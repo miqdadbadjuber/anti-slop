@@ -72,7 +72,7 @@ You can optionally put a dial line in `DESIGN.md` (`Dial: ENERGY 2 / RHYTHM 3 / 
 | `antislop-docs` | Documentation: READMEs, API references, changelogs, tutorials | v2.6.0 (planned) |
 | `antislop-identity` | Identity & naming: product names, taglines, brand voice | v2.7.0 (planned) |
 
-Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, accessibility work → `antislop-human`, any combination → "All", or none (the core alone is a complete filter).
+Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, people work → `antislop-human`, any combination → "All", or none (the core alone is a complete filter).
 
 ## Usage Modes
 

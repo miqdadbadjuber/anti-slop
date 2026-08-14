@@ -30,7 +30,7 @@ curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/m
 
 > "Read `antislop.md` and follow its install instructions. I want the UI skill."
 
-That's it. The pointer block is the source of truth: every later session loads the core plus only the skills you installed. Say "core only" to skip skills entirely. For a permanent setup that needs no first-run chat, add one line to your entry file (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, etc.): "For UI or copy work, read `antislop.md`."
+That's it. The pointer block is the source of truth: every later session loads the core plus only the skills you installed. Say "core only" to skip skills entirely. For a permanent setup that needs no first-run chat, add one line to your entry file (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, etc.): "For UI, copy, or people work, read `antislop.md`."
 
 **Manual (the 3-file system).**
 
@@ -47,13 +47,22 @@ curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/m
 
 `antislop.md` alone is a complete filter. Skills add depth for one concern at a time; the wizard installs them, or download any you want the same way (`curl -o <skill-name>.md`).
 
+`antislop-human` also ships a contrast script. It is optional, the skill falls back to the formula without it, but the manual path has to fetch it explicitly:
+
+```bash
+mkdir -p scripts
+curl -o scripts/contrast-check.py https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/scripts/contrast-check.py
+```
+
 Then add a pointer block to your entry file, listing exactly the skills you installed:
 
 ```md
+<!-- antislop: auto-managed block, do not edit -->
 ## antislop
-For UI or copy work, read `antislop.md` (core) and then the skill for the task:
+For UI, copy, or people work, read `antislop.md` (core) and then the skill for the task:
 - UI / visual: `antislop-ui.md`
 - Copy & text: `antislop-copywriting.md`
+- People: `antislop-human.md`
 Before starting, ask the user when antislop applies: during the work, or after it is done.
 ```
 
@@ -65,12 +74,12 @@ You can optionally put a dial line in `DESIGN.md` (`Dial: ENERGY 2 / RHYTHM 3 / 
 |-------|----------------|----------|
 | `antislop-ui` | UI / visual: layout, color, components, decoration, motion, structure | v2.2.0 |
 | `antislop-copywriting` | Copy & text: headlines, CTAs, tone, fake stats, anti-AI-writing patterns, markdown hygiene | v2.3.0 |
-| `antislop-human` | Human: contrast, keyboard, focus, states | v2.4.0 (planned) |
+| `antislop-human` | Human: contrast, keyboard, focus, states | v2.4.0 |
 | `antislop-layoutmobile` | Mobile layout: responsive breakpoints, grids, overflow, tap targets | v2.5.0 (planned) |
 | `antislop-docs` | Documentation: READMEs, API references, changelogs, tutorials | v2.6.0 (planned) |
 | `antislop-identity` | Identity & naming: product names, taglines, brand voice | v2.7.0 (planned) |
 
-Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, both → "All", or none (the core alone is a complete filter).
+Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, people work → `antislop-human`, any combination → "All", or none (the core alone is a complete filter).
 
 ## Usage Modes
 

@@ -2,7 +2,7 @@
 
 > Anti AI Slop: Design & Copy Rules. Human skill
 
-> Part of the antislop system. Read together with `antislop.md` (the core). This skill deep-dives the human concern: the UI must stay usable by people with different eyes, hands, and setups. Contrast, keyboard, focus, states, and the mobile details that exclude people. The layout mechanics behind mobile (breakpoints, grids, overflow, tap targets) live in `antislop-layoutmobile`.
+> Part of the antislop system. Read together with `antislop.md` (the core). This skill deep-dives the human concern: the UI must stay usable by people with different eyes, hands, and setups. Contrast, keyboard, focus, states, and the mobile details that exclude people.
 
 ## How to use this skill
 
@@ -10,7 +10,7 @@
 - Every entry has the same shape: **Tell** (the pattern), **Why** (who it excludes, and why it reads as unfinished), **Fix** (what to do instead), with the governing core rule cited as R-XX.
 - Accessibility is not a checklist of extras bolted on at the end. It is part of the core promise that "the UI holds up" (C-4). The Delivery Gate in the core remains the gate; the "Human Skill Checklist" at the end of this file is the supplement to run alongside it.
 - The contrast checker (formula + reference table + script) lives in this skill. Use it for every color pairing you cannot verify by eye.
-- For the layout mechanics behind mobile (breakpoints, grids, overflow, tap targets), load `antislop-layoutmobile` together with this skill. This skill keeps only the mobile details that exclude people: zooming, and the on-screen keyboard.
+- This skill keeps only the mobile details that exclude people: zooming, and the on-screen keyboard. The layout mechanics behind mobile (breakpoints, grids, overflow, tap targets) belong to `antislop-layoutmobile`, which ships in v2.5.0. Until then they are covered by R-03 in the core; do not try to load a skill file that does not exist yet.
 
 ## Color & Contrast
 
@@ -116,7 +116,7 @@ Read the table as a sanity check, not as a substitute. Any pairing not listed, o
 
 ## Zoom & Mobile Use
 
-The layout mechanics behind mobile (breakpoints, grids, overflow, tap targets) live in `antislop-layoutmobile`. This section keeps only the mobile details that exclude people: zooming, and the on-screen keyboard.
+This section keeps only the mobile details that exclude people: zooming, and the on-screen keyboard.
 
 ### Text That Cannot Zoom
 

@@ -4,6 +4,7 @@
 Usage:
     python contrast-check.py "#FFFFFF" "#777777"
     python contrast-check.py FFFFFF 777777
+    python contrast-check.py --selftest
 
 Prints the contrast ratio and a PASS/FAIL verdict for normal text (4.5:1)
 and large text (3:1, 18px+ per antislop R-25). Exit code 0 only when both
@@ -41,9 +42,41 @@ def contrast_ratio(color_a, color_b):
     return (lighter + 0.05) / (darker + 0.05)
 
 
+# The reference table in antislop-human.md. Kept here so the doc has an oracle:
+# a rounded ratio hides a failure (#777777 on white is 4.48, not 4.5).
+REFERENCE_PAIRS = [
+    ("#000000", "#FFFFFF", 21.00),
+    ("#FFFFFF", "#000000", 21.00),
+    ("#FFFFFF", "#333333", 12.63),
+    ("#FFFFFF", "#666666", 5.74),
+    ("#777777", "#FFFFFF", 4.48),
+    ("#FFFFFF", "#888888", 3.54),
+    ("#FFFFFF", "#999999", 2.85),
+    ("#555555", "#000000", 2.82),
+]
+
+
+def selftest():
+    for text, background, expected in REFERENCE_PAIRS:
+        got = round(contrast_ratio(text, background), 2)
+        assert got == expected, f"{text} on {background}: expected {expected}, got {got}"
+    assert parse_hex("#fff") == (255, 255, 255), "3-digit hex must expand"
+    assert parse_hex("777777") == (119, 119, 119), "a bare hex must parse"
+    for bad in ("#GGGGGG", "#FFFF", ""):
+        try:
+            parse_hex(bad)
+        except ValueError:
+            continue
+        raise AssertionError(f"{bad!r} should have been rejected")
+    print(f"selftest: {len(REFERENCE_PAIRS)} reference pairs OK")
+    return 0
+
+
 def main(argv):
+    if argv == ["--selftest"]:
+        return selftest()
     if len(argv) != 2:
-        print("usage: python contrast-check.py <hex1> <hex2>")
+        print("usage: python contrast-check.py <hex1> <hex2> | --selftest")
         return 2
     try:
         ratio = contrast_ratio(*argv)

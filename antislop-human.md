@@ -46,8 +46,9 @@ The home of the contrast checker. Three layers, from most to least convenient:
 
 ```bash
 python scripts/contrast-check.py "#FFFFFF" "#777777"
-# normal text: FAIL (4.48 < 4.5)
-# large text:  PASS (4.48 >= 3.0)
+# ratio: 4.48:1
+# normal text (4.5:1): FAIL
+# large text  (3.0:1): PASS
 ```
 
 The script exists so agents stop hallucinating AA. It takes two hex colors and prints the ratio and the verdict for both text sizes. It ships with the skill; if it is missing from an older setup, the formula and table below are complete on their own. Never block on the script.
@@ -63,14 +64,16 @@ The script exists so agents stop hallucinating AA. It takes two hex colors and p
 
 | Pairing (text on background) | Ratio | Normal text (4.5) | Large text (3.0) |
 |------------------------------|-------|-------------------|------------------|
-| Black on white | 21.0 | Pass | Pass |
-| White on black | 21.0 | Pass | Pass |
-| White on #333333 | 12.6 | Pass | Pass |
-| White on #666666 | 5.7 | Pass | Pass |
-| #777777 on white | 4.5 | Borderline, compute | Pass |
-| White on #888888 | 3.5 | Fail | Pass |
-| White on #999999 | 2.8 | Fail | Fail |
-| #555555 on black | 2.8 | Fail | Fail |
+| Black on white | 21.00 | Pass | Pass |
+| White on black | 21.00 | Pass | Pass |
+| White on #333333 | 12.63 | Pass | Pass |
+| White on #666666 | 5.74 | Pass | Pass |
+| #777777 on white | 4.48 | Fail | Pass |
+| White on #888888 | 3.54 | Fail | Pass |
+| White on #999999 | 2.85 | Fail | Fail |
+| #555555 on black | 2.82 | Fail | Fail |
+
+Ratios are given to two decimals because rounding hides failures: #777777 on white is 4.48, which fails the 4.5 bar, but reads as a pass once it is rounded to 4.5. `python scripts/contrast-check.py --selftest` reads this table, recomputes every row from the formula and checks both verdict columns, so a wrong number here fails the check.
 
 Read the table as a sanity check, not as a substitute. Any pairing not listed, or anything near a threshold, goes through the formula or the script.
 

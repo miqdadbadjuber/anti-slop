@@ -47,6 +47,13 @@ curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/m
 
 `antislop.md` alone is a complete filter. Skills add depth for one concern at a time; the wizard installs them, or download any you want the same way (`curl -o <skill-name>.md`).
 
+`antislop-human` also ships a contrast script. It is optional, the skill falls back to the formula without it, but the manual path has to fetch it explicitly:
+
+```bash
+mkdir -p scripts
+curl -o scripts/contrast-check.py https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/scripts/contrast-check.py
+```
+
 Then add a pointer block to your entry file, listing exactly the skills you installed:
 
 ```md

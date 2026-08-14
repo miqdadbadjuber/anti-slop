@@ -73,7 +73,7 @@ The script exists so agents stop hallucinating AA. It takes two hex colors and p
 | White on #999999 | 2.85 | Fail | Fail |
 | #555555 on black | 2.82 | Fail | Fail |
 
-Ratios are given to two decimals because rounding hides failures: #777777 on white is 4.48, which fails the 4.5 bar, but reads as a pass once it is rounded to 4.5. `python scripts/contrast-check.py --selftest` asserts every row above, so the table and the script cannot drift apart.
+Ratios are given to two decimals because rounding hides failures: #777777 on white is 4.48, which fails the 4.5 bar, but reads as a pass once it is rounded to 4.5. `python scripts/contrast-check.py --selftest` reads this table, recomputes every row from the formula and checks both verdict columns, so a wrong number here fails the check.
 
 Read the table as a sanity check, not as a substitute. Any pairing not listed, or anything near a threshold, goes through the formula or the script.
 

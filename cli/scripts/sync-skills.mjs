@@ -16,21 +16,14 @@ const CORE_FRONTMATTER = [
   '',
 ].join('\n')
 
-const NO_DOWNLOAD_STEP = '4. **No download needed.** The skill folders are already installed next to this core: the picker (`npx antislop-ai`) and the skills directory (`npx skills add miqdadbadjuber/anti-slop`) copy them into place. To add or remove a skill later, run `npx antislop-ai` again.'
-
-let coreBody = fs.readFileSync(path.join(repoRoot, 'antislop.md'), 'utf8')
+const coreBody = fs.readFileSync(path.join(repoRoot, 'antislop.md'), 'utf8')
   .replace(/\r\n/g, '\n')
   .trim()
 
-if (coreBody.includes('4. **Download the chosen skill(s)**')) {
-  coreBody = coreBody.replace(
-    /4\. \*\*Download the chosen skill\(s\)\*\*[\s\S]*?\n   ```\n(?=5\. )/,
-    NO_DOWNLOAD_STEP + '\n\n'
-  )
-  coreBody = coreBody.replace(
-    /- The wizard needs download and file-write access for steps 4 and 5; the user approves once\./,
-    '- The wizard needs file-write access for step 5 (the pointer block); the user approves once. Skills are already installed in this packaged form.'
-  )
+// A shipped skill must not tell the agent to download the rest of its own instructions:
+// that is Snyk W012, and it cost us one MEDIUM finding on the directory listing already.
+if (/https?:\/\/raw\.githubusercontent\.com/.test(coreBody)) {
+  throw new Error('antislop.md carries a runtime download URL; remove it before syncing (Snyk W012)')
 }
 
 fs.writeFileSync(path.join(repoSkills, 'antislop', 'SKILL.md'), CORE_FRONTMATTER + coreBody + '\n')

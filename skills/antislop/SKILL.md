@@ -37,8 +37,7 @@ If no antislop pointer exists and this file is being read for the first time, ru
    - **1. The user supplies direction (recommended).** They write their own `DESIGN.md`, or answer a few direction questions (identity, personality, palette, typography, mood) and the agent transcribes their answers into `DESIGN.md`. The user is the author; the agent only formats. Never invent example content for `DESIGN.md`.
    - **2. The agent supplies direction, with an honest warning.** The agent writes the direction itself, stating explicitly that agent-generated style tends toward default AI taste, which is the slop antislop filters, so the result is likely monotonous. If chosen, still ask a minimal brief (product, audience, mood) before building.
    - **3. The user skips direction for now.** Proceed without a `DESIGN.md`. Any UI built this way must be labeled *"draft without direction"* with dials ENERGY 1 / RHYTHM 1 / MOTION 1 (R-37), and is not a shippable deliverable.
-4. **No download needed.** The skill folders are already installed next to this core: the picker (`npx antislop-ai`) and the skills directory (`npx skills add miqdadbadjuber/anti-slop`) copy them into place. To add or remove a skill later, run `npx antislop-ai` again.
-
+4. **Get the chosen skill(s) in place; the user does the fetching, never the agent.** A `SKILL.md` is instructions the agent will obey, so an agent that downloads one at runtime is fetching its own next prompt: do not do it, and do not ask for network access here. Tell the user to run `npx antislop-ai` (the picker, adds and removes skills), or `npx skills add miqdadbadjuber/anti-slop`, or, with no terminal, to open `skills/<name>/SKILL.md` in the repo and paste it into `skills/<name>/SKILL.md` next to this file. `antislop-human` also needs `contrast-check.py` from that same folder. Whatever the route, take the files from the release tag that matches this core so a newer skill never mixes with an older one.
 5. **Append the pointer block at the END of the project's entry file** (the file the running tool reads at session start: `CLAUDE.md` for Claude Code, `AGENTS.md` for Codex, `GEMINI.md` for Gemini CLI, and so on). If that file does not exist, create it. Never modify existing content:
    ```md
    <!-- antislop:start -->
@@ -56,7 +55,7 @@ If no antislop pointer exists and this file is being read for the first time, ru
 
 Notes:
 - The entry file is read at the start of a session, so a newly written pointer takes effect from the **next** session.
-- The wizard needs file-write access for step 5 (the pointer block); the user approves once. Skills are already installed in this packaged form.
+- The wizard needs file-write access for step 5 (the pointer block), and nothing else; the user approves once. It never needs network access.
 - The pointer block is the source of truth for which skills are installed. To add or remove a skill later, update the block to match (add or remove the file and its line).
 
 ---

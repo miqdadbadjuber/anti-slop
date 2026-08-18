@@ -5,7 +5,7 @@ allowed-tools: Read Write Edit Glob Grep
 ---
 # antislop-layoutmobile
 
-> Anti AI Slop: Design & Copy Rules. Mobile Layout skill
+> Anti Slop: Rules for AI Coding Agents. Mobile Layout skill
 
 > Part of the antislop system. Read together with `antislop.md` (the core). This skill deep-dives the mobile layout concern: how a layout must reflow on small screens. Breakpoints, scale, grids, overflow, tap targets, and navigation. It references core rules by number and never duplicates or renumbers them. Load it when the task builds or edits a layout that has to hold up on a phone.
 

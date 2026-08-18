@@ -5,7 +5,7 @@ allowed-tools: Read Write Edit Glob Grep
 ---
 # antislop-ui
 
-> Anti AI Slop: Design & Copy Rules. UI & Visual skill
+> Anti Slop: Rules for AI Coding Agents. UI & Visual skill
 
 > Part of the antislop system. Read together with `antislop.md` (the core). This skill deep-dives the UI/visual concern: color, layout, components, decoration, structural flow, and motion. It references core rules by number and never duplicates or renumbers them. Load it when the task builds or edits a website, web app, or any interface.
 
@@ -135,6 +135,12 @@ allowed-tools: Read Write Edit Glob Grep
 - **Why:** these glyphs are the generic vocabulary of "AI product". They communicate nothing about the specific feature.
 - **Fix:** use icons genuinely relevant to the content, with the relevance written down when the glyph is generic (R-04). If no appropriate icon exists, use none. The feature label does the work.
 
+### Emoji as Decoration
+
+- **Tell:** literal emoji scattered through the copy, headings, badges, and buttons: 🚀 in a headline, ✅ beside every feature bullet, 🔥 on a CTA, 📈 above a chart title.
+- **Why:** emoji is the loudest shorthand for "this was generated, not written". In a UI it competes with the content for attention and flattens the product's voice into the same cheerful default as every other AI site.
+- **Fix:** remove emoji from UI text. If a concept needs a mark, use a real, relevant icon with the reason written down (R-04), or no mark at all. The copy carries the meaning; the emoji adds nothing.
+
 ### Small Arrows on Every Button
 
 - **Tell:** `→` or `↗` placed on almost every button as pure decoration.
@@ -213,6 +219,12 @@ The patterns above are landing-page shapes. These are the app-side equivalents: 
 - **Why:** the columns come from the table component, not from the data. The user scans for the field that decides their next move and it is not there.
 - **Fix:** pick columns from the decision the user makes in this table, and put the deciding field early. The row menu holds actions that exist; anything that does nothing comes out (R-26).
 
+### Filler Data in Fields and Columns
+
+- **Tell:** empty form fields and table columns filled with fake but plausible data: `John Doe`, `johndoe@example.com`, `"Let's build something"`, phone numbers and dates that belong to nobody.
+- **Why:** fabricated content disguised as real. It reads fine in a mockup and falls apart the moment a real user looks: the name is not a customer, the email is not a lead, and the message is a tagline. It is the strongest tell that the screen was generated, not built.
+- **Fix:** leave empty cells empty, or use placeholders that clearly say what goes there: `Your Name`, `email@example.com`, `Drop your message here...`, or `[REAL DATA]` when a value is expected (R-23, R-38). Real data goes in when it exists. Generic filler copy like "Let's build something" is buzzword slop and does not belong in a data column (R-16).
+
 ### Placeholder Empty and Loading States
 
 - **Tell:** "No data available" with an illustration, a bare spinner, or a full-page skeleton that mimics a layout the real data never fills.
@@ -239,11 +251,13 @@ Run these alongside the core Delivery Gate when the task is UI work. All answers
 
 - [ ] Is the palette derived from `DESIGN.md` or a written brand identity, not the default gradient set? (R-01, R-29)
 - [ ] Is the accent used at the key moment only, not spread across every element? (core Part 3, one deliberate accent)
+- [ ] Is the copy free of decorative emoji scattered through headings, bullets, and buttons? (R-04)
 - [ ] Do section compositions vary according to the declared RHYTHM dial instead of repeating one template? (R-05)
 - [ ] Does every navigation item and interactive element have a real destination or behavior, or a visible "Coming soon" label? (R-24, R-26)
 - [ ] Does motion follow the declared MOTION dial and serve a written purpose, with no endless loops? (R-19)
 - [ ] Is glass, glow, shadow, and radius used at their dose caps, not as a page-wide default? (R-10, R-11, R-12, R-13)
 - [ ] On an app screen, is the layout built around the decision the user makes there, rather than the sidebar plus stat row plus chart plus table default? (C-3, R-20)
 - [ ] Is every number, delta, feed entry, and table row real or a labelled placeholder, with no invented metrics? (R-17, R-18, R-38)
+- [ ] Do empty form fields and table cells stay empty or carry honest placeholders (Your Name, email@example.com) instead of fake-looking data (John Doe, johndoe@example.com)? (R-23, R-38)
 - [ ] Do the empty, loading, and error states name the cause and the next action instead of saying "No data"? (R-27)
 - [ ] Does the page hold up at every breakpoint, theme, and state, and pass keyboard-only use? (R-03, R-34, C-4)

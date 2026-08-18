@@ -10,7 +10,7 @@ const cliSkills = path.join(__dirname, '..', 'skills')
 const CORE_FRONTMATTER = [
   '---',
   'name: antislop',
-  'description: "Anti AI Slop: Design & Copy Rules. The core rules filter for AI coding agents. Load always to stop generic AI slop."',
+  'description: "Anti Slop: Rules for AI Coding Agents. The core filter. Load always to stop generic AI slop."',
   'allowed-tools: Read Write Edit Glob Grep',
   '---',
   '',

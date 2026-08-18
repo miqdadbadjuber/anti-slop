@@ -13,7 +13,7 @@
 
 # antislop
 
-> **Anti AI Slop: Design & Copy Rules.** A rules file for AI coding agents. It stops them from generating generic "AI slop" UI and copy, without letting the result turn sterile. It is a **filter, not a style guide**: no prescribed colors, fonts, or layouts. It is not only for building pages: it also writes and audits copy, so AI text stops reading like AI. And it never beautifies on its own; `DESIGN.md` (yours) is where beauty and direction come from.
+> **Anti Slop: Rules for AI Coding Agents.** It stops them from generating generic "AI slop" UI and copy, without letting the result turn sterile. It is a **filter, not a style guide**: no prescribed colors, fonts, or layouts. It is not only for building pages: it also writes and audits copy, so AI text stops reading like AI. And it never beautifies on its own; `DESIGN.md` (yours) is where beauty and direction come from.
 
 > **New here? Start with the [guide](guide.md).** It explains what antislop is and how to install it, from zero.
 
@@ -70,8 +70,9 @@ curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/m
 | `antislop-copywriting` | Copy & text: headlines, CTAs, tone, fake stats, anti-AI-writing patterns, markdown hygiene | v2.3.0 |
 | `antislop-human` | Human: contrast (with the checker), keyboard, focus, states | v2.4.0 |
 | `antislop-layoutmobile` | Mobile layout: responsive breakpoints, grids, overflow, tap targets, navigation | v2.5.0 |
+| `antislop-code` | Code comments: remove generic AI-slop comments, keep the valuable ones, never touch the code | v3.1.0 |
 
-Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, people work → `antislop-human`, mobile layout work → `antislop-layoutmobile`, more than one → install several, or none (the core alone is a complete filter).
+Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, people work → `antislop-human`, mobile layout work → `antislop-layoutmobile`, code comments work → `antislop-code`, more than one → install several, or none (the core alone is a complete filter).
 
 ## Usage Modes
 
@@ -82,7 +83,7 @@ antislop is used one of two ways, chosen at the start of a session:
 
 ## Roadmap
 
-**v3.0.0 shipped**: antislop is packaged as installable skills. See [ROADMAP.md](ROADMAP.md). The skill plan that built toward it (one skill per version) is complete; `antislop-docs` and `antislop-identity` are candidates for after v3.
+**v3.0.0 shipped**: antislop is packaged as installable skills, then refined through v3.0.1 and v3.0.2. The next release, **v3.1.0**, ships the `antislop-code` skill. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
 
 ## FAQ
 

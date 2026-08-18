@@ -19,6 +19,7 @@ antislop is not only for building pages. Any AI output that can get sloppy benef
 - Build a new page or app: layout, color, parts of the page, animation, structure.
 - Write or rewrite copy: headlines, buttons, emails, and tone that do not sound AI-made.
 - Keep the page usable by people: readable colors, keyboard use, clear focus, and button states.
+- Clean up code comments: remove the generic AI ones, keep the ones that matter.
 - Check work you already have: it can list what to fix.
 
 The main file (the core) covers all of it. Skills (see What is a skill?) go deeper into one concern when you want more.
@@ -49,8 +50,9 @@ A skill is an optional folder (with a `SKILL.md` inside) that goes deeper into o
 - `antislop-copywriting`: the text. Headlines, buttons, tone, made-up statistics.
 - `antislop-human`: the people. Readable colors, keyboard use, clear focus, and button states.
 - `antislop-layoutmobile`: the small screen. Layout that reflows on a phone, tap targets, navigation.
+- `antislop-code`: the comments in your code. Remove the generic AI ones, keep the ones that carry information.
 
-Pick the one that matches your work. UI work means `antislop-ui`. Copy work means `antislop-copywriting`. People work means `antislop-human`. Mobile layout work means `antislop-layoutmobile`. More than one? Ask for "All". None? The core alone is enough.
+Pick the one that matches your work. UI work means `antislop-ui`. Copy work means `antislop-copywriting`. People work means `antislop-human`. Mobile layout work means `antislop-layoutmobile`. Code comments work means `antislop-code`. More than one? Ask for "All". None? The core alone is enough.
 
 ## How to install
 
@@ -118,7 +120,7 @@ The main file holds everything: the rules and the wizard. Skills are optional de
 
 ## Where is this going?
 
-The skill plan is complete. antislop v3.0.0 is now packaged: installable as skills, installable as a plugin, and still available as one file. See the roadmap, the page that lists what is coming next, [here](ROADMAP.md).
+antislop is packaged: installable as skills, installable as a plugin, and still available as one file. Skills keep shipping as they are ready; the next one is `antislop-code`. See the roadmap, the page that lists what is coming next, [here](ROADMAP.md).
 
 ## Feedback
 

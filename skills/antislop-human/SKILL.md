@@ -5,7 +5,7 @@ allowed-tools: Bash(python *) Bash(python3 *) Read Write Edit Glob Grep
 ---
 # antislop-human
 
-> Anti AI Slop: Design & Copy Rules. Human skill
+> Anti Slop: Rules for AI Coding Agents. Human skill
 
 > Part of the antislop system. Read together with `antislop.md` (the core). This skill deep-dives the human concern: the UI must stay usable by people with different eyes, hands, and setups. Contrast, keyboard, focus, states, and the mobile details that exclude people.
 

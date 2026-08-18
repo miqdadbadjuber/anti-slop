@@ -17,6 +17,7 @@ const EXTRA_SKILLS = [
   { value: 'antislop-copywriting', label: 'antislop-copywriting', hint: 'copywriting and text rules' },
   { value: 'antislop-human', label: 'antislop-human', hint: 'accessibility, with the contrast checker' },
   { value: 'antislop-layoutmobile', label: 'antislop-layoutmobile', hint: 'mobile layout rules' },
+  { value: 'antislop-code', label: 'antislop-code', hint: 'code comment rules' },
 ]
 
 function stop(message) {
@@ -26,7 +27,7 @@ function stop(message) {
 
 async function main() {
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log('antislop 3.0.2')
+    console.log('antislop 3.1.0')
     return
   }
 

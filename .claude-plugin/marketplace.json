@@ -1,6 +1,6 @@
 {
   "name": "anti-slop",
-  "description": "The antislop skill/plugin: Anti AI Slop, Design & Copy Rules for AI coding agents.",
+  "description": "The antislop skill/plugin. Anti Slop: Rules for AI Coding Agents.",
   "owner": {
     "name": "miqdadbadjuber"
   },
@@ -8,8 +8,8 @@
     {
       "name": "antislop",
       "source": "./",
-      "version": "3.0.2",
-      "description": "Anti AI Slop: Design & Copy Rules. A rules filter for AI coding agents that stops generic AI slop UI and copy. Loads as five skills."
+      "version": "3.1.0",
+      "description": "Anti Slop: Rules for AI Coding Agents. Stops generic AI slop in generated UI, copy, and code. Loads as six skills."
     }
   ]
 }

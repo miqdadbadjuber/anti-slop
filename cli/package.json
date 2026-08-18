@@ -1,7 +1,7 @@
 {
   "name": "antislop-ai",
-  "version": "3.0.2",
-  "description": "Interactive installer for the antislop skills. Anti AI Slop: Design & Copy Rules.",
+  "version": "3.1.0",
+  "description": "Interactive installer for the antislop skills. Anti Slop: Rules for AI Coding Agents.",
   "type": "module",
   "bin": {
     "antislop-ai": "index.mjs"

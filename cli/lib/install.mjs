@@ -87,6 +87,7 @@ const SKILL_LINES = {
   'antislop-copywriting': 'Copy & text: `antislop-copywriting`',
   'antislop-human': 'People: `antislop-human`',
   'antislop-layoutmobile': 'Mobile / responsive: `antislop-layoutmobile`',
+  'antislop-code': 'Code comments: `antislop-code`',
 }
 
 // Names the skills instead of importing the core. The skills sit in the agent's
@@ -96,7 +97,7 @@ function pointerBlock(skills) {
   return [
     POINTER_START,
     '## antislop',
-    'For UI, copy, people, or mobile layout work, load the antislop skill for the task:',
+    'For UI, copy, people, mobile layout, or code comments work, load the antislop skill for the task:',
     ...skills.filter((s) => SKILL_LINES[s]).map((s) => `- ${SKILL_LINES[s]}`),
     'Before starting, ask the user when antislop applies: during the work, or after it is done.',
     POINTER_END,

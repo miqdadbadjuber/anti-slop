@@ -4,15 +4,16 @@
 
 ## Where we are
 
-The latest release is **v3.0.2**. antislop is a **packaged system**: a lean, always-loaded **core** plus four **skills**, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`):
+The latest release is **v3.1.0**. antislop is a **packaged system**: a lean, always-loaded **core** plus five **skills**, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`):
 
 - `antislop`: the core rules filter (rules, tiers, Delivery Gate, liveliness)
 - `antislop-ui`: UI / visual
 - `antislop-copywriting`: copy & text
 - `antislop-human`: human / accessibility, home of the contrast checker
 - `antislop-layoutmobile`: mobile / responsive
+- `antislop-code`: code comments
 
-The next release, **v3.1.0**, ships a fifth skill: `antislop-code`, the code comment filter.
+**v3.1.0** shipped `antislop-code`, the code comment filter. The next release, **v3.1.1**, is a patch: the picker no longer copies per-skill READMEs into projects, and the wizard no longer names install commands (clears the Socket warning on skills.sh).
 
 The system installs three ways from one repo: the interactive picker (`npx antislop-ai`), the skills directory (`npx skills add miqdadbadjuber/anti-slop`, listed on skills.sh), and the Claude Code plugin marketplace (`.claude-plugin/plugin.json`). The contrast checker is also exposed as an MCP tool inside the plugin. Each skill folder also carries a short `README.md` that says on GitHub what the skill is for.
 
@@ -63,12 +64,11 @@ What v3.0.0 shipped:
 - [x] v3.0.0 - skill/plugin packaging: `skills/` folders, two doors, picker CLI, MCP contrast tool, MIT license
 - [x] v3.0.1 - Snyk W012 fix (no runtime curl in the packaged core), npm package author to antislop, docs clarity
 - [x] v3.0.2 - adaptive python (python3 on macOS/Linux, python on Windows), App & Dashboard + copy voice patterns, pointer fix
-- [ ] v3.1.0 - `antislop-code` skill, per-skill READMEs, Filler Data and Emoji as Decoration patterns
+- [x] v3.1.0 - `antislop-code` skill, per-skill READMEs, Filler Data and Emoji as Decoration patterns
+- [ ] v3.1.1 - picker stops copying per-skill READMEs; wizard drops install commands (clears the Socket warning on skills.sh)
 
 ## After v3
 
-- [ ] `antislop-docs` (skill candidate)
-- [ ] `antislop-identity` (skill candidate)
 - [ ] **Cross-agent plugin** (plan, no promised version): antislop installs as a plugin on more agents the way superpowers installs everywhere from one repo, with paths for Antigravity, Codex, Cursor, Gemini CLI, and others. Estimate: Q3-Q4 2026.
 
 ## Not in scope

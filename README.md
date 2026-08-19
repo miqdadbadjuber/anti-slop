@@ -83,7 +83,7 @@ antislop is used one of two ways, chosen at the start of a session:
 
 ## Roadmap
 
-**v3.0.0 shipped**: antislop is packaged as installable skills, then refined through v3.0.1 and v3.0.2. The next release, **v3.1.0**, ships the `antislop-code` skill. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
+**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** is a patch: the picker stops copying per-skill READMEs into projects, and the wizard drops install commands (clears the Socket warning). See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
 
 ## FAQ
 

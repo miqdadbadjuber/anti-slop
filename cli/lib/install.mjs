@@ -52,6 +52,8 @@ function copyDir(src, dest) {
   fs.rmSync(dest, { recursive: true, force: true })
   fs.mkdirSync(dest, { recursive: true })
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    // README.md is GitHub-facing only; never ship it into a user's agent setup.
+    if (entry.name === 'README.md') continue
     const s = path.join(src, entry.name)
     const d = path.join(dest, entry.name)
     if (entry.isDirectory()) copyDir(s, d)

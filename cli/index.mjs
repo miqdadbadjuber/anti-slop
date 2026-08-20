@@ -29,7 +29,7 @@ function stop(message) {
 
 async function main() {
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log('antislop 3.1.2')
+    console.log('antislop 3.1.3')
     return
   }
 

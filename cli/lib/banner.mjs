@@ -15,7 +15,7 @@ export function banner() {
     ...LOGO,
     '',
     '  ' + pc.dim('Anti Slop: Rules for AI Coding Agents'),
-    '  ' + pc.dim('installer v3.1.2'),
+    '  ' + pc.dim('installer v3.1.3'),
     '',
   ].join('\n')
 }

@@ -44,6 +44,8 @@ npx skills add miqdadbadjuber/anti-slop
 
 Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for a single one. Run `--list` first to see what is available.
 
+`npx skills add` copies the skill folders but does not write the agent entry pointer that loads antislop every session. To add the pointer, run `npx antislop-ai`, choose the same skills and agent, and pick **Keep what is there** when it finds the existing folders. The picker (path 1) does both in one run.
+
 skills.sh reads the skill folders straight from this repository, so the listing appears as soon as the repo is live; there is no separate setup step.
 
 **3. The plugin (Claude Code).** Add the marketplace once, then install the plugin:
@@ -83,7 +85,7 @@ antislop is used one of two ways, chosen at the start of a session:
 
 ## Roadmap
 
-**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
+**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. **v3.1.3** states the `DESIGN.md` boundary explicitly, adds a security explainer ([SECURITY.md](SECURITY.md)), and documents what `npx skills add` does and does not install. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
 
 ## FAQ
 

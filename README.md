@@ -30,7 +30,7 @@ The core prevents slop but cannot invent direction. `DESIGN.md` (yours) supplies
 
 antislop is a set of **standard agent skills** (one folder per skill, `SKILL.md`) you can install as a package. The core is always loaded; the skills load only for the task at hand. Pick one of these three paths.
 
-**1. The picker (recommended).** One command, then choose. It shows the antislop banner, lists the skills with the core locked on, and asks for project or global:
+**1. The picker (recommended).** One command, then choose. It shows the antislop banner, lists the skills with the core locked on, and asks where (project or global) and which agents (Claude Code, Antigravity, Codex):
 
 ```bash
 npx antislop-ai
@@ -53,7 +53,7 @@ skills.sh reads the skill folders straight from this repository, so the listing 
 /plugin install antislop@anti-slop
 ```
 
-Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into Claude Code (`.claude/skills/`), Codex (`.codex/skills/`), Antigravity (`.agents/skills/`), and any other agent that reads the standard. The picker (path 1) detects which of these agents exist in your project and installs into them; the skills directory (path 2) handles the same agents and more. The plugin (path 3) is the Claude Code door only.
+Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into Claude Code (`.claude/skills/`), Codex (`.codex/skills/`), Antigravity (`.agents/skills/`), and any other agent that reads the standard. The picker (path 1) asks which of these agents you use and installs into them, creating the skill folder if it does not exist yet; the skills directory (path 2) handles the same agents and more. The plugin (path 3) is the Claude Code door only.
 
 **Manual (single file, no packaging).** The core `antislop.md` alone remains a complete filter you can paste into any chat window. Download it and tell your agent to read it; the First-Run wizard inside it installs skills the manual way:
 
@@ -83,7 +83,7 @@ antislop is used one of two ways, chosen at the start of a session:
 
 ## Roadmap
 
-**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** is a patch: the picker stops copying per-skill READMEs into projects, and the wizard drops install commands (clears the Socket warning). See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
+**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
 
 ## FAQ
 

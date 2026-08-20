@@ -25,15 +25,21 @@ function resolveBase(location) {
   return location === 'global' ? os.homedir() : process.cwd()
 }
 
-export function resolveTargets(location) {
+export function resolveTargets(location, selected = AGENTS.map((a) => a.id)) {
   const base = resolveBase(location)
-  return AGENTS.map((agent) => ({ agent, path: path.join(base, agent.dir) }))
-    .filter((t) => {
-      if (t.agent.id === 'claude') return true
-      const parent = path.join(base, t.agent.dir.split('/')[0])
-      return fs.existsSync(parent)
-    })
-    .map((t) => ({ ...t, exists: fs.existsSync(t.path) }))
+  return AGENTS.filter((a) => selected.includes(a.id)).map((agent) => ({
+    agent,
+    path: path.join(base, agent.dir),
+    exists: fs.existsSync(path.join(base, agent.dir)),
+  }))
+}
+
+// Which agents already have their folder present, used to pre-check the picker's
+// agent question. Absence of a folder is not absence of the agent, so the picker
+// still lets the user add an agent whose folder does not exist yet.
+export function detectAgents(location) {
+  const base = resolveBase(location)
+  return AGENTS.filter((a) => fs.existsSync(path.join(base, a.dir.split('/')[0]))).map((a) => a.id)
 }
 
 export function detectConflicts({ skills, targets }) {

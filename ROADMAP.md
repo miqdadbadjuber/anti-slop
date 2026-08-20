@@ -4,7 +4,7 @@
 
 ## Where we are
 
-The latest release is **v3.1.0**. antislop is a **packaged system**: a lean, always-loaded **core** plus five **skills**, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`):
+The latest release is **v3.1.2**. antislop is a **packaged system**: a lean, always-loaded **core** plus five **skills**, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`):
 
 - `antislop`: the core rules filter (rules, tiers, Delivery Gate, liveliness)
 - `antislop-ui`: UI / visual
@@ -13,9 +13,9 @@ The latest release is **v3.1.0**. antislop is a **packaged system**: a lean, alw
 - `antislop-layoutmobile`: mobile / responsive
 - `antislop-code`: code comments
 
-**v3.1.0** shipped `antislop-code`, the code comment filter. The next release, **v3.1.1**, is a patch: the picker no longer copies per-skill READMEs into projects, and the wizard no longer names install commands (clears the Socket warning on skills.sh).
+**v3.1.0** shipped `antislop-code`, the code comment filter. **v3.1.1** was a patch: the picker no longer copied per-skill READMEs into projects, and the wizard no longer named install commands (cleared the Socket warning on skills.sh). **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project installs into the right folder instead of silently targeting Claude Code.
 
-The system installs three ways from one repo: the interactive picker (`npx antislop-ai`), the skills directory (`npx skills add miqdadbadjuber/anti-slop`, listed on skills.sh), and the Claude Code plugin marketplace (`.claude-plugin/plugin.json`). The contrast checker is also exposed as an MCP tool inside the plugin. Each skill folder also carries a short `README.md` that says on GitHub what the skill is for.
+The system installs three ways from one repo: the interactive picker (`npx antislop-ai`), the skills directory (`npx skills add miqdadbadjuber/anti-slop`, listed on skills.sh), and the Claude Code plugin marketplace (`.claude-plugin/plugin.json`). The contrast checker is also exposed as an MCP tool inside the plugin. What each skill covers is in the root README's skill table; there is no per-skill README.
 
 The **First-Run Install Wizard** still lives inside `antislop.md` as the manual path. The single-file core remains a complete filter you can paste into any chat window.
 
@@ -65,7 +65,8 @@ What v3.0.0 shipped:
 - [x] v3.0.1 - Snyk W012 fix (no runtime curl in the packaged core), npm package author to antislop, docs clarity
 - [x] v3.0.2 - adaptive python (python3 on macOS/Linux, python on Windows), App & Dashboard + copy voice patterns, pointer fix
 - [x] v3.1.0 - `antislop-code` skill, per-skill READMEs, Filler Data and Emoji as Decoration patterns
-- [ ] v3.1.1 - picker stops copying per-skill READMEs; wizard drops install commands (clears the Socket warning on skills.sh)
+- [x] v3.1.1 - picker stops copying per-skill READMEs; wizard drops install commands (clears the Socket warning on skills.sh)
+- [ ] v3.1.2 - per-skill READMEs removed; picker asks which agent to install into (fresh Antigravity and Codex projects land in the right folder)
 
 ## After v3
 

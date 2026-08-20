@@ -5,8 +5,10 @@ import { intro, outro, select, multiselect, confirm, isCancel, cancel, log, spin
 import { banner } from './lib/banner.mjs'
 import {
   CORE,
+  AGENTS,
   skillSourceDir,
   resolveTargets,
+  detectAgents,
   detectConflicts,
   installSkills,
   updatePointers,
@@ -27,7 +29,7 @@ function stop(message) {
 
 async function main() {
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log('antislop 3.1.1')
+    console.log('antislop 3.1.2')
     return
   }
 
@@ -59,7 +61,21 @@ async function main() {
   })
   if (isCancel(location)) stop('Install cancelled.')
 
-  const targets = resolveTargets(location)
+  log.step('Choose which agents get antislop')
+  const detected = detectAgents(location)
+  const chosen = await multiselect({
+    message: 'Which agent(s) should antislop install into?',
+    options: AGENTS.map((a) => ({
+      value: a.id,
+      label: a.label,
+      hint: detected.includes(a.id) ? `found here (${a.dir})` : `will create ${a.dir}`,
+    })),
+    required: 'Pick at least one agent.',
+    initialValues: detected,
+  })
+  if (isCancel(chosen)) stop('Install cancelled.')
+
+  const targets = resolveTargets(location, chosen)
   await log.message(
     'Installing into:\n' + targets.map((t) => '  ' + t.path).join('\n'),
     { symbol: pc.cyan('│') }

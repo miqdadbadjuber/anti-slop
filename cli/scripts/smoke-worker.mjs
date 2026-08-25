@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import {
   skillSourceDir,
@@ -15,7 +16,7 @@ const skills = ['antislop', 'antislop-ui']
 const fresh = detectAgents('project')
 console.log('A detected (fresh project):', fresh.length === 0 ? 'none' : fresh.join(', '), '(expect none)')
 const defaultTargets = resolveTargets('project')
-console.log('A default targets:', defaultTargets.map((t) => `${t.agent.id}@${t.path} exists=${t.exists}`).join(' | '), '(expect all three, exists=false)')
+console.log('A default targets:', defaultTargets.map((t) => `${t.agent.id}@${t.path} exists=${t.exists}`).join(' | '), '(expect all seven, exists=false)')
 
 // 2. Claude Code only, via explicit selection (old behavior preserved).
 const targets = resolveTargets('project', ['claude'])
@@ -42,15 +43,34 @@ const agPointers = updatePointers({ targets: agTargets, skills })
 console.log('D antigravity pointers:', agPointers.map((p) => path.basename(p)).join(', '), '(expect AGENTS.md)')
 console.log('D .agents/skills/antislop/SKILL.md exists:', fs.existsSync(path.join(process.cwd(), '.agents', 'skills', 'antislop', 'SKILL.md')))
 
-// 4. Detection now sees both agents that were installed.
-const after = detectAgents('project')
-console.log('E detected after installs:', after.join(', '), '(expect claude, antigravity)')
+// 4. New providers on the fresh project: OpenCode, Cursor, Gemini install and
+//    point to their own entry files.
+for (const agent of ['opencode', 'cursor', 'gemini']) {
+  const t = resolveTargets('project', [agent])
+  const w = installSkills({ skills, targets: t, overwrite: false })
+  const pointers = updatePointers({ targets: t, skills })
+  console.log(`D2 ${agent} written:`, w.map((x) => `${x.agent.id}:${x.skill}`).join(', '), '(expect 2)')
+  console.log(`D2 ${agent} pointer:`, pointers.map((p) => path.basename(p)).join(', '), `(expect ${agent === 'gemini' ? 'GEMINI.md' : 'AGENTS.md'})`)
+  console.log(`D2 ${agent} folder exists:`, fs.existsSync(path.join(process.cwd(), agent === 'gemini' ? '.gemini' : agent === 'cursor' ? '.cursor' : '.opencode', 'skills', 'antislop', 'SKILL.md')))
+}
 
-// 5. Global with a selection.
+// 5. Hermes is global-only: even a project install resolves to the home dir, and
+//    it is never detected as a project agent. resolveTargets only, no install.
+const hermesProject = resolveTargets('project', ['hermes'])
+const hermesGlobal = resolveTargets('global', ['hermes'])
+console.log('D3 hermes project target:', hermesProject[0].path, '(expect ' + path.join(os.homedir(), '.hermes', 'skills') + ')')
+console.log('D3 hermes global target:', hermesGlobal[0].path, '(expect ' + path.join(os.homedir(), '.hermes', 'skills') + ')')
+console.log('D3 hermes detected in project:', detectAgents('project').includes('hermes'), '(expect false)')
+
+// 6. Detection now sees the agents that were installed.
+const after = detectAgents('project')
+console.log('E detected after installs:', after.join(', '), '(expect claude, antigravity, opencode, cursor, gemini)')
+
+// 7. Global with a selection.
 const globalTargets = resolveTargets('global', ['claude', 'codex'])
 console.log('F global targets:', globalTargets.map((t) => `${t.agent.id}@${t.path}`).join(' | '))
 
-// 6. Copies are identical and the pointer block dedupes.
+// 8. Copies are identical and the pointer block dedupes.
 const src = fs.readFileSync(path.join(skillSourceDir(), 'antislop-ui', 'SKILL.md'), 'utf8')
 const dst = fs.readFileSync(path.join(process.cwd(), '.claude', 'skills', 'antislop-ui', 'SKILL.md'), 'utf8')
 console.log('G antislop-ui SKILL.md identical:', src === dst)

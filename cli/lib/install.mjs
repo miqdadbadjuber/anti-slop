@@ -11,6 +11,11 @@ export const AGENTS = [
   { id: 'claude', label: 'Claude Code', dir: '.claude/skills' },
   { id: 'antigravity', label: 'Antigravity', dir: '.agents/skills' },
   { id: 'codex', label: 'Codex', dir: '.codex/skills' },
+  { id: 'opencode', label: 'OpenCode', dir: '.opencode/skills' },
+  { id: 'cursor', label: 'Cursor', dir: '.cursor/skills' },
+  { id: 'gemini', label: 'Gemini CLI', dir: '.gemini/skills' },
+  // Hermes reads its skills from the home dir only, never from a project folder.
+  { id: 'hermes', label: 'Hermes', dir: '.hermes/skills', globalOnly: true },
 ]
 
 export function skillSourceDir() {
@@ -27,19 +32,29 @@ function resolveBase(location) {
 
 export function resolveTargets(location, selected = AGENTS.map((a) => a.id)) {
   const base = resolveBase(location)
-  return AGENTS.filter((a) => selected.includes(a.id)).map((agent) => ({
-    agent,
-    path: path.join(base, agent.dir),
-    exists: fs.existsSync(path.join(base, agent.dir)),
-  }))
+  return AGENTS.filter((a) => selected.includes(a.id)).map((agent) => {
+    // A global-only agent (Hermes) always resolves to the home dir, even for a
+    // project install, because it never reads skills from a project folder.
+    const targetBase = agent.globalOnly ? os.homedir() : base
+    return {
+      agent,
+      path: path.join(targetBase, agent.dir),
+      exists: fs.existsSync(path.join(targetBase, agent.dir)),
+    }
+  })
 }
 
 // Which agents already have their folder present, used to pre-check the picker's
 // agent question. Absence of a folder is not absence of the agent, so the picker
-// still lets the user add an agent whose folder does not exist yet.
+// still lets the user add an agent whose folder does not exist yet. Global-only
+// agents (Hermes) are detected only for global installs: a project install must
+// not pre-check a folder that lives in the home dir.
 export function detectAgents(location) {
   const base = resolveBase(location)
-  return AGENTS.filter((a) => fs.existsSync(path.join(base, a.dir.split('/')[0]))).map((a) => a.id)
+  return AGENTS.filter((a) => {
+    if (a.globalOnly && location !== 'global') return false
+    return fs.existsSync(path.join(base, a.dir.split('/')[0]))
+  }).map((a) => a.id)
 }
 
 export function detectConflicts({ skills, targets }) {
@@ -87,7 +102,15 @@ const POINTER_START = '<!-- antislop:start -->'
 const POINTER_END = '<!-- antislop:end -->'
 
 // The entry file each agent reads at session start.
-const ENTRY_FILE = { claude: 'CLAUDE.md', codex: 'AGENTS.md', antigravity: 'AGENTS.md' }
+const ENTRY_FILE = {
+  claude: 'CLAUDE.md',
+  codex: 'AGENTS.md',
+  antigravity: 'AGENTS.md',
+  opencode: 'AGENTS.md',
+  cursor: 'AGENTS.md',
+  gemini: 'GEMINI.md',
+  hermes: 'AGENTS.md',
+}
 
 const SKILL_LINES = {
   [CORE]: 'Core filter, always on: `antislop`',

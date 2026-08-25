@@ -30,7 +30,7 @@ The core prevents slop but cannot invent direction. `DESIGN.md` (yours) supplies
 
 antislop is a set of **standard agent skills** (one folder per skill, `SKILL.md`) you can install as a package. The core is always loaded; the skills load only for the task at hand. Pick one of these three paths.
 
-**1. The picker (recommended).** One command, then choose. It shows the antislop banner, lists the skills with the core locked on, and asks where (project or global) and which agents (Claude Code, Antigravity, Codex):
+**1. The picker (recommended).** One command, then choose. It shows the antislop banner, lists the skills with the core locked on, asks where (project or global) and which agents (Claude Code, Antigravity, Codex, OpenCode, Cursor, Gemini CLI, Hermes), then installs the folders and writes the pointer that loads antislop every session. The skills directory (path 2) does not write that pointer, so this is the one to use:
 
 ```bash
 npx antislop-ai
@@ -44,7 +44,7 @@ npx skills add miqdadbadjuber/anti-slop
 
 Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for a single one. Run `--list` first to see what is available.
 
-`npx skills add` copies the skill folders but does not write the agent entry pointer that loads antislop every session. To add the pointer, run `npx antislop-ai`, choose the same skills and agent, and pick **Keep what is there** when it finds the existing folders. The picker (path 1) does both in one run.
+`npx skills add` copies the skill folders but does not write the agent entry pointer that loads antislop every session; skills.sh does not write them, so that gap is theirs, not antislop's. That is why the picker (path 1) is the recommended way to install. If you already used path 2, run `npx antislop-ai`, choose the same skills and agent, and pick **Keep what is there** when it finds the existing folders; that writes the pointer.
 
 skills.sh reads the skill folders straight from this repository, so the listing appears as soon as the repo is live; there is no separate setup step.
 
@@ -55,7 +55,7 @@ skills.sh reads the skill folders straight from this repository, so the listing 
 /plugin install antislop@anti-slop
 ```
 
-Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into Claude Code (`.claude/skills/`), Codex (`.codex/skills/`), Antigravity (`.agents/skills/`), and any other agent that reads the standard. The picker (path 1) asks which of these agents you use and installs into them, creating the skill folder if it does not exist yet; the skills directory (path 2) handles the same agents and more. The plugin (path 3) is the Claude Code door only.
+Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into any agent that reads the standard: Claude Code (`.claude/skills/`), Codex (`.codex/skills/`), Antigravity (`.agents/skills/`), OpenCode (`.opencode/skills/`), Cursor (`.cursor/skills/`), Gemini CLI (`.gemini/skills/`), and Hermes (`~/.hermes/skills/`). The picker (path 1) asks which of these agents you use and installs into them, creating the skill folder if it does not exist yet; the skills directory (path 2) handles the same agents and more. The plugin (path 3) is the Claude Code door only.
 
 **Manual (single file, no packaging).** The core `antislop.md` alone remains a complete filter you can paste into any chat window. Download it and tell your agent to read it; the First-Run wizard inside it installs skills the manual way:
 
@@ -85,7 +85,7 @@ antislop is used one of two ways, chosen at the start of a session:
 
 ## Roadmap
 
-**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. **v3.1.3** states the `DESIGN.md` boundary explicitly, adds a security explainer ([SECURITY.md](SECURITY.md)), and documents what `npx skills add` does and does not install. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
+**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. **v3.1.3** states the `DESIGN.md` boundary explicitly, adds a security explainer ([SECURITY.md](SECURITY.md)), and documents what `npx skills add` does and does not install. **v3.2.0** adds OpenCode, Cursor, Gemini CLI, and Hermes to the picker, so one run covers seven agents and the shared `.agents/skills/` folder covers the long tail that reads the standard. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
 
 ## FAQ
 
@@ -95,9 +95,9 @@ No, a filter. It does not prescribe colors, fonts, or layouts. It rejects techni
 **Which agents does it work with?**
 All of them, but the install paths differ:
 
-- **The picker and the skills directory** support Claude Code, Codex, and Antigravity (the picker detects each agent's skill folder; `npx skills add` handles the same agents and more). These are the recommended paths.
+- **The picker and the skills directory** support Claude Code, Codex, Antigravity, OpenCode, Cursor, Gemini CLI, and Hermes (the picker detects each agent's skill folder; Hermes installs globally only). These are the recommended paths.
 - **The plugin** is Claude Code only. It is the Claude-specific door.
-- **The single file** (`antislop.md`) works with any agent that reads plain Markdown: Cursor, Gemini CLI, or a plain chat window.
+- **The single file** (`antislop.md`) works with any agent that reads plain Markdown, including a plain chat window.
 
 The packaged skills use the open Agent Skills standard (folder per skill), so they drop into any tool that reads the standard.
 

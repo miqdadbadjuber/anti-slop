@@ -27,9 +27,14 @@ function stop(message) {
   process.exit(0)
 }
 
+// A global-only agent (Hermes) installs into the home dir, never into the project.
+function displayDir(agent) {
+  return agent.globalOnly ? `~/${agent.dir}` : agent.dir
+}
+
 async function main() {
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log('antislop 3.1.3')
+    console.log('antislop 3.2.0')
     return
   }
 
@@ -68,7 +73,7 @@ async function main() {
     options: AGENTS.map((a) => ({
       value: a.id,
       label: a.label,
-      hint: detected.includes(a.id) ? `found here (${a.dir})` : `will create ${a.dir}`,
+      hint: detected.includes(a.id) ? `found here (${displayDir(a)})` : `will create ${displayDir(a)}`,
     })),
     required: 'Pick at least one agent.',
     initialValues: detected,

@@ -56,21 +56,21 @@ Pick the one that matches your work. UI work means `antislop-ui`. Copy work mean
 
 ## How to install
 
-**The one-command way.** Run this in the terminal:
+**The one-command way (recommended).** Run this in the terminal:
 
 ```bash
 npx antislop-ai
 ```
 
-Pick the skills you want, choose "this project" or "everywhere", and antislop installs itself. The core is always on; the skills load only for the work you do.
+Pick the skills you want, choose "this project" or "everywhere", pick which agent(s) you use, and antislop installs itself and writes the pointer that loads it every session. The core is always on; the skills load only for the work you do.
 
-Or install straight from the skills directory, the open directory for agent skills:
+**The skills directory.** Or install the skill folders straight from skills.sh, the open directory for agent skills:
 
 ```bash
 npx skills add miqdadbadjuber/anti-slop
 ```
 
-Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for a single one. Run `--list` first to see what is available. The skills directory reads the skills straight from the GitHub repository, so it works as soon as the repository is live; there is no separate setup step.
+Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for a single one. Run `--list` first to see what is available. The skills directory reads the skills straight from the GitHub repository, so it works as soon as the repository is live; there is no separate setup step. One caveat: skills.sh copies the skill folders but does not write the agent entry pointer that loads antislop every session; that is a skills.sh limitation, not antislop's. Use the one-command way instead, or run it afterwards to write the pointer.
 
 **The plugin (Claude Code).** If you use Claude Code, add the marketplace once, then install the plugin:
 
@@ -83,7 +83,8 @@ Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for 
 
 All of them, but the install path differs by agent:
 
-- **The one-command way and the skills directory** work with Claude Code, Codex, and Antigravity. The picker detects which of those agents exist in your project and installs into their skill folders. This is the recommended path.
+- **The one-command way (`npx antislop-ai`) is recommended**: it installs the skill folders and writes the pointer that loads antislop every session, in one run. It works with Claude Code, Codex, Antigravity, OpenCode, Cursor, Gemini CLI, and Hermes, and detects which of those agents exist in your project (Hermes installs globally, into `~/.hermes/skills/`).
+- **The skills directory** (`npx skills add`) copies the skill folders but writes no agent pointer; skills.sh does not write them. Use it for the folders only, then run the one-command way to add the pointer.
 - **The plugin** is Claude Code only.
 - **The manual way** works with any agent that reads plain Markdown, including a plain chat window (ChatGPT, Gemini, and so on).
 

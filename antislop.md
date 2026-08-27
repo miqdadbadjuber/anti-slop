@@ -144,7 +144,8 @@ These are the most common patterns found in AI-generated designs. Use this table
 | **Excessive Border Radius** | Every element is pill-shaped: buttons, inputs, cards, badges, modals |
 | **Overly Soft Shadows** | Every component has a large shadow, the whole page feels like it's floating |
 | **Glow Everywhere** | Glow on cards, buttons, icons, badges, backgrounds, and borders all at once |
-| **Background Grid** | Grid squares, blueprint lines, graph paper, thin horizontal/vertical lines |
+| **AI Default Palette** | Harsh or rainbow gradients, purple-and-black schemes, neon accents, pastel blocks, radial orbs, used as the default color treatment |
+| **Background Grid** | Grid squares, blueprint lines, graph paper, dot grids, thin horizontal/vertical lines |
 | **Too Much Decoration / Trend-Stacking** | Blob, mesh gradient, glow, noise, pattern, grid with no purpose, especially when multiple trends are stacked (e.g. Glassmorphism + Mesh Gradient + Glow + Monospace + Grid + Rounded UI) |
 | **Dark Mode Default for No Reason** | Entire page is dark just because it looks "tech", with no branding consideration |
 | **Too Many Colors in Palette** | Using 5-7 different colors on one page without a clear design system |
@@ -158,12 +159,15 @@ These are the most common patterns found in AI-generated designs. Use this table
 |---------|---------------|
 | **Monotonous Layout** | Hero, Subtitle, 2 CTAs, Screenshot, Feature Grid, Testimonials, FAQ, CTA, Footer |
 | **Copy-Paste Feature Cards** | Identical size, height, icon, layout, and padding across all cards |
+| **Bento Grid** | A mosaic of differently-sized cards filling a section, the default "app-like" layout |
+| **Fake Terminal Window** | A styled terminal window with typed-out commands as the hero or feature visual |
 | **Uniform Spacing** | Padding, margin, and element gaps are identical across every section |
 | **Broken Mobile** | Horizontal overflow, cards clipping off-screen, broken navbar, colliding text |
 | **Template Animations** | Every element uses Fade Up, Fade In, Floating, Scale, Bounce |
 | **"How It Works" Always 3 Steps** | Round icon + number 1, 2, 3 + short text, always three steps, always the same |
 | **"Trusted By" Logo Bar** | Row of generic company logos placed directly below the hero |
 | **"Most Popular" Pricing Card** | Middle tier always highlighted with a capsule badge |
+| **3 Pricing Tiers** | Always three columns whatever the real pricing structure, with the middle tier highlighted |
 | **4-Column Template Footer** | Product / Company / Resources / Legal columns with no variation |
 | **Uniform Section Rhythm** | Every section is the same composition: centered title + subtitle + identical card grid, with no variation between sections |
 | **Alternating Background Only** | The only variation between sections is flipping the background color every other section |
@@ -178,12 +182,15 @@ These are the most common patterns found in AI-generated designs. Use this table
 | **Fake Statistics** | 10K+ Users, 99.9% Uptime, 500M Requests, 120+ Countries |
 | **Fake Testimonials** | AI avatars, random names, random job titles, fictional reviews |
 | **Fabricated Trust Claims** | "SOC 2 compliant", "ISO 27001", "Enterprise-grade security", "300% faster" for a product with no such evidence |
+| **Demo Without a Product** | Sells a product that is never shown working: no real demo, no Terms of Service, no Privacy Policy |
 
 ### Decorative Elements
 
 | Pattern | Telltale Signs |
 |---------|---------------|
 | **Generic AI Icons** | Sparkle, Star, Magic, Lightning, Diamond, Cube, Robot, AI Orb |
+| **Lucide Icons** | Every icon from the same thin-stroke rounded library (Lucide or a clone), the default icon-set look |
+| **Colored Left Stripe** | A thin colored vertical bar on the left edge of cards, rows, or section headers, as decoration |
 | **Small Arrows (→ / ↗)** | Placed on almost every button as pure decoration |
 | **AI Capsule Badges** | Pill shape, thin border, glow, small dot, uppercase, containing: "AI Powered", "Beta", "New" |
 | **Generic AI Typography** | Large monospace headings, HOW IT WORKS uppercase with wide tracking |
@@ -376,25 +383,26 @@ Each technique below is allowed. It FAILS only when it appears as a default with
 
 #### R-01 — Color & Gradients
 
-- **FORBIDDEN as default without purpose**: blue-to-purple, blue-to-cyan, purple-to-pink gradients as primary colors, colored glow backgrounds, neon blue buttons
+- **FORBIDDEN as default without purpose**: blue-to-purple, blue-to-cyan, purple-to-pink gradients as primary colors, harsh or rainbow gradients, purple-and-black schemes, neon or pastel palettes, radial orbs, colored glow backgrounds, neon blue buttons
 - **ALLOWED** when the color/gradient is part of an established brand identity OR serves a stated hierarchy goal, with the reason written down
 - A gradient that separates one level of hierarchy from another is craft; the same gradient covering the whole page is slop. The technique is not the problem, the purpose is
 
 #### R-04 — Icons
 
 - **FORBIDDEN as default without purpose**: Sparkle, Star, Magic, Lightning, Diamond, Orb, Robot as feature icons
+- **FORBIDDEN as default without purpose**: an icon set chosen for its recognizable library look (Lucide-style thin rounded strokes) instead of relevance to the content
 - Icons must be **genuinely relevant** to the content they represent, and the relevance written down when the icon is a generic glyph
 - If no appropriate icon exists, it is better to use none
 
 #### R-06 — Typography
 
 - **FORBIDDEN as default without purpose**: large monospace fonts used purely for "terminal" aesthetics, uppercase labels with extreme letter-spacing (`HOW IT WORKS`, `FEATURES`)
-- Choose typeface based on brand character, not because it is the AI model's default pick, and write the reason
+- Choose typeface based on brand character, not because it is the AI model's default pick (Inter, Geist, Space Grotesk for sans; Geist Mono, JetBrains Mono, Fira Code for mono), and write the reason
 - Typography must **improve readability** and reflect the product's character
 
 #### R-07 — Background
 
-- **FORBIDDEN as default without purpose**: grid squares, blueprint lines, graph paper as a background
+- **FORBIDDEN as default without purpose**: grid squares, blueprint lines, graph paper, dot patterns as a background
 - Use texture or pattern only if it genuinely supports the product's specific visual identity, with the reason written down
 
 #### R-08 — Button Arrows
@@ -451,6 +459,9 @@ These are consistency requirements. They stay as-is, with two adjustments: R-05 
 
 - **FORBIDDEN**: AI template layouts (Hero + 3 cards, Hero + 6 features, Hero + fake stats, etc.)
 - **FORBIDDEN**: "How It Works" always in 3 steps with round icons and numbers
+- **FORBIDDEN**: bento-grid mosaic as the default section layout
+- **FORBIDDEN**: a fake terminal window as the hero or feature visual
+- **FORBIDDEN**: pricing always shown as three columns
 - **FORBIDDEN**: generic "Trusted By" logo bar directly below the hero
 - **FORBIDDEN**: 4-column template footer with Product / Company / Resources / Legal and no variation
 - **FORBIDDEN**: every section using the same internal layout pattern (centered title + subtitle + identical card grid); see "Uniform Section Rhythm". Composition variety comes from `DESIGN.md`, not from a template
@@ -613,9 +624,9 @@ Before declaring the design done, answer every question below. All answers must 
 For each technique, the technique itself is allowed. FAIL if it appears as a default without purpose, or if the reason is not written down:
 
 - [ ] Do gradients/glows appear as a default with no stated hierarchy or brand purpose? *(R-01)*
-- [ ] Are there generic icons (sparkle, star, magic, lightning, diamond, robot, orb) or icons irrelevant to their content, with no written relevance? *(R-04)*
+- [ ] Are there generic icons (sparkle, star, magic, lightning, diamond, robot, orb), an icon set picked for its library look (Lucide-style), or icons irrelevant to their content, with no written relevance? *(R-04)*
 - [ ] Is there a large monospace font, uppercase label with wide tracking, or a typeface chosen without a written brand-character reason? *(R-06)*
-- [ ] Is there a background grid, blueprint, or graph paper without a written visual-identity purpose? *(R-07)*
+- [ ] Is there a background grid, blueprint, graph paper, or dot pattern without a written visual-identity purpose? *(R-07)*
 - [ ] Are arrows (`→` / `↗`) placed on almost every button purely as decoration, with no written purpose? *(R-08)*
 - [ ] Are there capsule badges ("AI Powered", "Beta", "New", "Secure", "Fast") with no real function, or the full capsule + thin border + glow + uppercase combination? *(R-09)*
 - [ ] Is glassmorphism applied to more than 1-2 elements simultaneously (navbar + card + modal + sidebar)? *(R-10)*
@@ -646,7 +657,7 @@ All answers must be **no**:
 - [ ] C-3: Does any section exist only to fill an AI template, not to serve the product's content? *(Content-Driven Composition)*
 - [ ] C-4: Does the UI break in any state, theme, breakpoint, or without a mouse? *(Resilience)*
 - [ ] C-5: Is any testimonial, statistic, or claim fabricated? *(Evidence Over Claims)*
-- [ ] Does the layout follow an AI template (generic Hero+cards, "How It Works" always 3 steps, "Trusted By" logo bar, 4-column footer with no variation, uniform section rhythm), or does the section rhythm contradict the declared RHYTHM dial? *(R-05)*
+- [ ] Does the layout follow an AI template (generic Hero+cards, "How It Works" always 3 steps, "Trusted By" logo bar, bento-grid mosaic, fake terminal window, 3 pricing columns, 4-column footer with no variation, uniform section rhythm), or does the section rhythm contradict the declared RHYTHM dial? *(R-05)*
 - [ ] Are all elements (buttons, cards, inputs, badges) made pill-shaped with no radius variation? *(R-11)*
 - [ ] Are CTAs still generic (Get Started, Learn More, Try Now, Explore, Discover)? *(R-15)*
 - [ ] Are there any AI marketing buzzwords (AI Powered, Seamless, Revolutionary, Cutting Edge, etc.)? *(R-16)*

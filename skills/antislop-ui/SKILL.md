@@ -22,6 +22,7 @@ allowed-tools: Read Write Edit Glob Grep
 - **Tell:** blue-to-purple, blue-to-cyan, or purple-to-pink gradients used as the primary color treatment, or a full-page colored glow.
 - **Why:** the most over-represented color treatment in training data. It signals "no brand identity", not "our palette", and marks the design as AI-generated at a glance.
 - **Fix:** pull the palette from `DESIGN.md` or the product's own identity. Keep a gradient only as a hierarchy function with the reason written down (R-01). A gradient separating one level from another is craft; the same gradient on every section is a default.
+- **The same default family:** harsh or rainbow gradients, purple-and-black schemes, neon or pastel palettes, and blurred radial orbs behind the hero. They are the same tell wearing different clothes: color from the model's default, not from the brand. All of them are FORBIDDEN as defaults without purpose (R-01).
 
 ### Excessive Glassmorphism
 
@@ -49,7 +50,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 ### Background Grid
 
-- **Tell:** grid squares, blueprint lines, graph paper, or thin repeating lines behind content.
+- **Tell:** grid squares, blueprint lines, graph paper, dot grids, or thin repeating lines behind content.
 - **Why:** it is a default way to make a flat page feel "technical" without doing any real work. It reads as texture without intent.
 - **Fix:** use texture or pattern only when it genuinely supports the product's identity, with the reason written down (R-07). A real identity motif (core Part 3) beats a stock grid every time.
 
@@ -91,6 +92,12 @@ allowed-tools: Read Write Edit Glob Grep
 - **Why:** uniform cards flatten the content. When every feature is a card with an icon, the features with real weight and the ones without look the same.
 - **Fix:** create variation that reflects content hierarchy, with the reason written down (R-14). Not every feature needs to be a card. The flagship feature may deserve a full-width treatment, the supporting ones a list.
 
+### Bento Grid
+
+- **Tell:** a section made of a mosaic of differently-sized cards, some spanning two columns or two rows, filling the space like a tiled dashboard.
+- **Why:** it is the default "app-like" landing layout of the last few years, so it signals nothing about the product. When every section could be a bento, the layout is a template, not a decision.
+- **Fix:** use a bento grid only when the content genuinely has elements of different sizes to show (R-05). If every cell is roughly the same, a simple grid or list is more honest. The RHYTHM dial decides whether sections vary at all.
+
 ### Uniform Spacing
 
 - **Tell:** padding, margin, and gaps are identical across every section.
@@ -114,6 +121,13 @@ allowed-tools: Read Write Edit Glob Grep
 - **Tell:** the middle pricing tier always highlighted with a capsule badge.
 - **Why:** it is the default pattern, which means it is not a decision. When every pricing section does it, the highlighted tier stops meaning anything.
 - **Fix:** highlight the tier that actually serves the product's goals, and write why (R-31). If no tier deserves emphasis, highlight none.
+- **Three columns is part of the tell:** pricing shown as three tiers whatever the real structure, the middle one highlighted. That shape is the default, so it is not a decision (R-05). Use as many tiers as the product really has, and highlight the one that serves it.
+
+### Demo Without a Product
+
+- **Tell:** the page sells a product that is never shown working: no real demo, no Terms of Service, no Privacy Policy, just promises.
+- **Why:** it is a demo wearing a product's clothes. Every claim is trust with nothing behind it, and the missing legal pages are the quiet tell that nothing real exists yet.
+- **Fix:** show the real product working, or say honestly that it is not shipped yet (R-38, C-5). If the page asks for signups or payment, the Terms of Service and Privacy Policy must exist. An honest "coming soon" beats a convincing demo.
 
 ### 4-Column Template Footer
 
@@ -135,6 +149,12 @@ allowed-tools: Read Write Edit Glob Grep
 - **Why:** these glyphs are the generic vocabulary of "AI product". They communicate nothing about the specific feature.
 - **Fix:** use icons genuinely relevant to the content, with the relevance written down when the glyph is generic (R-04). If no appropriate icon exists, use none. The feature label does the work.
 
+### Lucide Icons
+
+- **Tell:** every icon comes from the same thin-stroke, rounded-corner library (Lucide or a visual clone), so all icons share one recognizable look.
+- **Why:** a single default icon library makes every AI site's icons identical, so the icons stop telling you anything about the product. The glyphs may be relevant; the uniform library look is the tell.
+- **Fix:** the icon set is a visual choice, not a default (R-04). Pick icons for relevance first; then decide whether the library's weight and stroke suit the product's character. Two icons that look "same-ish" can still read as yours if the set is a decision, not an import.
+
 ### Emoji as Decoration
 
 - **Tell:** literal emoji scattered through the copy, headings, badges, and buttons: 🚀 in a headline, ✅ beside every feature bullet, 🔥 on a CTA, 📈 above a chart title.
@@ -147,6 +167,12 @@ allowed-tools: Read Write Edit Glob Grep
 - **Why:** the arrow becomes a pattern, not a signal. When every CTA has one, none of them point anywhere specific.
 - **Fix:** arrows are not the default identity for buttons (R-08). Keep them for the action that genuinely benefits from a direction cue, sized proportionally, with the purpose written down.
 
+### Colored Left Stripe
+
+- **Tell:** a thin colored vertical bar on the left edge of cards, list rows, or section headers, used as decoration.
+- **Why:** the stripe adds color without adding meaning. It is the cheapest way to make a card "look designed", so it appears everywhere and says nothing.
+- **Fix:** the stripe is decoration; it must carry information or go (R-01, R-31). A left edge that marks real state (active, warning, new) is a signal. A stripe that exists to look designed is a default.
+
 ### AI Capsule Badges
 
 - **Tell:** pill shape, thin border, glow, small dot, uppercase, containing "AI Powered", "Beta", "New".
@@ -158,6 +184,13 @@ allowed-tools: Read Write Edit Glob Grep
 - **Tell:** large monospace headings, or uppercase labels with extreme letter-spacing ("HOW IT WORKS", "FEATURES").
 - **Why:** monospace-as-aesthetic and wide-tracked uppercase are shorthand for "technical and modern" without doing any real typographic work.
 - **Fix:** choose typeface from brand character, not the model's default pick, and write the reason (R-06). Typography must improve readability and reflect the product. A type choice with a reason beats a trend every time.
+- **The default roster:** Inter, Geist, and Space Grotesk for sans; Geist Mono, JetBrains Mono, and Fira Code for mono. None are banned; each is valid with a brand reason. The tell is the font that shows up because it was the default, not because it fits (R-06).
+
+### Fake Terminal Window
+
+- **Tell:** a styled terminal window with traffic-light dots, a prompt line, and typed-out commands, used as the hero or feature visual.
+- **Why:** it is the generic "this is a developer tool" costume. The window is decoration; the real product rarely looks like that. It reads as a placeholder for a real screenshot.
+- **Fix:** if the product is genuinely a terminal or CLI, a real, working screenshot is evidence. Otherwise show the actual product UI, not a costume (R-06, C-5). Monospace as aesthetic is already covered by R-06; a fake terminal is that pattern as a component.
 
 ### Illustrations With No Connection
 
@@ -253,6 +286,7 @@ Run these alongside the core Delivery Gate when the task is UI work. All answers
 - [ ] Is the accent used at the key moment only, not spread across every element? (core Part 3, one deliberate accent)
 - [ ] Is the copy free of decorative emoji scattered through headings, bullets, and buttons? (R-04)
 - [ ] Do section compositions vary according to the declared RHYTHM dial instead of repeating one template? (R-05)
+- [ ] Is the layout free of the default AI shapes: bento-grid mosaic, fake terminal window, three pricing columns, and left-edge color stripes with no meaning? (R-05, R-01)
 - [ ] Does every navigation item and interactive element have a real destination or behavior, or a visible "Coming soon" label? (R-24, R-26)
 - [ ] Does motion follow the declared MOTION dial and serve a written purpose, with no endless loops? (R-19)
 - [ ] Is glass, glow, shadow, and radius used at their dose caps, not as a page-wide default? (R-10, R-11, R-12, R-13)

@@ -28,7 +28,7 @@ The core prevents slop but cannot invent direction. `DESIGN.md` (yours) supplies
 
 ## Install
 
-antislop is a set of **standard agent skills** (one folder per skill, `SKILL.md`) you can install as a package. The core is always loaded; the skills load only for the task at hand. Pick one of these four paths.
+antislop is a set of **standard agent skills** (one folder per skill, `SKILL.md`) you can install as a package. The core is always loaded; the skills load only for the task at hand. Pick one of these five paths.
 
 **1. The picker (recommended).** One command, then choose. It shows the antislop banner, lists the skills with the core locked on, asks where (project or global) and which agents (Claude Code, Antigravity, Codex, OpenCode, Cursor, Gemini CLI, Hermes), then installs the folders and writes the pointer that loads antislop every session. The skills directory (path 2) does not write that pointer, so this is the one to use:
 
@@ -61,7 +61,14 @@ skills.sh reads the skill folders straight from this repository, so the listing 
 agy plugin install https://github.com/miqdadbadjuber/anti-slop
 ```
 
-Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into any agent that reads the standard: Claude Code (`.claude/skills/`), Codex (`.codex/skills/`), Antigravity (`.agents/skills/`), OpenCode (`.opencode/skills/`), Cursor (`.cursor/skills/`), Gemini CLI (`.gemini/skills/`), and Hermes (`~/.hermes/skills/`). The picker (path 1) asks which of these agents you use and installs into them, creating the skill folder if it does not exist yet; the skills directory (path 2) handles the same agents and more. The plugins are per-agent doors: path 3 is the Claude Code marketplace plugin, path 4 the Antigravity plugin.
+**5. The plugin (Codex).** The same repo is a Codex plugin and marketplace: a `.codex-plugin/plugin.json` manifest plus a `.agents/plugins/marketplace.json` index, both pointing at the shared `skills/` folder. Add the marketplace once, then install the plugin:
+
+```bash
+codex plugin marketplace add miqdadbadjuber/anti-slop
+codex plugin add antislop@anti-slop
+```
+
+Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into any agent that reads the standard: Claude Code (`.claude/skills/`), Codex (`.codex/skills/`), Antigravity (`.agents/skills/`), OpenCode (`.opencode/skills/`), Cursor (`.cursor/skills/`), Gemini CLI (`.gemini/skills/`), and Hermes (`~/.hermes/skills/`). The picker (path 1) asks which of these agents you use and installs into them, creating the skill folder if it does not exist yet; the skills directory (path 2) handles the same agents and more. The plugins are per-agent doors: path 3 is the Claude Code marketplace plugin, path 4 the Antigravity plugin, path 5 the Codex plugin and marketplace.
 
 **Manual (single file, no packaging).** The core `antislop.md` alone remains a complete filter you can paste into any chat window. Download it and tell your agent to read it; the First-Run wizard inside it installs skills the manual way:
 
@@ -91,7 +98,7 @@ antislop is used one of two ways, chosen at the start of a session:
 
 ## Roadmap
 
-**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. **v3.1.3** states the `DESIGN.md` boundary explicitly, adds a security explainer ([SECURITY.md](SECURITY.md)), and documents what `npx skills add` does and does not install. **v3.2.0** adds OpenCode, Cursor, Gemini CLI, and Hermes to the picker, so one run covers seven agents and the shared `.agents/skills/` folder covers the long tail that reads the standard. **v3.2.1** closes UI slop gaps: new patterns for bento grids, Lucide-style icon sets, colored left stripes, fake terminal windows, and demos without a product, plus rule extensions for the palette family (harsh gradients, purple-and-black, neon, pastel, radial orbs), dot grids, the typeface roster (Geist Mono and friends), and pricing always shown as three columns. **v3.2.2** ships the plugin as an Antigravity door: `agy plugin install https://github.com/miqdadbadjuber/anti-slop` registers the six skills and loads the antislop pointer into every session through the plugin's `rules/` component. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
+**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. **v3.1.3** states the `DESIGN.md` boundary explicitly, adds a security explainer ([SECURITY.md](SECURITY.md)), and documents what `npx skills add` does and does not install. **v3.2.0** adds OpenCode, Cursor, Gemini CLI, and Hermes to the picker, so one run covers seven agents and the shared `.agents/skills/` folder covers the long tail that reads the standard. **v3.2.1** closes UI slop gaps: new patterns for bento grids, Lucide-style icon sets, colored left stripes, fake terminal windows, and demos without a product, plus rule extensions for the palette family (harsh gradients, purple-and-black, neon, pastel, radial orbs), dot grids, the typeface roster (Geist Mono and friends), and pricing always shown as three columns. **v3.2.2** ships the plugin as an Antigravity door: `agy plugin install https://github.com/miqdadbadjuber/anti-slop` registers the six skills and loads the antislop pointer into every session through the plugin's `rules/` component. **v3.2.3** ships the plugin as a Codex door: `codex plugin marketplace add miqdadbadjuber/anti-slop` then `codex plugin add antislop@anti-slop` registers the six skills from the shared folder, with no copy to maintain. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
 
 ## FAQ
 
@@ -102,7 +109,7 @@ No, a filter. It does not prescribe colors, fonts, or layouts. It rejects techni
 All of them, but the install paths differ:
 
 - **The picker and the skills directory** support Claude Code, Codex, Antigravity, OpenCode, Cursor, Gemini CLI, and Hermes (the picker detects each agent's skill folder; Hermes installs globally only). These are the recommended paths.
-- **The plugins** are per-agent doors: the Claude Code marketplace plugin (path 3) and the Antigravity plugin (path 4), both installed from the same repo.
+- **The plugins** are per-agent doors: the Claude Code marketplace plugin (path 3), the Antigravity plugin (path 4), and the Codex plugin (path 5), all installed from the same repo.
 - **The single file** (`antislop.md`) works with any agent that reads plain Markdown, including a plain chat window.
 
 The packaged skills use the open Agent Skills standard (folder per skill), so they drop into any tool that reads the standard.

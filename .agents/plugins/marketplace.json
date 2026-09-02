@@ -1,0 +1,19 @@
+{
+  "name": "anti-slop",
+  "interface": {
+    "displayName": "antislop"
+  },
+  "plugins": [
+    {
+      "name": "antislop",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

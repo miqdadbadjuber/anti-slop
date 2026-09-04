@@ -28,9 +28,9 @@ The core prevents slop but cannot invent direction. `DESIGN.md` (yours) supplies
 
 ## Install
 
-antislop is a set of **standard agent skills** (one folder per skill, `SKILL.md`) you can install as a package. The core is always loaded; the skills load only for the task at hand. Pick one of these five paths.
+antislop ships as a set of **standard agent skills** (one folder per skill, holding a `SKILL.md`). The core is always loaded; the other skills load only when the task needs them. Pick one of these five paths from this one repo.
 
-**1. The picker (recommended).** One command, then choose. It shows the antislop banner, lists the skills with the core locked on, asks where (project or global) and which agents (Claude Code, Antigravity, Codex, OpenCode, Cursor, Gemini CLI, Hermes), then installs the folders and writes the pointer that loads antislop every session. The skills directory (path 2) does not write that pointer, so this is the one to use:
+**1. The picker (recommended).** One command, then answer the prompts. It asks where to install (this project or everywhere), which agents you use, and which extra skills you want, then copies the folders and writes the pointer that loads antislop every session. Path 2 does not write that pointer, so start here:
 
 ```bash
 npx antislop-ai
@@ -42,11 +42,11 @@ npx antislop-ai
 npx skills add miqdadbadjuber/anti-slop
 ```
 
-Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for a single one. Run `--list` first to see what is available.
+Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for one skill. Run `--list` first to see what is available.
 
-`npx skills add` copies the skill folders but does not write the agent entry pointer that loads antislop every session; skills.sh does not write them, so that gap is theirs, not antislop's. That is why the picker (path 1) is the recommended way to install. If you already used path 2, run `npx antislop-ai`, choose the same skills and agent, and pick **Keep what is there** when it finds the existing folders; that writes the pointer.
+`npx skills add` copies the skill folders but does not write the agent entry pointer that loads antislop every session, and skills.sh does not write one either. If you used this path and want that pointer, run `npx antislop-ai`, pick the same skills and agent, and choose **Keep what is there** when it finds the folders.
 
-skills.sh reads the skill folders straight from this repository, so the listing appears as soon as the repo is live; there is no separate setup step.
+skills.sh reads the folders straight from this repository, so the listing needs no setup beyond the repo being live.
 
 **3. The plugin (Claude Code).** Add the marketplace once, then install the plugin:
 
@@ -68,9 +68,21 @@ codex plugin marketplace add miqdadbadjuber/anti-slop
 codex plugin add antislop@anti-slop
 ```
 
-Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into any agent that reads the standard: Claude Code (`.claude/skills/`), Codex (`.codex/skills/`), Antigravity (`.agents/skills/`), OpenCode (`.opencode/skills/`), Cursor (`.cursor/skills/`), Gemini CLI (`.gemini/skills/`), and Hermes (`~/.hermes/skills/`). The picker (path 1) asks which of these agents you use and installs into them, creating the skill folder if it does not exist yet; the skills directory (path 2) handles the same agents and more. The plugins are per-agent doors: path 3 is the Claude Code marketplace plugin, path 4 the Antigravity plugin, path 5 the Codex plugin and marketplace.
+**Where the skills live.** Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into any agent that reads the standard. The picker (path 1) installs into whichever of these you use, creating the folder if it is missing:
 
-**Manual (single file, no packaging).** The core `antislop.md` alone remains a complete filter you can paste into any chat window. Download it and tell your agent to read it; the First-Run wizard inside it installs skills the manual way:
+| Agent | Reads antislop from |
+|-------|---------------------|
+| Claude Code | `.claude/skills/` |
+| Codex | `.codex/skills/` |
+| Antigravity | `.agents/skills/` |
+| OpenCode | `.opencode/skills/` |
+| Cursor | `.cursor/skills/` |
+| Gemini CLI | `.gemini/skills/` |
+| Hermes | `~/.hermes/skills/` |
+
+The plugins (paths 3, 4, 5) are per-agent doors: they load antislop straight from this repo, so there are no skill folders to keep in sync.
+
+**Manual (single file, no packaging).** The core `antislop.md` alone is a complete filter you can paste into any chat window. Download it and tell your agent to read it; the First-Run wizard inside it installs skills the manual way:
 
 ```bash
 curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/antislop.md
@@ -80,12 +92,12 @@ curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/m
 
 | Skill | What it covers | Ships in |
 |-------|----------------|----------|
-| `antislop` | The core filter: rules, tiers, Delivery Gate, liveliness | v3.0.0 |
-| `antislop-ui` | UI / visual: layout, color, components, decoration, motion, structure | v2.2.0 |
-| `antislop-copywriting` | Copy & text: headlines, CTAs, tone, fake stats, anti-AI-writing patterns, markdown hygiene | v2.3.0 |
-| `antislop-human` | Human: contrast (with the checker), keyboard, focus, states | v2.4.0 |
-| `antislop-layoutmobile` | Mobile layout: responsive breakpoints, grids, overflow, tap targets, navigation | v2.5.0 |
-| `antislop-code` | Code comments: remove generic AI-slop comments, keep the valuable ones, never touch the code | v3.1.0 |
+| antislop | The core filter: rules, tiers, Delivery Gate, liveliness | v3.0.0 |
+| antislop-ui | UI / visual: layout, color, components, decoration, motion, structure | v2.2.0 |
+| antislop-copywriting | Copy & text: headlines, CTAs, tone, fake stats, anti-AI-writing patterns, markdown hygiene | v2.3.0 |
+| antislop-human | Human: contrast (with the checker), keyboard, focus, states | v2.4.0 |
+| antislop-layoutmobile | Mobile layout: responsive breakpoints, grids, overflow, tap targets, navigation | v2.5.0 |
+| antislop-code | Code comments: remove generic AI-slop comments, keep the valuable ones, never touch the code | v3.1.0 |
 
 Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, people work → `antislop-human`, mobile layout work → `antislop-layoutmobile`, code comments work → `antislop-code`, more than one → install several, or none (the core alone is a complete filter).
 
@@ -98,7 +110,15 @@ antislop is used one of two ways, chosen at the start of a session:
 
 ## Roadmap
 
-**v3.1.0 shipped** the `antislop-code` skill, per-skill READMEs, and the tagline rename. **v3.1.1** was a patch: the picker stopped copying per-skill READMEs into projects, and the wizard dropped install commands. **v3.1.2** removes the per-skill READMEs entirely and makes the picker ask which agent to install into, so a fresh Antigravity or Codex project lands in the right folder. **v3.1.3** states the `DESIGN.md` boundary explicitly, adds a security explainer ([SECURITY.md](SECURITY.md)), and documents what `npx skills add` does and does not install. **v3.2.0** adds OpenCode, Cursor, Gemini CLI, and Hermes to the picker, so one run covers seven agents and the shared `.agents/skills/` folder covers the long tail that reads the standard. **v3.2.1** closes UI slop gaps: new patterns for bento grids, Lucide-style icon sets, colored left stripes, fake terminal windows, and demos without a product, plus rule extensions for the palette family (harsh gradients, purple-and-black, neon, pastel, radial orbs), dot grids, the typeface roster (Geist Mono and friends), and pricing always shown as three columns. **v3.2.2** ships the plugin as an Antigravity door: `agy plugin install https://github.com/miqdadbadjuber/anti-slop` registers the six skills and loads the antislop pointer into every session through the plugin's `rules/` component. **v3.2.3** ships the plugin as a Codex door: `codex plugin marketplace add miqdadbadjuber/anti-slop` then `codex plugin add antislop@anti-slop` registers the six skills from the shared folder, with no copy to maintain. See [ROADMAP.md](ROADMAP.md) for the tracker, including the cross-agent plugin plan.
+What changed in each release. The full tracker, including the cross-agent plugin plan, lives in [ROADMAP.md](ROADMAP.md).
+
+- **v3.1.0** shipped `antislop-code`, the code comment skill.
+- **v3.1.1** and **v3.1.2** trimmed packaging: the picker stopped copying per-skill READMEs into projects and now asks which agent to install into.
+- **v3.1.3** stated the `DESIGN.md` boundary and added [SECURITY.md](SECURITY.md).
+- **v3.2.0** grew the picker to seven agents: Claude Code, Antigravity, Codex, OpenCode, Cursor, Gemini CLI, and Hermes.
+- **v3.2.1** closed UI slop gaps: bento grids, Lucide-style icon sets, colored left stripes, fake terminal windows, demos without a product, and rule extensions for palette families, dot grids, typefaces, and pricing.
+- **v3.2.2** opened the Antigravity door: `agy plugin install https://github.com/miqdadbadjuber/anti-slop` registers the six skills and loads antislop every session.
+- **v3.2.3** opened the Codex door: `codex plugin marketplace add miqdadbadjuber/anti-slop`, then `codex plugin add antislop@anti-slop`.
 
 ## FAQ
 

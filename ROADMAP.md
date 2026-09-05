@@ -1,10 +1,10 @@
 # antislop: Roadmap
 
-> How antislop grows from a single rules file into an installable, cross-agent skill/plugin. New to antislop? Read the [guide](guide.md) first. See [README.md](README.md) for the product.
+> How antislop grows from a single rules file into an installable, cross-agent skill/plugin. New to antislop? Read the [guide](GUIDE.md) first. See [README.md](README.md) for the product.
 
 ## Where we are
 
-The latest release is **v3.2.3**. antislop is a **packaged system**: a lean, always-loaded **core** plus five **skills**, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`):
+The latest release is **v3.2.4**. antislop is a **packaged system**: a lean, always-loaded **core** plus five **skills**, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`):
 
 - `antislop`: the core rules filter (rules, tiers, Delivery Gate, liveliness)
 - `antislop-ui`: UI / visual
@@ -71,7 +71,8 @@ What v3.0.0 shipped:
 - [x] v3.2.0 - picker adds OpenCode, Cursor, Gemini CLI, Hermes (global-only); shared `.agents/skills/` folder covers the long tail of standard readers
 - [x] v3.2.1 - UI slop gaps closed: bento grids, Lucide-style icon sets, colored left stripes, fake terminal windows, demos without a product; rules extended for the palette family (harsh gradients, purple-and-black, neon, pastel, radial orbs), dot grids, the typeface roster, and 3-pricing-column layouts
 - [x] v3.2.2 - Antigravity plugin door: root `plugin.json` + `rules/` pointer so `agy plugin install https://github.com/miqdadbadjuber/anti-slop` registers the six skills and loads antislop every session
-- [ ] v3.2.3 - Codex plugin door: `.codex-plugin/plugin.json` manifest + `.agents/plugins/marketplace.json` index so `codex plugin marketplace add miqdadbadjuber/anti-slop` then `codex plugin add antislop@anti-slop` registers the six skills from the shared folder
+- [x] v3.2.3 - Codex plugin door: `.codex-plugin/plugin.json` manifest + `.agents/plugins/marketplace.json` index so `codex plugin marketplace add miqdadbadjuber/anti-slop` then `codex plugin add antislop@anti-slop` registers the six skills from the shared folder
+- [x] v3.2.4 - R-35 sharpened into a click-through smoke test: every interactive element is run and exercised one at a time, and its result is recorded as evidence in the Delivery Gate PASS/FAIL report
 
 ## After v3
 

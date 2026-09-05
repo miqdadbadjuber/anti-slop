@@ -15,7 +15,7 @@
 
 > **Anti Slop: Rules for AI Coding Agents.** It stops them from generating generic "AI slop" UI and copy, without letting the result turn sterile. It is a **filter, not a style guide**: no prescribed colors, fonts, or layouts. It is not only for building pages: it also writes and audits copy, so AI text stops reading like AI. And it never beautifies on its own; `DESIGN.md` (yours) is where beauty and direction come from.
 
-> **New here? Start with the [guide](guide.md).** It explains what antislop is and how to install it, from zero.
+> **New here? Start with the [guide](GUIDE.md).** It explains what antislop is and how to install it, from zero.
 
 ## What it does
 
@@ -99,7 +99,15 @@ curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/m
 | antislop-layoutmobile | Mobile layout: responsive breakpoints, grids, overflow, tap targets, navigation | v2.5.0 |
 | antislop-code | Code comments: remove generic AI-slop comments, keep the valuable ones, never touch the code | v3.1.0 |
 
-Pick what matches the work: UI work → `antislop-ui`, copy work → `antislop-copywriting`, people work → `antislop-human`, mobile layout work → `antislop-layoutmobile`, code comments work → `antislop-code`, more than one → install several, or none (the core alone is a complete filter).
+Pick what matches the work:
+
+- UI work → antislop-ui
+- Copy work → antislop-copywriting
+- People work → antislop-human
+- Mobile layout work → antislop-layoutmobile
+- Code comments work → antislop-code
+- More than one kind of work → install several
+- None → the core alone is a complete filter
 
 ## Usage Modes
 
@@ -119,6 +127,7 @@ What changed in each release. The full tracker, including the cross-agent plugin
 - **v3.2.1** closed UI slop gaps: bento grids, Lucide-style icon sets, colored left stripes, fake terminal windows, demos without a product, and rule extensions for palette families, dot grids, typefaces, and pricing.
 - **v3.2.2** opened the Antigravity door: `agy plugin install https://github.com/miqdadbadjuber/anti-slop` registers the six skills and loads antislop every session.
 - **v3.2.3** opened the Codex door: `codex plugin marketplace add miqdadbadjuber/anti-slop`, then `codex plugin add antislop@anti-slop`.
+- **v3.2.4** turned R-35 into a click-through smoke test: every interactive element must be run and exercised one at a time, and its result recorded as evidence in the Delivery Gate report.
 
 ## FAQ
 

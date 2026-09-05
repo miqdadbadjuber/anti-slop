@@ -1,6 +1,8 @@
 # The antislop guide
 
-antislop is a rules file you give to the AI assistant you already talk to, like ChatGPT, Claude, or Gemini. It stops that AI from making slop: pages and text that look generic and obviously made by AI. It is a filter, not a style guide. It never picks your colors or fonts. It removes the slop and leaves the direction to you.
+antislop is a filter you give to the AI assistant you already use. It stops the AI from producing slop: pages, text, and code comments that look generic and obviously made by AI. It is a **filter, not a style guide**. It never picks your colors, fonts, or layout. It removes the slop and leaves the direction to you.
+
+New to antislop? Read this top to bottom once. If you are here to install it, jump to [How to install](#how-to-install). It is written to answer the question people ask most: "how do I put this on my agent?"
 
 ## What is slop?
 
@@ -14,114 +16,132 @@ If you have used AI to build a page or write a line of copy, you have seen slop.
 
 ## What you can use it for
 
-antislop is not only for building pages. Any AI output that can get sloppy benefits:
+Any AI output that can get sloppy benefits:
 
-- Build a new page or app: layout, color, parts of the page, animation, structure.
+- Build a new page or app: layout, color, structure, animation.
 - Write or rewrite copy: headlines, buttons, emails, and tone that do not sound AI-made.
-- Keep the page usable by people: readable colors, keyboard use, clear focus, and button states.
+- Keep the page usable by people: readable colors, keyboard use, clear focus, button states.
 - Clean up code comments: remove the generic AI ones, keep the ones that matter.
-- Check work you already have: it can list what to fix.
+- Check work you already have: it lists what to fix.
 
-The main file (the core) covers all of it. Skills (see What is a skill?) go deeper into one concern when you want more.
-
-## Why use it?
-
-Without a filter, AI output looks and sounds the same everywhere. With antislop, the result is specific and alive, not just clean: every major choice needs a reason, written down.
-
-One thing antislop does not do: make things pretty. It removes slop. If you have a specific look in mind, write it down in a file called DESIGN.md and the AI builds toward it. You don't have to make one. Without a DESIGN.md, the AI labels its work "draft without direction" instead of passing it off as finished (see Words used here).
-
-## What you need
-
-An AI assistant, and antislop itself. The easiest way in is one command in the terminal:
-
-```bash
-npx antislop-ai
-```
-
-It shows you what antislop has, you pick the skills you want and where to put them, and it sets everything up. No terminal? There is a manual way below that only needs one file.
-
-The main file, `antislop.md`, holds all the rules and the wizard that installs skills manually. Skills are optional add-ons; you do not need any to start.
-
-## What is a skill?
-
-A skill is an optional folder (with a `SKILL.md` inside) that goes deeper into one concern. The core works alone; a skill adds depth for one topic.
-
-- `antislop-ui`: look and feel. Layout, color, parts of the page, animation.
-- `antislop-copywriting`: the text. Headlines, buttons, tone, made-up statistics.
-- `antislop-human`: the people. Readable colors, keyboard use, clear focus, and button states.
-- `antislop-layoutmobile`: the small screen. Layout that reflows on a phone, tap targets, navigation.
-- `antislop-code`: the comments in your code. Remove the generic AI ones, keep the ones that carry information.
-
-Pick the one that matches your work. UI work means `antislop-ui`. Copy work means `antislop-copywriting`. People work means `antislop-human`. Mobile layout work means `antislop-layoutmobile`. Code comments work means `antislop-code`. More than one? Ask for "All". None? The core alone is enough.
+The core file covers all of it. Skills (see [What is a skill?](#what-is-a-skill)) go deeper into one concern when you want more.
 
 ## How to install
 
-**The one-command way (recommended).** Run this in the terminal:
+Pick the path that fits the tool you use. Three cases, three answers:
+
+1. **I use a coding agent** (Claude Code, Codex, Antigravity, Cursor, OpenCode, Gemini CLI, or Hermes). Run one command. See [The one-command way](#the-one-command-way).
+2. **I want the native plugin** on Claude Code, Antigravity, or Codex. See [The plugin doors](#the-plugin-doors).
+3. **I only have a chat window** (ChatGPT on the web, plain Gemini, and so on) or no terminal. See [The manual way](#the-manual-way).
+
+### The one-command way
+
+Recommended for everyone who uses a coding agent. Run this in a terminal (the black window where you type commands):
 
 ```bash
 npx antislop-ai
 ```
 
-Pick the skills you want, choose "this project" or "everywhere", pick which agent(s) you use, and antislop installs itself and writes the pointer that loads it every session. The core is always on; the skills load only for the work you do.
+It shows you what antislop has, then asks three things:
 
-**The skills directory.** Or install the skill folders straight from skills.sh, the open directory for agent skills:
+- **Which agent(s) you use.** It detects the ones present in your project. Each agent reads antislop from its own folder, and the picker writes the pointer that reloads antislop in every session. Hermes installs globally (into `~/.hermes/skills/`) because it does not read project folders.
+- **Which skills you want.** The core is always on. The extra skills load only for the work you do. See [What is a skill?](#what-is-a-skill).
+- **Where antislop should live.** This project only, or everywhere on your machine.
 
-```bash
-npx skills add miqdadbadjuber/anti-slop
-```
+That is the whole install. No agent entry file to write by hand, nothing else to run.
 
-Add `--all` for every skill, `-g` for a global install, or `--skill <name>` for a single one. Run `--list` first to see what is available. The skills directory reads the skills straight from the GitHub repository, so it works as soon as the repository is live; there is no separate setup step. One caveat: skills.sh copies the skill folders but does not write the agent entry pointer that loads antislop every session; that is a skills.sh limitation, not antislop's. Use the one-command way instead, or run it afterwards to write the pointer.
+### The plugin doors
 
-**The plugin (Claude Code).** If you use Claude Code, add the marketplace once, then install the plugin:
+Claude Code, Antigravity, and Codex can also load antislop as a native plugin straight from this repository. The plugin points at the same shared skills, so there are no copies to keep in sync. Use one of these if you already run plugins on that agent.
+
+**Claude Code.** Add the marketplace once, then install the plugin:
 
 ```text
 /plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
 /plugin install antislop@anti-slop
 ```
 
-**Which agents does it work with?**
+**Antigravity.** One command installs the plugin (its `rules/` component loads antislop in every session):
 
-All of them, but the install path differs by agent:
+```bash
+agy plugin install https://github.com/miqdadbadjuber/anti-slop
+```
 
-- **The one-command way (`npx antislop-ai`) is recommended**: it installs the skill folders and writes the pointer that loads antislop every session, in one run. It works with Claude Code, Codex, Antigravity, OpenCode, Cursor, Gemini CLI, and Hermes, and detects which of those agents exist in your project (Hermes installs globally, into `~/.hermes/skills/`).
-- **The skills directory** (`npx skills add`) copies the skill folders but writes no agent pointer; skills.sh does not write them. Use it for the folders only, then run the one-command way to add the pointer.
-- **The plugin** is Claude Code only.
-- **The manual way** works with any agent that reads plain Markdown, including a plain chat window (ChatGPT, Gemini, and so on).
+**Codex.** Add the marketplace once, then install the plugin:
 
-**The manual way.** Three steps. Use this when you want no packaging at all, or a chat window you cannot run commands in.
+```bash
+codex plugin marketplace add miqdadbadjuber/anti-slop
+codex plugin add antislop@anti-slop
+```
+
+Which should you use, the one-command way or the plugin? Both load the same rules. The one-command way copies skill folders into your project and works on all seven agents. The plugin doors load straight from the repository and are per-agent, so if you switch projects there is nothing to reinstall. Start with the one-command way; add a plugin door later if you want the project-free setup.
+
+### The manual way
+
+Use this when you have no terminal, or when your AI is a chat window you cannot run commands in. Three steps:
 
 **1. Download `antislop.md` once.** Two ways:
 
-- From the browser: open the repository page (the GitHub page where the product's files live, [here](https://github.com/miqdadbadjuber/anti-slop)), open `antislop.md`, and click the Download button.
-- From the terminal (the black window where you type commands):
+- From the browser: open the repository page [here](https://github.com/miqdadbadjuber/anti-slop), open `antislop.md`, and click the Download button.
+- From the terminal:
 
   ```bash
   curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/antislop.md
   ```
 
-**2. Put the file where your AI can read it, then tell it what you want.**
+**2. Give the file to your AI, then tell it what you want.**
 
-`antislop.md` is a plain text file, so the AI can read it. If your AI works with files (like Claude, Gemini, or Cursor), save `antislop.md` in the same folder as your work. Not sure which folder? Ask your AI where to put it. If your AI is a chat window (like ChatGPT on the web), open `antislop.md` in a text editor (Notepad works), copy everything, and paste it into the chat.
+`antislop.md` is plain text, so any AI can read it. If your AI works with files (Claude Code, Codex, Cursor, and similar), save the file in the same folder as your work. Not sure which folder? Ask your AI where to put it. If your AI is a chat window (ChatGPT on the web, and similar), open `antislop.md` in a text editor, copy everything, and paste it into the chat.
 
-Then tell it what you want. Say:
+Then say:
 
 > Read `antislop.md` and follow its install instructions. I want the UI and copywriting skill.
 
-If you pasted the contents instead of giving the file, say: "Follow the install instructions I pasted. I want the UI and copywriting skill." The AI follows the instructions, downloads the skills you asked for, and saves a note to use them next time. That is the whole setup. Say "core only" to skip skills.
+If you pasted the contents instead of giving the file, say: "Follow the install instructions I pasted. I want the UI and copywriting skill." The AI follows the instructions and sets antislop up. Say "core only" to skip skills.
 
 **3. Answer the wizard's questions.**
 
 It confirms which skills you want and asks when antislop should apply: while the AI is working (during), or after the work is done, to check it (after). Pick "during" for new work.
 
-Done. Want the one-command install instead? See the README, the product's main page, [here](README.md).
+That is the whole manual setup.
 
-## Why is one file enough?
+### Where each agent reads antislop from
 
-The main file holds everything: the rules and the wizard. Skills are optional depth, downloaded only when you need them. That keeps the filter light and your AI fast.
+The one-command way installs into the folder your agent reads. This is what it writes and where:
+
+| Agent | Reads antislop from |
+|-------|---------------------|
+| Claude Code | `.claude/skills/` |
+| Codex | `.codex/skills/` |
+| Antigravity | `.agents/skills/` |
+| OpenCode | `.opencode/skills/` |
+| Cursor | `.cursor/skills/` |
+| Gemini CLI | `.gemini/skills/` |
+| Hermes | `~/.hermes/skills/` (global only) |
+
+## What is a skill?
+
+A skill is an optional folder (with a `SKILL.md` inside) that goes deeper into one concern. The core works alone; a skill adds depth for one topic. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.
+
+There are five skills. Pick the one that matches your work:
+
+- **UI work** (look and feel: layout, color, components, animation) → antislop-ui
+- **Copy work** (headlines, buttons, tone, made-up statistics) → antislop-copywriting
+- **People work** (readable colors, keyboard use, focus, button states) → antislop-human
+- **Mobile layout work** (reflowing on a phone, tap targets, navigation) → antislop-layoutmobile
+- **Code comments work** (remove generic AI comments, keep the valuable ones) → antislop-code
+- **More than one kind of work** → pick several. The picker lets you choose as many as you want.
+- **None of these** → fine. The core alone is a complete filter.
+
+The names above are what you pick in the one-command way and what the wizard asks for in the manual way.
+
+## What antislop does not do
+
+It never beautifies on its own. antislop removes slop; it does not invent direction. If you have a specific look in mind, write it down in a file called `DESIGN.md` in your project and the AI builds toward it. You do not have to make one. Without a `DESIGN.md`, the AI labels its work "draft without direction" instead of passing it off as finished. A sterile result means the direction was missing, not that the filter failed.
 
 ## Where is this going?
 
-antislop is packaged: installable as skills, installable as a plugin, and still available as one file. Skills keep shipping as they are ready; the next one is `antislop-code`. See the roadmap, the page that lists what is coming next, [here](ROADMAP.md).
+antislop is packaged three ways at once: standard skill folders, native plugins for Claude Code, Antigravity, and Codex, and the single-file core that works anywhere. Agent support grows over time. For the current release and what comes next, see the [roadmap](ROADMAP.md). For the full picture of every skill, see the [README](README.md).
 
 ## Feedback
 
@@ -130,12 +150,13 @@ Found a new AI slop pattern, a rule that missed something, or an install that di
 ## Words used here
 
 - **Slop**: output that looks or reads generic and AI-made.
-- **Agent**: another word for your AI assistant, like ChatGPT, Claude, or Gemini.
+- **Agent**: another word for your AI assistant, like Claude Code, Codex, Cursor, ChatGPT, or Gemini.
 - **Core**: `antislop.md`, the main file that holds all the rules and the wizard.
 - **Skill**: an optional folder (`<name>/SKILL.md`) that goes deeper into one concern. The core works alone; a skill adds depth for one topic.
+- **Wizard**: the install instructions inside `antislop.md`. When you tell your AI to read the file, it follows them and asks you questions.
+- **Picker**: the interactive installer (`npx antislop-ai`) that asks you what to install and where.
 - **Copy**: the words on a page.
 - **Contrast**: how clearly text stands out from its background.
-- **Wizard**: the install instructions inside `antislop.md`. When you tell your AI to read the file, it follows them and asks you questions.
 - **Filter**: removes the bad and keeps the good. antislop removes slop, not your direction.
 - **UI**: the look of a page or app.
 - **DESIGN.md**: a file you write with your UI direction: who it is for, the mood, the colors. antislop does not invent direction.

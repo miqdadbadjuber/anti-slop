@@ -349,11 +349,13 @@ If an element genuinely cannot have a destination yet, remove it instead of ship
 
 #### R-35 — Verify Before You Deliver
 
-- Run or build the app before declaring the task done
-- Check the console for errors
-- Exercise every interactive element
-- Check every theme and the mobile breakpoints
-- A design that has never been run is not finished
+- Run or build the app before declaring the task done; a design that has never been run is not finished
+- Check the console for errors after running
+- Click through every interactive element, one at a time, and watch what it does: buttons, links, dropdowns, forms, tabs, modals, toggles, accordions, and navigation
+- An element passes only when its action really happens: a link navigates somewhere that exists, a form submit shows validation or success, a toggle changes state, a modal opens and closes. Code that only looks interactive is a dead control (see R-26)
+- If the deliverable cannot be run (a static mockup or a chat-only output), say so and verify each element by code inspection instead of claiming it was clicked
+- Exercise every theme and the mobile breakpoints while clicking through
+- Report the click-through as evidence with the deliverable, element by element (e.g. "Signup -> opens /signup with no console errors", "empty form -> shows validation", "mobile menu -> opens and closes"). A PASS claimed without that recorded list is not a PASS
 
 #### R-36 — No Fabricated Claims
 
@@ -592,7 +594,7 @@ If none of these applies to an element, the element should not exist.
 
 ## Delivery Gate (Mandatory)
 
-Run this gate BEFORE delivering. Output its status with your deliverable as a **PASS/FAIL report**: one line per item, and every `PASS` backed by concrete evidence (e.g. "R-26 PASS: every button has a real `href` or `onClick`; no dead controls").
+Run this gate BEFORE delivering. Output its status with your deliverable as a **PASS/FAIL report**: one line per item, and every `PASS` backed by concrete evidence (e.g. "R-26 PASS: every button has a real `href` or `onClick`; no dead controls", "R-35 PASS: ran the build and clicked every control: Signup -> /signup, empty form -> validation, mobile menu -> opens, no console errors").
 If any item is **FAIL** (or any answer is **yes**), do not deliver: fix it first, then re-run. A report containing a FAIL must never be shipped.
 
 The gate has four blocks: Hard Gate (absolute), Purpose-Gate (technique + written reason), Liveliness (dials + levers), Craftsmanship & Quality Locks (C-1..C-5 plus the consistency locks R-05, R-11, R-15, R-16, R-20, R-21, R-29, R-30, R-31).
@@ -614,7 +616,7 @@ Before declaring the design done, answer every question below. All answers must 
 - [ ] Can the UI not be navigated by keyboard (Tab, Enter, Escape) or is there no visible focus state? *(R-32)*
 - [ ] Was any feature added by patching source/CSS with an external script instead of writing it in source? *(R-33)*
 - [ ] If a theme toggle exists, does one mode (light or dark) break styles, fonts, or layout? *(R-34)*
-- [ ] Was the app delivered without being run or built, or with any interactive element left unexercised? *(R-35)*
+- [ ] Was the app delivered without being run or built, or without a recorded click-through of every interactive element? *(R-35)*
 - [ ] Are there any fabricated security, compliance, performance, or customer claims? *(R-36)*
 - [ ] Was the design built without direction and not labeled *"draft without direction"* with honest default dials ENERGY 1 / RHYTHM 1 / MOTION 1? *(R-37)*
 - [ ] Is there any realistically-styled content that was fabricated (testimonials, features, statistics, ghost links, fictional team) without a real source? *(R-38)*

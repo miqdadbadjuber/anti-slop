@@ -26,7 +26,7 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'antislop-smoke-'))
 const result = spawnSync(process.execPath, [worker], { cwd: tmp, encoding: 'utf8' })
 console.log('--- worker output ---')
 console.log(result.stdout.trim())
-if (result.status !== 0) console.log('worker stderr:', result.stderr)
+if (result.status !== 0) console.error('worker stderr:', result.stderr)
 
 console.log('\n--- files written to temp project ---')
 console.log(tree(tmp).join('\n'))
@@ -39,7 +39,19 @@ for (const name of ['CLAUDE.md', 'AGENTS.md', 'GEMINI.md']) {
 }
 
 const coreSkill = path.join(tmp, '.claude', 'skills', 'antislop', 'SKILL.md')
-console.log('\ncore SKILL.md exists:', fs.existsSync(coreSkill))
+const coreInstalled = fs.existsSync(coreSkill)
+console.log('\ncore SKILL.md exists:', coreInstalled)
+
+// Decide before cleaning up, so a failure still leaves a tidy temp dir behind.
+const reasons = []
+if (result.status !== 0) reasons.push(`worker exited ${result.status}`)
+if (!coreInstalled) reasons.push('core SKILL.md was not installed')
 
 fs.rmSync(tmp, { recursive: true, force: true })
 console.log('\ncleaned up temp project.')
+
+if (reasons.length > 0) {
+  console.error('\nsmoke test failed: ' + reasons.join('; '))
+  process.exit(1)
+}
+console.log('smoke test passed.')

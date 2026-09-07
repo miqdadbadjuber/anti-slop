@@ -30,6 +30,7 @@
     "skills/"
   ],
   "scripts": {
+    "test": "node scripts/smoke-test.mjs",
     "sync-skills": "node scripts/sync-skills.mjs",
     "prepublishOnly": "npm run sync-skills"
   },

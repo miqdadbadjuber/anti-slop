@@ -12,8 +12,8 @@
   "skills": ["./skills/"],
   "mcpServers": {
     "antislop-contrast": {
-      "command": "python",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/skills/antislop-human/contrast-mcp.py"],
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/.claude-plugin/contrast-mcp-launcher.mjs"],
       "env": {}
     }
   }

@@ -42,7 +42,7 @@ That kept the filter pull-only-what-you-need and made the v3 packaging mechanica
 | v3.2.3 | Codex plugin door: `.codex-plugin/plugin.json` manifest plus a `.agents/plugins/marketplace.json` index, both pointing at the shared `skills/` folder. |
 | v3.2.4 | R-35 sharpened into a click-through smoke test: every interactive element must be run and exercised one at a time, and its result recorded as evidence in the Delivery Gate report. |
 | v3.2.5 | Cursor plugin door: `.cursor-plugin/plugin.json` manifest plus a `.cursor-plugin/marketplace.json` index, with the six skills and a `.mdc` rule pointer. The Codex plugin also gains its app identity (plugin icon, brand color, banner screenshot). |
-| v3.2.6 | First community batch, merged from PRs #22 to #26: a runtime Python launcher for the contrast MCP tool (fixes it on macOS), pointer writes that leave the user's entry file untouched, a smoke test that can actually fail, repo guardrails plus a CI workflow, and a contributors section. |
+| v3.2.6 | Five-PR community round (PRs #22 to #26): a runtime Python launcher for the contrast MCP tool (fixes it on macOS), pointer writes that leave the user's entry file untouched, a smoke test that can actually fail, repo guardrails plus a CI workflow, and a contributors section. |
 
 ## What's next
 

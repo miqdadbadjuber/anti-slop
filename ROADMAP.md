@@ -45,14 +45,15 @@ That kept the filter pull-only-what-you-need and made the v3 packaging mechanica
 
 ## What's next
 
-The plan is one item per version. The plugin doors follow the style of the Claude Code, Antigravity, Codex, and Cursor doors that are already shipped; v3.2.6 prepares the OpenAI listing instead.
+The plan is one item per version. The plugin doors follow the style of the Claude Code, Antigravity, Codex, and Cursor doors already shipped. v3.2.6 first merges the accepted community PRs and issues; v3.2.7 then prepares the OpenAI listing.
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.6 | OpenAI directory | Listing prep for the public plugin directory shared by ChatGPT and Codex: a versioned skill bundle, a submission document, and public privacy and terms pages. The submission itself happens on the OpenAI Platform after identity verification, outside this repo. |
-| v3.2.7 | Gemini CLI | Gemini CLI was sunset in June 2026 and superseded by Antigravity CLI, which already has a door (v3.2.2). The door closes the folder anyway: manifest plus pointer. |
-| v3.2.8 | OpenCode | OpenCode has no native plugin marketplace, so the door is the skills folder plus an `AGENTS.md` pointer (the picker already writes `.opencode/skills/`). |
-| v3.2.9 | The rest | Hermes, GitHub Copilot, and the `.agents/skills` long tail (Cline, Roo, Amp). The existing `.agents/plugins/marketplace.json` already points at the repo root, so any agent that reads the .agents standard can add the same marketplace. Mostly verification plus documentation per agent. |
+| v3.2.6 | Community batch | Merge the accepted contributor PRs and issues (the #19 to #26 batch): a runtime Python launcher for the contrast MCP tool, pointer writes that leave the user's entry file untouched, a smoke test that can actually fail, repo guardrails plus CI, and a contributors section. Reviewed before merge; none of it changes skill content. |
+| v3.2.7 | OpenAI directory | Listing prep for the public plugin directory shared by ChatGPT and Codex: a versioned skill bundle, a submission document, and public privacy and terms pages. The submission itself happens on the OpenAI Platform after identity verification, outside this repo. |
+| v3.2.8 | Gemini CLI | Gemini CLI was sunset in June 2026 and superseded by Antigravity CLI, which already has a door (v3.2.2). The door closes the folder anyway: manifest plus pointer. |
+| v3.2.9 | OpenCode | OpenCode has no native plugin marketplace, so the door is the skills folder plus an `AGENTS.md` pointer (the picker already writes `.opencode/skills/`). |
+| v3.2.10 | The rest | Hermes, GitHub Copilot, and the `.agents/skills` long tail (Cline, Roo, Amp). The existing `.agents/plugins/marketplace.json` already points at the repo root, so any agent that reads the .agents standard can add the same marketplace. Mostly verification plus documentation per agent. |
 
 Beyond the numbered plan, with no promised version:
 

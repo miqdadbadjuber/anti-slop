@@ -141,12 +141,17 @@ function writeBlock(entry, block) {
   const start = lines.findIndex((l) => l.trim() === POINTER_START)
   const end = lines.findIndex((l) => l.trim() === POINTER_END)
   const replacing = start !== -1 && end !== -1 && start < end
-  const head = replacing ? lines.slice(0, start) : lines
+  const head = replacing ? lines.slice(0, start) : lines.slice()
   const tail = replacing ? lines.slice(end + 1) : []
 
-  const body = [...head, '', ...block, '', ...tail]
+  // Tidy the two seams only. Normalising the joined document, which is what a
+  // /\n{3,}/g sweep does, also collapses blank lines the author wrote, including
+  // the ones inside their fenced code blocks.
+  while (head.length && head[head.length - 1].trim() === '') head.pop()
+  while (tail.length && tail[0].trim() === '') tail.shift()
+
+  const body = [...head, '', ...block, ...(tail.length ? ['', ...tail] : [])]
     .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
     .replace(/^\n+/, '')
     .trimEnd()
 

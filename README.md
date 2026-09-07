@@ -5,6 +5,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f" alt="License: MIT"></a>
   <a href="https://github.com/miqdadbadjuber/anti-slop/releases"><img src="https://img.shields.io/github/v/release/miqdadbadjuber/anti-slop?label=version&color=1f6feb" alt="Version"></a>
+  <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors"><img src="https://img.shields.io/github/contributors/miqdadbadjuber/anti-slop?color=8957e5" alt="Contributors"></a>
 </p>
 
 <p align="center">
@@ -155,6 +156,16 @@ A folder that goes deeper into one concern (UI, copywriting, accessibility, and 
 
 **What are DURING and AFTER?**
 The two usage modes: DURING applies the rules while building, AFTER audits finished work. You pick one at the start of a session.
+
+## Contributors
+
+Thanks to everyone who helps make antislop better.
+
+<p align="center">
+  <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop" alt="antislop contributors" />
+  </a>
+</p>
 
 ## Contributing
 

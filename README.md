@@ -160,6 +160,16 @@ The two usage modes: DURING applies the rules while building, AFTER audits finis
 
 Found a new AI slop pattern, a rule that missed something, or a bug in the installer? Open an [issue](https://github.com/miqdadbadjuber/anti-slop/issues). PRs are welcome for new AI slop patterns, clarifications, or checklist items out of sync with their rule.
 
+Before pushing, run the checks CI runs. They need no install step:
+
+```bash
+node scripts/check-repo.mjs          # em dashes, rule and gate coverage, versions, links
+node cli/scripts/smoke-test.mjs      # the installer, end to end
+python3 skills/antislop-human/contrast-check.py --selftest
+```
+
+Editing `antislop.md` also means running `node cli/scripts/sync-skills.mjs`, because `skills/antislop/SKILL.md` is generated from it and CI fails on the drift.
+
 ## License
 
 MIT: [LICENSE](LICENSE)

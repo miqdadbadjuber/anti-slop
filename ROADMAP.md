@@ -4,7 +4,7 @@
 
 ## Where we are
 
-The latest release is **v3.2.5**. antislop is a **packaged system**: a lean, always-loaded core plus five additive skills, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`). There are no per-skill READMEs.
+The latest release is **v3.2.6**. antislop is a **packaged system**: a lean, always-loaded core plus five additive skills, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`). There are no per-skill READMEs.
 
 - **Core, unchanged since v2.2:** 38 rules across three tiers (Hard Gate, Purpose-Gate, Quality Locks), a Liveliness Toolkit, a mandatory Delivery Gate, and two usage modes (During / After). The single-file `antislop.md` is still a complete filter you can paste into any chat window; its First-Run Install Wizard is the manual install path.
 - **The six skills:** `antislop` (the core), plus `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, and `antislop-code`. Each skill only loads when the task needs it.
@@ -42,14 +42,14 @@ That kept the filter pull-only-what-you-need and made the v3 packaging mechanica
 | v3.2.3 | Codex plugin door: `.codex-plugin/plugin.json` manifest plus a `.agents/plugins/marketplace.json` index, both pointing at the shared `skills/` folder. |
 | v3.2.4 | R-35 sharpened into a click-through smoke test: every interactive element must be run and exercised one at a time, and its result recorded as evidence in the Delivery Gate report. |
 | v3.2.5 | Cursor plugin door: `.cursor-plugin/plugin.json` manifest plus a `.cursor-plugin/marketplace.json` index, with the six skills and a `.mdc` rule pointer. The Codex plugin also gains its app identity (plugin icon, brand color, banner screenshot). |
+| v3.2.6 | First community batch, merged from PRs #22 to #26: a runtime Python launcher for the contrast MCP tool (fixes it on macOS), pointer writes that leave the user's entry file untouched, a smoke test that can actually fail, repo guardrails plus a CI workflow, and a contributors section. |
 
 ## What's next
 
-The plan is one item per version. The plugin doors follow the style of the Claude Code, Antigravity, Codex, and Cursor doors already shipped. v3.2.6 first merges the accepted community PRs and issues; v3.2.7 then prepares the OpenAI listing.
+The plan is one item per version. The plugin doors follow the style of the Claude Code, Antigravity, Codex, and Cursor doors already shipped. v3.2.7 prepares the OpenAI listing.
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.6 | Community batch | Merge the accepted contributor PRs and issues (the #19 to #26 batch): a runtime Python launcher for the contrast MCP tool, pointer writes that leave the user's entry file untouched, a smoke test that can actually fail, repo guardrails plus CI, and a contributors section. Reviewed before merge; none of it changes skill content. |
 | v3.2.7 | OpenAI directory | Listing prep for the public plugin directory shared by ChatGPT and Codex: a versioned skill bundle, a submission document, and public privacy and terms pages. The submission itself happens on the OpenAI Platform after identity verification, outside this repo. |
 | v3.2.8 | Gemini CLI | Gemini CLI was sunset in June 2026 and superseded by Antigravity CLI, which already has a door (v3.2.2). The door closes the folder anyway: manifest plus pointer. |
 | v3.2.9 | OpenCode | OpenCode has no native plugin marketplace, so the door is the skills folder plus an `AGENTS.md` pointer (the picker already writes `.opencode/skills/`). |

@@ -136,6 +136,7 @@ What changed in each release. The full tracker, including the cross-agent plugin
 - **v3.2.3** opened the Codex door: `codex plugin marketplace add miqdadbadjuber/anti-slop`, then `codex plugin add antislop@anti-slop`.
 - **v3.2.4** turned R-35 into a click-through smoke test: every interactive element must be run and exercised one at a time, and its result recorded as evidence in the Delivery Gate report.
 - **v3.2.5** opened the Cursor door: `.cursor-plugin/plugin.json` plus a `.cursor-plugin/marketplace.json` index, skills with a `.mdc` rule pointer. The Codex plugin also gains its app identity: an icon, a brand color, and a banner screenshot.
+- **v3.2.6** shipped the first community batch: the contrast MCP tool gets a Python launcher that works on macOS too, pointer writes stop touching the user's entry file, the smoke test can now fail (`npm test`), and the repo gains guardrail checks, a CI workflow, and a contributors section.
 
 ## FAQ
 

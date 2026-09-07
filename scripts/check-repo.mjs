@@ -15,7 +15,10 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8')
-const lines = (p) => read(p).split('\n')
+// Split on /\r?\n/, not '\n': on a Windows checkout the working-tree files carry
+// \r\n, so a line kept its trailing \r and every ^...$ regex in the checks below
+// (the em dash section tracker especially) silently stopped matching.
+const lines = (p) => read(p).split(/\r?\n/)
 
 const SKILLS = fs
   .readdirSync(path.join(root, 'skills'), { withFileTypes: true })

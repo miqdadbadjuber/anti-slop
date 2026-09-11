@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""Minimal MCP stdio server that exposes the antislop contrast checker as a tool.
+"""Minimal MCP stdio server exposing the antislop contrast checker as a tool.
 
-Speaks the Model Context Protocol over stdio. All logging must go to stderr;
-stdout is reserved for newline-delimited JSON-RPC responses.
+All logging goes to stderr; stdout is reserved for JSON-RPC responses.
 """
 import json
 import sys
 
 PROTOCOL_VERSION = "2024-11-05"
 SERVER_NAME = "antislop-contrast"
-SERVER_VERSION = "3.2.6"
+SERVER_VERSION = "3.2.7"
 
 TOOLS = [
     {

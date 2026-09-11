@@ -1,12 +1,7 @@
 #!/usr/bin/env node
 /**
- * Starts contrast-mcp.py with whichever Python name this machine actually has.
- *
- * The manifest's `command` is one string with no shell, so it cannot pick per
- * platform on its own, and every single-name answer breaks somewhere: macOS has
- * had no `python` since 12.3 removed Python 2, and Windows has no `python3` on
- * some installs. v3.0.2 made allowed-tools and the skill prose accept both; this
- * is the same fix for the one place that only takes a single value.
+ * Starts contrast-mcp.py with whichever Python name this machine has.
+ * The manifest's `command` is a single string and cannot pick per platform.
  */
 import { spawn, spawnSync } from "node:child_process";
 import path from "node:path";
@@ -17,9 +12,8 @@ const server = path.join(here, "..", "skills", "antislop-human", "contrast-mcp.p
 
 const candidates = process.platform === "win32" ? ["python", "python3"] : ["python3", "python"];
 
-// Run each candidate rather than just looking it up: Windows ships a `python`
-// stub that exists on PATH and only opens the Store page, and pyenv leaves
-// shims that exit non-zero when no version is selected.
+// Run each candidate: the Windows `python` stub is on PATH but only opens the
+// Store, and pyenv shims exit non-zero when no version is set.
 const python = candidates.find(
   (bin) => spawnSync(bin, ["-c", ""], { stdio: "ignore" }).status === 0
 );

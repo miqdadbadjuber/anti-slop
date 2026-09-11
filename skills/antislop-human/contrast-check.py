@@ -74,7 +74,10 @@ def reference_doc_path():
 
 
 def parse_reference_rows(path):
-    """Parse the reference table rows out of the skill doc."""
+    """Reference table rows from SKILL.md, with the ratio already a float.
+
+    A row that does not split into four cells is dropped silently, not raised.
+    """
     rows = []
     with open(path, encoding="utf-8") as handle:
         in_table = False

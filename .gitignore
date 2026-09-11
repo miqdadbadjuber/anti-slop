@@ -2,6 +2,9 @@
 docs/
 issue/
 
+# Python bytecode, written whenever the contrast checker runs
+__pycache__/
+
 # OS noise
 .DS_Store
 Thumbs.db

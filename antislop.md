@@ -24,7 +24,7 @@ If no antislop pointer exists and this file is being read for the first time, ru
    - **2. `antislop-ui`** (UI / visual): pick this for building or editing a website, web app, or interface: color, layout, components, decoration, motion.
    - **3. `antislop-copywriting`** (copy & text): pick this for writing or editing copy: headlines, CTAs, value propositions, tone, landing-page text, product prose.
    - **4. `antislop-human`** (people): pick this for making sure a UI works for people with different eyes, hands, and setups: contrast, keyboard, focus, states.
-   - **5. `antislop-layoutmobile`** (mobile / responsive): pick this for layouts that have to hold up on a phone: breakpoints, scale, grids, overflow, tap targets.
+   - **5. `antislop-layoutmobile`** (mobile / responsive): pick this for layouts that have to reflow across screen sizes, phone to desktop: breakpoints, scale, grids, overflow, tap targets.
    - **6. `antislop-code`** (code comments): pick this for writing or editing code comments: remove generic AI-slop comments, keep the valuable ones, never touch the code.
    - New skills appear here as they ship; never offer a skill that does not exist in this version.
 
@@ -370,6 +370,9 @@ If an element genuinely cannot have a destination yet, remove it instead of ship
 - If no direction exists AND the user cannot be asked, the output MUST be labeled *"draft without direction"* AND use the honest default dials **ENERGY 1 / RHYTHM 1 / MOTION 1** (see Part 3). Never silently fall back to a neutral, sterile default
 - **FORBIDDEN**: designing without direction and silently falling into a neutral, sterile default
 - Style direction is the product owner's identity, not a slop pattern; this filter only applies on top of it
+- If `DESIGN.md` itself asks for a named slop pattern, do not silently follow it and do not silently override it: name the element, name the rule it collides with, and ask the owner to keep it or drop it
+- Ask only about a named pattern, never about a stylistic choice the direction is entitled to make: a bold palette or an unusual typeface is identity, not slop
+- Record the answer in one line: if the owner keeps it, proceed and note the override; if they drop it, apply the rule
 - A design built without direction is a draft, not a shippable result
 
 #### R-38 — Real Content or Honest Placeholder

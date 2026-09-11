@@ -1,13 +1,13 @@
 ---
 name: antislop-layoutmobile
-description: "Mobile layout skill for antislop. Use for layouts that reflow on small screens: grids, overflow, tap targets. Load with the core."
+description: "Mobile layout skill for antislop. Use for layouts that reflow across screen sizes, phone to desktop: grids, overflow, tap targets. Load with the core."
 allowed-tools: Read Write Edit Glob Grep
 ---
 # antislop-layoutmobile
 
 > Anti Slop: Rules for AI Coding Agents. Mobile Layout skill
 
-> Part of the antislop system. Read together with `antislop.md` (the core). This skill deep-dives the mobile layout concern: how a layout must reflow on small screens. Breakpoints, scale, grids, overflow, tap targets, and navigation. It references core rules by number and never duplicates or renumbers them. Load it when the task builds or edits a layout that has to hold up on a phone.
+> Part of the antislop system. Read together with `antislop.md` (the core). This skill deep-dives the responsive layout concern: how a layout must reflow across screen sizes, phone to desktop. Breakpoints, scale, grids, overflow, tap targets, and navigation. It references core rules by number and never duplicates or renumbers them. Load it when the task builds or edits a layout that has to hold up at any screen width.
 
 ## How to use this skill
 
@@ -35,6 +35,12 @@ allowed-tools: Read Write Edit Glob Grep
 - **Tell:** mobile rules bolted on as a trailing override: a long desktop stylesheet with a small media query at the end fixing one or two things.
 - **Why:** an override patch is not a mobile design. It fixes the symptom that got reported and leaves the next one, and the base styles stay tuned for a wide screen (R-03).
 - **Fix:** treat mobile as a designed state, not an override. Give the narrow viewport its own deliberate sizes and stacking, and verify the whole layout there, not just the patched spots (R-35).
+
+### Two-State Layout
+
+- **Tell:** a layout with exactly two states: a single stacked column below one breakpoint, and a wide multi-column grid above it, with nothing defined in between. A tablet or small laptop width then inherits whichever state is closest: the phone stack stretched absurdly wide, or the desktop grid crammed into a fraction of its intended canvas.
+- **Why:** a page is a continuous range of widths, and R-03 demands it hold up at every one of them, not just two chosen breakpoints. Two states leave the whole middle band of the range (roughly 600 to 1024 px, where tablets and small laptops live) as an accident: content that neither stacks with intent nor sits in a grid that fits. The layout reads as designed only at its two sample points and broken everywhere between.
+- **Fix:** define real states at the widths where the content stops working, and let them be as many as the content needs. A typical reflow is three states, not two: single column, then a two-column grid when cards get too wide as a single stack, then the full multi-column grid only when it genuinely fits. Verify by dragging the viewport through the whole range, not by checking two widths and calling it done (R-35).
 
 ## Scale & Sizing
 
@@ -153,6 +159,7 @@ allowed-tools: Read Write Edit Glob Grep
 Run these alongside the core Delivery Gate when the task is mobile or responsive layout work. All answers must be **yes**:
 
 - [ ] Does the layout reflow into a distinct mobile state rather than a squeezed desktop? (R-03)
+- [ ] Are there defined states across the width range, not just phone and desktop, so tablet and small-laptop widths are never a stretched stack or a crammed grid? (R-03, R-35)
 - [ ] Do sizes (type, padding, gaps, section heights) use a mobile scale, not desktop sizes unchanged? (R-03, R-05)
 - [ ] Do multi-column grids collapse and stack instead of colliding? (R-03)
 - [ ] Is there no horizontal overflow and nothing clipped? (R-03)

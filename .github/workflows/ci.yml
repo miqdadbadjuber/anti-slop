@@ -18,21 +18,16 @@ jobs:
         with:
           node-version: 20
 
-      # The rules antislop applies to other repos, applied to this one: the em
-      # dash ban with its own carve-out, rule and gate coverage, version drift,
-      # manifest validity, skill registration.
+      # The rules antislop applies to other repos, applied to this one.
       - name: Repo guardrails
         run: node scripts/check-repo.mjs
 
-      # The contrast table in antislop-human is a set of claims about a formula.
-      # This recomputes every row. It caught issue #2 by hand once already.
+      # The contrast table is a set of claims about a formula; recompute every row.
       - name: Contrast table matches the formula
         run: python3 skills/antislop-human/contrast-check.py --selftest
 
-      # skills/antislop/SKILL.md is generated from antislop.md. Editing the core
-      # and not syncing ships a skill that disagrees with the file it came from.
-      # sync-skills also throws on a raw.githubusercontent URL in the core, which
-      # is the Snyk W012 guard from v3.0.1.
+      # skills/antislop/SKILL.md is generated from antislop.md, so an unsynced
+      # core edit would ship a skill that disagrees with it.
       - name: Generated core skill is in sync with antislop.md
         run: |
           node cli/scripts/sync-skills.mjs

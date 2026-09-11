@@ -33,8 +33,7 @@ function resolveBase(location) {
 export function resolveTargets(location, selected = AGENTS.map((a) => a.id)) {
   const base = resolveBase(location)
   return AGENTS.filter((a) => selected.includes(a.id)).map((agent) => {
-    // A global-only agent (Hermes) always resolves to the home dir, even for a
-    // project install, because it never reads skills from a project folder.
+    // A global-only agent always resolves to the home dir, even on a project install.
     const targetBase = agent.globalOnly ? os.homedir() : base
     return {
       agent,
@@ -44,11 +43,8 @@ export function resolveTargets(location, selected = AGENTS.map((a) => a.id)) {
   })
 }
 
-// Which agents already have their folder present, used to pre-check the picker's
-// agent question. Absence of a folder is not absence of the agent, so the picker
-// still lets the user add an agent whose folder does not exist yet. Global-only
-// agents (Hermes) are detected only for global installs: a project install must
-// not pre-check a folder that lives in the home dir.
+// Agents whose folder already exists, used to pre-check the picker. A missing
+// folder does not mean a missing agent, so the user can still add one.
 export function detectAgents(location) {
   const base = resolveBase(location)
   return AGENTS.filter((a) => {
@@ -121,9 +117,8 @@ const SKILL_LINES = {
   'antislop-code': 'Code comments: `antislop-code`',
 }
 
-// Names the skills instead of importing the core. The skills sit in the agent's
-// own folder, so the agent already finds them; an `@` import would also pull all
-// 46 KB of the core into every session, including sessions that touch no UI.
+// Names the skills rather than importing the core: an `@` import pulls all 46 KB
+// of it into every session, including ones that touch no UI.
 function pointerBlock(skills) {
   return [
     POINTER_START,
@@ -144,9 +139,8 @@ function writeBlock(entry, block) {
   const head = replacing ? lines.slice(0, start) : lines.slice()
   const tail = replacing ? lines.slice(end + 1) : []
 
-  // Tidy the two seams only. Normalising the joined document, which is what a
-  // /\n{3,}/g sweep does, also collapses blank lines the author wrote, including
-  // the ones inside their fenced code blocks.
+  // Tidy the two seams only: a /\n{3,}/g sweep over the whole document would also
+  // collapse blank lines the author wrote inside their code fences.
   while (head.length && head[head.length - 1].trim() === '') head.pop()
   while (tail.length && tail[0].trim() === '') tail.shift()
 

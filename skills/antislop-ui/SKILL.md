@@ -179,6 +179,12 @@ allowed-tools: Read Write Edit Glob Grep
 - **Why:** the capsule-plus-glow-plus-dot combination is a self-referential badge that says "made by AI, about being made by AI". It adds noise, not information.
 - **Fix:** badges only when functionally needed, with the need written down, and never the full combination (R-09). A real status label is fine; a decorative "AI Powered" pill is not.
 
+### Decorative Status Dot
+
+- **Tell:** a small colored dot beside a heading, eyebrow, nav item, or label, usually glowing and pulsing on a loop, that marks nothing. It borrows the visual language of a live or recording indicator for a page where nothing is live.
+- **Why:** the dot is an attention grab with nothing behind it: a glow plus an endless pulse is a double bid for the eye over a fact that does not exist. It reads as AI because generated pages reach for system-status vocabulary as decoration, and the same dot lands in the same place on every one of them.
+- **Fix:** a dot must mark a real state (active, live, recording, warning). If it does, keep one dot, drop the glow, and drop the endless pulse (R-19). If it marks nothing, remove it: a heading needs no indicator to be a heading (R-31).
+
 ### Generic AI Typography
 
 - **Tell:** large monospace headings, or uppercase labels with extreme letter-spacing ("HOW IT WORKS", "FEATURES").
@@ -290,6 +296,7 @@ Run these alongside the core Delivery Gate when the task is UI work. All answers
 - [ ] Does every navigation item and interactive element have a real destination or behavior, or a visible "Coming soon" label? (R-24, R-26)
 - [ ] Does motion follow the declared MOTION dial and serve a written purpose, with no endless loops? (R-19)
 - [ ] Is glass, glow, shadow, and radius used at their dose caps, not as a page-wide default? (R-10, R-11, R-12, R-13)
+- [ ] Is every colored dot and status light marking a real state, with no decorative glow or endless pulse? (R-13, R-19, R-31)
 - [ ] On an app screen, is the layout built around the decision the user makes there, rather than the sidebar plus stat row plus chart plus table default? (C-3, R-20)
 - [ ] Is every number, delta, feed entry, and table row real or a labelled placeholder, with no invented metrics? (R-17, R-18, R-38)
 - [ ] Do empty form fields and table cells stay empty or carry honest placeholders (Your Name, email@example.com) instead of fake-looking data (John Doe, johndoe@example.com)? (R-23, R-38)

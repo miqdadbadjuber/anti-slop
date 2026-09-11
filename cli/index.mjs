@@ -18,7 +18,7 @@ const EXTRA_SKILLS = [
   { value: 'antislop-ui', label: 'antislop-ui', hint: 'UI and visual design rules' },
   { value: 'antislop-copywriting', label: 'antislop-copywriting', hint: 'copywriting and text rules' },
   { value: 'antislop-human', label: 'antislop-human', hint: 'accessibility, with the contrast checker' },
-  { value: 'antislop-layoutmobile', label: 'antislop-layoutmobile', hint: 'mobile layout rules' },
+  { value: 'antislop-layoutmobile', label: 'antislop-layoutmobile', hint: 'responsive layout rules' },
   { value: 'antislop-code', label: 'antislop-code', hint: 'code comment rules' },
 ]
 
@@ -34,7 +34,7 @@ function displayDir(agent) {
 
 async function main() {
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log('antislop 3.2.6')
+    console.log('antislop 3.2.7')
     return
   }
 

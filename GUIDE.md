@@ -44,7 +44,7 @@ npx antislop-ai
 
 It shows you what antislop has, then asks three things:
 
-- **Which agent(s) you use.** It detects the ones present in your project. Each agent reads antislop from its own folder, and the picker writes the pointer that reloads antislop in every session. Hermes installs globally (into `~/.hermes/skills/`) because it does not read project folders.
+- **Which agent(s) you use.** It detects the ones present in your project. Each agent reads antislop from its own folder. On a project install the picker also writes the pointer that reloads antislop in every session; a global install writes no pointer and relies on the skills loading themselves by description. Hermes installs globally (into `~/.hermes/skills/`) because it does not read project folders.
 - **Which skills you want.** The core is always on. The extra skills load only for the work you do. See [What is a skill?](#what-is-a-skill).
 - **Where antislop should live.** This project only, or everywhere on your machine.
 
@@ -127,6 +127,10 @@ The one-command way installs into the folder your agent reads. This is what it w
 | Gemini CLI | `.gemini/skills/` |
 | Hermes | `~/.hermes/skills/` (global only) |
 
+On a project install the picker also writes the pointer that reloads antislop every session: into the project's `AGENTS.md` for Codex, Antigravity, OpenCode, and Cursor, into `CLAUDE.md` for Claude Code, and into `GEMINI.md` for Gemini CLI. For OpenCode that is the whole mechanism: it loads the skill folders from `.opencode/skills/` and reads the pointer from `AGENTS.md`, which was verified against the opencode CLI.
+
+Gemini CLI is legacy support: it was sunset on 18 June 2026 and superseded by Antigravity. The picker still installs into `.gemini/skills/` for existing Gemini CLI setups.
+
 ## What is a skill?
 
 A skill is an optional folder (with a `SKILL.md` inside) that goes deeper into one concern. The core works alone; a skill adds depth for one topic. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.
@@ -136,7 +140,7 @@ There are five skills. Pick the one that matches your work:
 - **UI work** (look and feel: layout, color, components, animation) → antislop-ui
 - **Copy work** (headlines, buttons, tone, made-up statistics) → antislop-copywriting
 - **People work** (readable colors, keyboard use, focus, button states) → antislop-human
-- **Mobile layout work** (reflowing on a phone, tap targets, navigation) → antislop-layoutmobile
+- **Responsive layout work** (reflowing across every screen width, phone to desktop, tap targets, navigation) → antislop-layoutmobile
 - **Code comments work** (remove generic AI comments, keep the valuable ones) → antislop-code
 - **More than one kind of work** → pick several. The picker lets you choose as many as you want.
 - **None of these** → fine. The core alone is a complete filter.
@@ -146,6 +150,8 @@ The names above are what you pick in the one-command way and what the wizard ask
 ## What antislop does not do
 
 It never beautifies on its own. antislop removes slop; it does not invent direction. If you have a specific look in mind, write it down in a file called `DESIGN.md` in your project and the AI builds toward it. You do not have to make one. Without a `DESIGN.md`, the AI labels its work "draft without direction" instead of passing it off as finished. A sterile result means the direction was missing, not that the filter failed.
+
+If your `DESIGN.md` happens to ask for something antislop counts as slop, it does not obey quietly and it does not overrule you: it names the element, names the rule, and asks whether to keep it. Direction that is simply bold or unusual is not slop, and stays.
 
 ## Where is this going?
 

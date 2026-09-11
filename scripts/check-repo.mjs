@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 /**
  * The rules antislop applies to other people's repos, applied to this one.
- *
- * Every check here exists because the matching mistake already shipped: a gate
- * item that disagreed with its rule (#7), checklists whose polarity no item used
- * (#9), a contrast row that was wrong (#2), and the repo not passing its own
- * filter (#6). Run it before opening a PR:
+ * Run it before opening a PR:
  *
  *   node scripts/check-repo.mjs
  */
@@ -15,9 +11,8 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8')
-// Split on /\r?\n/, not '\n': on a Windows checkout the working-tree files carry
-// \r\n, so a line kept its trailing \r and every ^...$ regex in the checks below
-// (the em dash section tracker especially) silently stopped matching.
+// Split on /\r?\n/, not '\n': on a Windows checkout a trailing \r survives and
+// every ^...$ regex below silently stops matching.
 const lines = (p) => read(p).split(/\r?\n/)
 
 const SKILLS = fs
@@ -36,11 +31,7 @@ const MANIFESTS = [
   'cli/package.json',
 ]
 
-/**
- * R-02 bans the em dash, and R-02's own carve-out exempts the places that have
- * to name the character to ban it. Encode that carve-out rather than skipping
- * the check, so a new em dash in ordinary prose still fails.
- */
+/** R-02's carve-out, encoded so a new em dash in ordinary prose still fails. */
 function emDashes() {
   const bad = []
   const files = ['antislop.md', 'README.md', 'GUIDE.md', 'ROADMAP.md', 'SECURITY.md', ...SKILLS]
@@ -99,8 +90,7 @@ function skillReferences() {
 
 /** The version is hand-written in eight places. They have to agree. */
 function versions() {
-  // A file that does not parse is already reported by the manifest check, so
-  // read it leniently here rather than crashing the whole run on it.
+  // A malformed file is already reported by the manifest check; do not crash here.
   const json = (p) => {
     try {
       return JSON.parse(read(p))
@@ -144,19 +134,14 @@ function frontmatter() {
   const bad = []
   for (const file of SKILLS) {
     const head = read(file).split('---')[1] ?? ''
-    // [ \t] not \s: \s spans the newline, so an empty value matches the first
-    // character of the next key and every skill passes.
+    // [ \t] not \s: \s spans newlines, so an empty value would match the next key.
     if (!/^name:[ \t]*\S/m.test(head)) bad.push(`${file} has no name in its frontmatter`)
     if (!/^description:[ \t]*\S/m.test(head)) bad.push(`${file} has no description in its frontmatter`)
   }
   return bad
 }
 
-/**
- * A new skill folder has to be registered in four other places before anyone can
- * install it: both rule pointers, the picker's menu, and the pointer block the
- * picker writes. v3.1.0 had to touch all four to ship antislop-code.
- */
+/** A new skill has to be registered in all four places below or it cannot install. */
 function registration() {
   const names = SKILLS.map((f) => f.split('/')[1])
   const core = 'antislop'
@@ -178,11 +163,7 @@ function registration() {
   return bad
 }
 
-/**
- * A rule's tier decides which Delivery Gate block it belongs in: Hard Gate to
- * Block 1, Purpose-Gate to Block 2, Quality Locks to Block 4. A rule cited from
- * the wrong block is what #7 was, three gate items disagreeing with their rule.
- */
+/** A rule's tier decides its gate block: Hard Gate 1, Purpose-Gate 2, Quality Locks 4. */
 function tiers() {
   const core = read('antislop.md')
   const part2 = core.split('## Part 2:')[1]?.split('## Part 3:')[0] ?? ''
@@ -234,12 +215,7 @@ function manifestPaths() {
   return bad
 }
 
-/**
- * A rename like guide.md to GUIDE.md in v3.2.4 is exactly when a doc link goes
- * stale, and existsSync cannot see it: macOS is case-insensitive, so the old
- * link keeps passing locally and only breaks for readers on github.com. Compare
- * against the real directory entry instead.
- */
+/** existsSync misses a case-only rename on macOS; compare the real dir entry. */
 const existsExactly = (target) => {
   const full = path.join(root, target)
   const dir = path.dirname(full)
@@ -259,11 +235,7 @@ function docLinks() {
   return bad
 }
 
-/**
- * contrast-check.py and contrast-mcp.py each carry their own copy of the WCAG
- * formula, and only the first has a selftest. The plugin exposes the second, so
- * a drift between them would ship as a wrong answer with nothing to catch it.
- */
+/** The WCAG formula is duplicated, and only contrast-check.py has a selftest. */
 function contrastTwins() {
   const check = read('skills/antislop-human/contrast-check.py')
   const mcp = read('skills/antislop-human/contrast-mcp.py')

@@ -4,7 +4,7 @@
 
 ## Where we are
 
-The latest release is **v3.2.6**. antislop is a **packaged system**: a lean, always-loaded core plus five additive skills, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`). There are no per-skill READMEs.
+The latest release is **v3.2.7**. antislop is a **packaged system**: a lean, always-loaded core plus five additive skills, each shipped as a standard agent skill folder (`skills/<name>/SKILL.md`). There are no per-skill READMEs.
 
 - **Core, unchanged since v2.2:** 38 rules across three tiers (Hard Gate, Purpose-Gate, Quality Locks), a Liveliness Toolkit, a mandatory Delivery Gate, and two usage modes (During / After). The single-file `antislop.md` is still a complete filter you can paste into any chat window; its First-Run Install Wizard is the manual install path.
 - **The six skills:** `antislop` (the core), plus `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, and `antislop-code`. Each skill only loads when the task needs it.
@@ -43,20 +43,20 @@ That kept the filter pull-only-what-you-need and made the v3 packaging mechanica
 | v3.2.4 | R-35 sharpened into a click-through smoke test: every interactive element must be run and exercised one at a time, and its result recorded as evidence in the Delivery Gate report. |
 | v3.2.5 | Cursor plugin door: `.cursor-plugin/plugin.json` manifest plus a `.cursor-plugin/marketplace.json` index, with the six skills and a `.mdc` rule pointer. The Codex plugin also gains its app identity (plugin icon, brand color, banner screenshot). |
 | v3.2.6 | Five-PR community round (PRs #22 to #26): a runtime Python launcher for the contrast MCP tool (fixes it on macOS), pointer writes that leave the user's entry file untouched, a smoke test that can actually fail, repo guardrails plus a CI workflow, and a contributors section. |
+| v3.2.7 | Content round plus an OpenCode door: three slop patterns earned names, "Two-State Layout" (a phone stack and a desktop grid with nothing defined between), "Over-Explained Comment" (a comment that runs on for several lines around a one-line fact), and "Decorative Status Dot" (a dot beside a heading that glows and pulses while marking nothing). R-37 gained the `DESIGN.md` conflict protocol: a direction that asks for a named slop pattern is surfaced and questioned, never silently followed or silently overridden. OpenCode is verified to load the skills from `.opencode/skills/` plus its `AGENTS.md` pointer. |
 
 ## What's next
 
-The plan is one item per version. The plugin doors follow the style of the Claude Code, Antigravity, Codex, and Cursor doors already shipped. v3.2.7 prepares the OpenAI listing.
+The plan is one item per version. The plugin doors follow the style of the Claude Code, Antigravity, Codex, and Cursor doors already shipped.
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.7 | OpenAI directory | Listing prep for the public plugin directory shared by ChatGPT and Codex: a versioned skill bundle, a submission document, and public privacy and terms pages. The submission itself happens on the OpenAI Platform after identity verification, outside this repo. |
-| v3.2.8 | Gemini CLI | Gemini CLI was sunset in June 2026 and superseded by Antigravity CLI, which already has a door (v3.2.2). The door closes the folder anyway: manifest plus pointer. |
-| v3.2.9 | OpenCode | OpenCode has no native plugin marketplace, so the door is the skills folder plus an `AGENTS.md` pointer (the picker already writes `.opencode/skills/`). |
-| v3.2.10 | The rest | Hermes, GitHub Copilot, and the `.agents/skills` long tail (Cline, Roo, Amp). The existing `.agents/plugins/marketplace.json` already points at the repo root, so any agent that reads the .agents standard can add the same marketplace. Mostly verification plus documentation per agent. |
+| v3.2.8 | The rest | Hermes, GitHub Copilot, and the `.agents/skills` long tail (Cline, Roo, Amp). The existing `.agents/plugins/marketplace.json` already points at the repo root, so any agent that reads the .agents standard can add the same marketplace. Mostly verification plus documentation per agent. |
 
 Beyond the numbered plan, with no promised version:
 
+- **OpenAI public directory listing** (deferred). Listing prep for the plugin directory shared by ChatGPT and Codex: a versioned skill bundle, a submission document, and public privacy and terms pages. The submission happens on the OpenAI Platform after identity verification, outside this repo; parked until that can proceed.
+- **Gemini CLI** (deferred). Gemini CLI was sunset in June 2026 and superseded by Antigravity CLI, which already has a door (v3.2.2). A completeness close would need an extension manifest for a tool that no longer ships; parked with antislop-compact.
 - **More plugin doors** as other agents grow plugin systems that antislop can ride from the same repo.
 - **antislop-compact**, a lightweight, standalone family of the five skills, each a self-contained cheat-sheet version that runs without the core alongside. Deferred: a parallel set of files would have to track every change to the full ones, and a compact skill is only sound if it keeps the one-line why per rule and the Delivery Gate.
 - **Skill candidates** still open: `antislop-docs` and `antislop-identity`.

@@ -68,6 +68,12 @@ allowed-tools: Read Write Edit Glob Grep
 
 ## How It Should Read
 
+### The Over-Explained Comment
+
+- **Tell:** one comment that runs on for several lines, stacking reasons, context, and history around a fact that fits in one line: a four-line block explaining that a stub sits on PATH, which release introduced the workaround, and what broke before it. Every sentence is true. The length is the tell.
+- **Why:** a person leaves a note, a generator writes a case. Padding a one-line fact into a paragraph, building a "because X, so Y, and therefore Z" chain, or citing the issue number and the version that fixed it are the same flourish as any other AI pattern, and they bury the one line that matters under the ones that do not.
+- **Fix:** cut to the constraint alone: one line, two at most, never three. Keep the platform trap, the silent failure, the protocol rule, the performance cost. Drop the issue number, the version history, and the reasoning chain.
+
 ### Line-by-Line Narration
 
 - **Tell:** a comment on every trivial statement, narrating each line as it is written: `// Initialize count`, then `// Loop items`, then `// Get item`, then `// Increment`, then `// Return result`.
@@ -104,6 +110,8 @@ Example that must stay:
 
 A comment earns its place when it explains something the code does not already show: the reason, the constraint, the non-obvious behavior.
 
+Earning a place says what may stay, never how long it may run. A workaround note is one line about the workaround, not a paragraph about it. The example above is two lines because two facts are real, not because two lines is a target. This list is the most common reason a comment survives a review it should not: the content is legitimately valuable, so the length goes unexamined. Value is not length.
+
 ## Code Comment Checklist
 
 Run these alongside the core Delivery Gate when the task touches comments. All answers must be **yes**:
@@ -115,5 +123,6 @@ Run these alongside the core Delivery Gate when the task touches comments. All a
 - [ ] Do the comments avoid empty labels and vague TODOs that name no task?
 - [ ] Do the comments avoid decorative emoji and end markers?
 - [ ] Is the comment density one per logical block, not one per line?
+- [ ] Is every comment one line, or two only when the second carries a new fact?
 - [ ] Do the remaining comments read short, natural, and in sentence case?
 - [ ] Is the scope guardrail held: only comments changed, the code untouched?

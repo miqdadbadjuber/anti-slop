@@ -36,18 +36,18 @@ There are four routes in, and the difference between them matters more than it l
 
 | Route | What it does | Works on |
 |-------|--------------|----------|
-| **The installer** | Copies the skill folders into your project or your home folder | Seven agents, no setup beyond a terminal |
+| **The installer** | Copies the skill folders into your project or your home folder | Eight agents, no setup beyond a terminal |
 | **The skills directory** | Copies the same folders using the skills.sh tool | The agents that directory supports |
-| **A plugin door** | Loads antislop straight from this repository, nothing copied | Claude Code, Antigravity, Codex, Cursor |
+| **A plugin door** | Loads antislop straight from this repository, nothing copied | Claude Code, Antigravity, Codex, Cursor, Pi |
 | **The single file** | One Markdown file you hand to any AI | Anything that reads text, including a phone |
 
 Pick one. They load the same rules, so adding a second only gives you a second thing to keep updated.
 
 ### Which route should I pick?
 
-- **The installer** if you want antislop in one project or everywhere, and you use any of the seven agents. It is the only route that covers OpenCode, Gemini CLI, and Hermes, and the only one that detects your agents for you.
+- **The installer** if you want antislop in one project or everywhere, and you use any of the eight agents. It is the only route that covers OpenCode, Gemini CLI, Hermes, and Pi, and the only one that detects your agents for you.
 - **The skills directory** if you already use that directory's tool and want the folders without the installer's questions. It writes no pointer, so antislop reloads by description alone.
-- **A plugin door** if you use Claude Code, Antigravity, Codex, or Cursor and would rather not keep a copy in your project. You get updates from the plugin's own update command instead of re-running an installer.
+- **A plugin door** if you use Claude Code, Antigravity, Codex, Cursor, or Pi and would rather not keep a copy in your project. You get updates from the plugin's own update command instead of re-running an installer.
 - **The single file** if you have no terminal, or you want antislop in a chat window or on a phone.
 
 ### Before you start
@@ -131,7 +131,7 @@ What it does not do is write the pointer that reloads antislop every session. If
 
 A plugin is a feature of the agent, not of antislop. You point the agent at this repository once, and from then on the agent loads antislop directly from there. Nothing is copied into your project, so there is no snapshot that can quietly go stale. A new version arrives by updating the plugin, not by re-running an installer.
 
-Two things to know before you pick one. A plugin fits exactly one agent, so this route exists for four agents and not for the other three. And every agent below keeps its own local copy, so none of them updates by itself unless that agent says it does.
+Two things to know before you pick one. A plugin fits exactly one agent, so this route exists for five agents and not for the other three. And every agent below keeps its own local copy, so none of them updates by itself unless that agent says it does.
 
 #### Claude Code
 
@@ -166,6 +166,16 @@ agent plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
 ```
 
 Then, inside Cursor, open **Customize** in the sidebar, find **antislop**, and select **Install**, choosing project or user scope. From the dashboard, **Dashboard → Plugins → Add Marketplace → Import from Repo** does the same.
+
+#### Pi
+
+Pi installs packages straight from a repository. This repo is a Pi package, so add it once:
+
+```bash
+pi install git:github.com/miqdadbadjuber/anti-slop
+```
+
+Add `-l` to install it into the current project instead of your user settings. Pi reads the six skills from the package's `skills/` directory and finds them by description, so nothing is copied and there is no pointer to write. A project install loads its skills only after you trust the project, which `pi` asks once on startup.
 
 ---
 
@@ -287,6 +297,16 @@ agent plugin marketplace update https://github.com/miqdadbadjuber/anti-slop
 
 In the dashboard you can also enable **Auto Refresh** for the marketplace, or press **Refresh** by hand. Cursor re-indexes a marketplace at most once every ten minutes. If new plugins were added to the repo, re-importing the repository URL is what picks them up.
 
+#### Pi
+
+Reinstall the package from the repository, which moves it to the newest ref:
+
+```bash
+pi install git:github.com/miqdadbadjuber/anti-slop
+```
+
+If you pinned a tag or commit, install with the new ref instead. `pi update --extensions` reconciles an existing clone to the ref you configured but does not move a pinned ref forward on its own.
+
 ### The single file
 
 Download the file again and replace your copy. There is nothing else to update, since this route installs no folders.
@@ -338,6 +358,14 @@ Cursor documents no plugin uninstall command, so remove the plugin from the Cust
 agent plugin marketplace remove anti-slop
 ```
 
+#### Pi
+
+```bash
+pi remove git:github.com/miqdadbadjuber/anti-slop
+```
+
+Add `-l` if you installed it into a project rather than your user settings. Removing the package removes the skills it loaded; nothing was copied into your project.
+
 ### The single file
 
 Delete the `antislop.md` file you downloaded. If you attached it to a chat project instead of keeping it as a file, remove it from that project's reference material.
@@ -359,10 +387,11 @@ The installer writes into the folder your agent reads. This is what it writes an
 | Cursor | `.cursor/skills/` |
 | Gemini CLI | `.gemini/skills/` |
 | Hermes | `.hermes/skills/` |
+| Pi | `.pi/skills/` |
 
-A global install writes the same folder under your home directory, with two exceptions. OpenCode documents its global skills folder as `~/.config/opencode/skills/`, so the installer writes there rather than to `~/.opencode/skills/`, which OpenCode still reads but does not document. Antigravity reads a project's `.agents/skills/`, but under your home directory it reads `~/.gemini/config/skills/` and not `~/.agents/skills/`, so the installer writes there on a global install.
+A global install writes the same folder under your home directory, with three exceptions. OpenCode documents its global skills folder as `~/.config/opencode/skills/`, so the installer writes there rather than to `~/.opencode/skills/`, which OpenCode still reads but does not document. Antigravity reads a project's `.agents/skills/`, but under your home directory it reads `~/.gemini/config/skills/` and not `~/.agents/skills/`, so the installer writes there on a global install. Pi reads a project's `.pi/skills/`, but under your home directory it reads `~/.pi/agent/skills/`, so the installer writes there on a global install.
 
-On a project install the installer also writes the pointer that reloads antislop every session: into the project's `AGENTS.md` for Codex, Antigravity, OpenCode, Cursor, and Hermes, into `CLAUDE.md` for Claude Code, and into `GEMINI.md` for Gemini CLI. For OpenCode that is the whole mechanism: it loads the skill folders from `.opencode/skills/` and reads the pointer from `AGENTS.md`, which was verified against the opencode CLI.
+On a project install the installer also writes the pointer that reloads antislop every session: into the project's `AGENTS.md` for Codex, Antigravity, OpenCode, Cursor, Hermes, and Pi, into `CLAUDE.md` for Claude Code, and into `GEMINI.md` for Gemini CLI. For OpenCode that is the whole mechanism: it loads the skill folders from `.opencode/skills/` and reads the pointer from `AGENTS.md`, which was verified against the opencode CLI.
 
 **Hermes needs one more step.** Hermes reads a project's `.hermes/skills/`, and a project's skills outrank your global ones, but it will not load skills out of a cloned repository until you say that repository is yours. After a project install, run this once in that project:
 
@@ -400,7 +429,7 @@ If your `DESIGN.md` happens to ask for something antislop counts as slop, it doe
 
 ## Where is this going?
 
-antislop is packaged three ways at once: standard skill folders, native plugins for Claude Code, Antigravity, Codex, and Cursor, and the single-file core that works anywhere. Agent support grows over time. For the current release and what comes next, see the [roadmap](ROADMAP.md). For the full picture of every skill, see the [README](README.md).
+antislop is packaged three ways at once: standard skill folders, native plugins for Claude Code, Antigravity, Codex, Cursor, and Pi, and the single-file core that works anywhere. Agent support grows over time. For the current release and what comes next, see the [roadmap](ROADMAP.md). For the full picture of every skill, see the [README](README.md).
 
 ## Feedback
 

@@ -24,7 +24,8 @@ jobs:
       - name: Repo guardrails
         run: node scripts/check-repo.mjs
 
-      # The contrast table is a set of claims about a formula; recompute every row.
+      # The contrast table is a set of claims about a formula; recompute
+      # every row.
       - name: Contrast table matches the formula
         run: python3 skills/antislop-human/contrast-check.py --selftest
 
@@ -35,9 +36,9 @@ jobs:
           node cli/scripts/sync-skills.mjs
           git diff --exit-code -- skills/
 
-      # The smoke test starts the picker, so its dependencies have to exist first.
-      # Without this the picker dies on an import error and never reaches the
-      # no-terminal guard the smoke test is checking for.
+      # The smoke test starts the picker, so its dependencies have to exist
+      # first. Without this the picker dies on an import error and never
+      # reaches the no-terminal guard the smoke test is checking for.
       - name: Install cli dependencies
         working-directory: cli
         run: npm ci

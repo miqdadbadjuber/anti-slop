@@ -28,6 +28,7 @@ const MANIFESTS = [
   '.cursor-plugin/marketplace.json',
   '.agents/plugins/marketplace.json',
   'plugin.json',
+  'package.json',
   'cli/package.json',
 ]
 
@@ -88,7 +89,7 @@ function skillReferences() {
   return bad
 }
 
-/** The version is hand-written in eight places. They have to agree. */
+/** The version is hand-written in nine places. They have to agree. */
 function versions() {
   // A malformed file is already reported by the manifest check; do not crash here.
   const json = (p) => {
@@ -106,6 +107,7 @@ function versions() {
     ['.claude-plugin/marketplace.json', json('.claude-plugin/marketplace.json')?.plugins?.[0]?.version],
     ['.codex-plugin/plugin.json', json('.codex-plugin/plugin.json')?.version],
     ['.cursor-plugin/plugin.json', json('.cursor-plugin/plugin.json')?.version],
+    ['package.json', json('package.json')?.version],
     ['cli/index.mjs', read('cli/index.mjs').match(/antislop (\d+\.\d+\.\d+)/)?.[1]],
     ['cli/lib/banner.mjs', read('cli/lib/banner.mjs').match(/installer v(\d+\.\d+\.\d+)/)?.[1]],
     ['skills/antislop-human/contrast-mcp.py', read('skills/antislop-human/contrast-mcp.py').match(/SERVER_VERSION = "(\d+\.\d+\.\d+)"/)?.[1]],

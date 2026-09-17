@@ -1,6 +1,8 @@
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import assert from 'node:assert/strict'
+import { configureMode, readSettings } from '../lib/settings.mjs'
 import {
   AGENTS,
   skillSourceDir,
@@ -12,6 +14,33 @@ import {
 } from '../lib/install.mjs'
 
 const skills = ['antislop', 'antislop-ui']
+
+const settingsFile = path.join(process.cwd(), 'preferences', 'settings.json')
+assert.match(configureMode([], settingsFile), /ask \(default\)/)
+assert.equal(fs.existsSync(settingsFile), false)
+for (const mode of ['during', 'after', 'ask']) {
+  assert.match(configureMode([mode], settingsFile), new RegExp(`global mode: ${mode}`))
+  assert.equal(readSettings(settingsFile).mode, mode)
+  assert.match(configureMode([], settingsFile), new RegExp(`global mode: ${mode}`))
+}
+fs.writeFileSync(settingsFile, '{"other":true,"mode":"during"}')
+configureMode(['after'], settingsFile)
+assert.deepEqual(readSettings(settingsFile), { other: true, mode: 'after' })
+assert.throws(() => configureMode(['invalid'], settingsFile), /Usage:/)
+assert.throws(() => configureMode(['during', 'extra'], settingsFile), /Usage:/)
+assert.equal(readSettings(settingsFile).mode, 'after')
+for (const content of ['{broken', 'null', '[]', '"during"']) {
+  fs.writeFileSync(settingsFile, content)
+  assert.throws(() => configureMode(['during'], settingsFile))
+  assert.equal(fs.readFileSync(settingsFile, 'utf8'), content)
+}
+for (const mode of ['invalid', null, 1]) {
+  fs.writeFileSync(settingsFile, JSON.stringify({ mode }))
+  assert.throws(() => configureMode([], settingsFile), /Invalid mode/)
+  configureMode(['during'], settingsFile)
+  assert.equal(readSettings(settingsFile).mode, 'during')
+}
+console.log('ok   global mode preferences: persistence, validation, and preservation')
 
 const failures = []
 
@@ -37,6 +66,7 @@ let pointers = updatePointers({ targets, skills })
 console.log('B targets:', targets.map((t) => `${t.agent.id}@${t.path} exists=${t.exists}`).join(' | '))
 console.log('B written:', written.map((w) => `${w.agent.id}:${w.skill}`).join(', '))
 check('B pointers', pointers.map((p) => path.basename(p)), ['CLAUDE.md'])
+assert.match(fs.readFileSync(pointers[0], 'utf8'), /read the global preference, resolve the mode, and announce it/)
 
 const conflicts = detectConflicts({ skills, targets })
 written = installSkills({ skills, targets, overwrite: false })

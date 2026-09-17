@@ -3,6 +3,7 @@ import path from 'node:path'
 import pc from 'picocolors'
 import { intro, outro, select, multiselect, confirm, isCancel, cancel, log, spinner } from '@clack/prompts'
 import { banner } from './lib/banner.mjs'
+import { configureMode } from './lib/settings.mjs'
 import {
   CORE,
   AGENTS,
@@ -34,6 +35,10 @@ function displayDir(agent, location) {
 }
 
 async function main() {
+  if (process.argv[2] === '--mode') {
+    console.log(configureMode(process.argv.slice(3)))
+    return
+  }
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
     console.log('antislop 3.2.9')
     return

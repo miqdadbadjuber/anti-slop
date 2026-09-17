@@ -128,6 +128,16 @@ agent plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
 
 Then open **Customize** in Cursor, find **antislop**, and select **Install**, choosing project or user scope.
 
+### 7. The plugin (Pi)
+
+Pi installs packages straight from a repository, and this repo is a Pi package: its `skills/` directory is a conventional package root, so nothing has to be copied or configured. Add it once:
+
+```bash
+pi install git:github.com/miqdadbadjuber/anti-slop
+```
+
+Add `-l` to install it into this project only (`.pi/settings.json`) instead of your user settings. Pi loads the six skills from the package and finds them by description, so there is no pointer to write.
+
 ### Where the skills live
 
 Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into any agent that reads the standard. The installer (path 1) installs into whichever of these you use, creating the folder if it is missing:
@@ -141,12 +151,13 @@ Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), s
 | Cursor | `.cursor/skills/` |
 | Gemini CLI | `.gemini/skills/` |
 | Hermes | `.hermes/skills/` |
+| Pi | `.pi/skills/` |
 
 The Gemini CLI row is legacy support: Antigravity replaced it, but the installer still writes there for existing setups.
 
-Those are the project paths. A global install writes the same folder under your home directory, with two exceptions: OpenCode writes to `~/.config/opencode/skills/`, and Antigravity to `~/.gemini/config/skills/`.
+Those are the project paths. A global install writes the same folder under your home directory, with three exceptions: OpenCode writes to `~/.config/opencode/skills/`, Antigravity to `~/.gemini/config/skills/`, and Pi to `~/.pi/agent/skills/`.
 
-Hermes needs one extra step after a project install: it will not load skills out of a cloned repository until you run `hermes skills trust` once in that project.
+Hermes needs one extra step after a project install: it will not load skills out of a cloned repository until you run `hermes skills trust` once in that project. Pi has the same gate: it loads a project's `.pi/skills/` and `.agents/skills/` only after you trust that project, which `pi` asks once on startup.
 
 ### Manual (single file, no packaging)
 
@@ -207,8 +218,8 @@ No, a filter. It does not prescribe colors, fonts, or layouts. It rejects techni
 
 All of them, but the install paths differ:
 
-- **The installer and the skills directory** support Claude Code, Codex, Antigravity, OpenCode, Cursor, Gemini CLI, and Hermes (the installer detects each agent's skill folder). These are the recommended paths.
-- **The plugins** are per-agent doors: the Claude Code marketplace plugin (path 3), the Antigravity plugin (path 4), the Codex plugin (path 5), and the Cursor plugin (path 6), all installed from the same repo.
+- **The installer and the skills directory** support Claude Code, Codex, Antigravity, OpenCode, Cursor, Gemini CLI, Hermes, and Pi (the installer detects each agent's skill folder). These are the recommended paths.
+- **The plugins** are per-agent doors: the Claude Code marketplace plugin (path 3), the Antigravity plugin (path 4), the Codex plugin (path 5), the Cursor plugin (path 6), and the Pi package (path 7), all installed from the same repo.
 - **The single file** (`antislop.md`) works with any agent that reads plain Markdown, including a plain chat window.
 
 The packaged skills use the open Agent Skills standard (folder per skill), so they drop into any tool that reads the standard.

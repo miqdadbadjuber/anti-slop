@@ -1,0 +1,16 @@
+{
+  "name": "antislop",
+  "version": "3.2.9",
+  "private": true,
+  "description": "Anti Slop: Rules for AI Coding Agents. Stops generic AI slop in generated UI, copy, and code.",
+  "keywords": ["pi-package", "ai-slop", "design-rules", "copy-rules", "agent-skills", "ui", "accessibility"],
+  "license": "MIT",
+  "homepage": "https://github.com/miqdadbadjuber/anti-slop",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miqdadbadjuber/anti-slop.git"
+  },
+  "pi": {
+    "skills": ["./skills"]
+  }
+}

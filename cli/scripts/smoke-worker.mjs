@@ -28,7 +28,7 @@ const check = (label, actual, expected) => {
 const fresh = detectAgents('project')
 check('A detected (fresh project)', fresh, [])
 const defaultTargets = resolveTargets('project')
-console.log('A default targets:', defaultTargets.map((t) => `${t.agent.id}@${t.path} exists=${t.exists}`).join(' | '), '(expect all seven, exists=false)')
+console.log('A default targets:', defaultTargets.map((t) => `${t.agent.id}@${t.path} exists=${t.exists}`).join(' | '), '(expect all eight, exists=false)')
 
 // Claude Code only, via explicit selection (old behavior preserved).
 const targets = resolveTargets('project', ['claude'])
@@ -73,6 +73,15 @@ const hermesWritten = installSkills({ skills, targets: hermesProject, overwrite:
 check('D3 hermes written into the project', hermesWritten.length, 2)
 check('D3 hermes detected in project', detectAgents('project').includes('hermes'), true)
 
+// Pi splits its scopes: project .pi/skills, global ~/.pi/agent/skills.
+const piProject = resolveTargets('project', ['pi'])
+const piGlobal = resolveTargets('global', ['pi'])
+check('D3b pi project target', piProject[0].path, path.join(process.cwd(), '.pi', 'skills'))
+check('D3b pi global target', piGlobal[0].path, path.join(os.homedir(), '.pi', 'agent', 'skills'))
+const piWritten = installSkills({ skills, targets: piProject, overwrite: false })
+check('D3b pi written into the project', piWritten.length, 2)
+check('D3b pi writes a project pointer', updatePointers({ targets: piProject, skills }).map((p) => path.basename(p)), ['AGENTS.md'])
+
 // OpenCode splits its scopes: project folder for a project install, ~/.config for global.
 const ocProject = resolveTargets('project', ['opencode'])
 const ocGlobal = resolveTargets('global', ['opencode'])
@@ -92,7 +101,7 @@ check('D6 hermes writes a project pointer', updatePointers({ targets: hermesProj
 
 // Detection now sees the agents that were installed.
 const after = detectAgents('project')
-check('E detected after installs', [...after].sort(), ['antigravity', 'claude', 'cursor', 'gemini', 'hermes', 'opencode'])
+check('E detected after installs', [...after].sort(), ['antigravity', 'claude', 'cursor', 'gemini', 'hermes', 'opencode', 'pi'])
 
 const globalTargets = resolveTargets('global', ['claude', 'codex'])
 console.log('F global targets:', globalTargets.map((t) => `${t.agent.id}@${t.path}`).join(' | '))

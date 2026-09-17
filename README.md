@@ -179,10 +179,20 @@ Pick what matches the work:
 
 ## Usage modes
 
-antislop is used one of two ways, chosen at the start of a session:
+antislop is used one of two ways:
 
 - **During** guides the work while it is built, ending with the Delivery Gate. Use it when building new UI.
 - **After** audits finished work: a numbered findings list, you approve which to fix, then a follow-up report. Use it to clean up existing output.
+
+Save your preferred mode once to skip the question in new sessions:
+
+```bash
+npx antislop-ai --mode during
+```
+
+Use `after` instead for audits, `ask` to restore the question, or `--mode` alone to view the setting. This stores `{"mode":"during"}` in `~/.config/antislop/settings.json`, shared across agents and projects. You can also ask your agent to "remember during as my global antislop mode".
+
+On activation, the skill announces **"antislop active: during (global preference)."** An explicit mode request in chat overrides the saved setting for that session. With no saved preference, it asks as before. Update existing skill installations and project pointers to use this behavior; older copies still contain the unconditional question. For installer-managed project pointers, rerun the installer in each project. Plugin users should update their plugin.
 
 ## Roadmap
 

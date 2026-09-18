@@ -127,7 +127,28 @@ agent plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
 ```
 
 Then open **Customize** in Cursor, find **antislop**, and select **Install**, choosing project or user scope.
+### 7. The plugin (Oh My Pi)
 
+This repository is an Oh My Pi plugin and marketplace. Add the marketplace once, then install the plugin:
+
+```bash
+omp plugin marketplace add oggiesutrisna/omp-anti-slop-integration
+omp plugin install antislop@anti-slop
+```
+
+Or from an active Oh My Pi session:
+
+```text
+/marketplace add oggiesutrisna/omp-anti-slop-integration
+/marketplace install antislop@anti-slop
+```
+
+If you are using the upstream repository directly:
+
+```bash
+omp plugin marketplace add miqdadbadjuber/anti-slop
+omp plugin install antislop@anti-slop
+```
 ### Where the skills live
 
 Every skill is a folder of the open Agent Skills standard (`<name>/SKILL.md`), so it drops into any agent that reads the standard. The installer (path 1) installs into whichever of these you use, creating the folder if it is missing:
@@ -208,7 +229,7 @@ No, a filter. It does not prescribe colors, fonts, or layouts. It rejects techni
 All of them, but the install paths differ:
 
 - **The installer and the skills directory** support Claude Code, Codex, Antigravity, OpenCode, Cursor, Gemini CLI, and Hermes (the installer detects each agent's skill folder). These are the recommended paths.
-- **The plugins** are per-agent doors: the Claude Code marketplace plugin (path 3), the Antigravity plugin (path 4), the Codex plugin (path 5), and the Cursor plugin (path 6), all installed from the same repo.
+- **The plugins** are per-agent doors: the Claude Code marketplace plugin (path 3), the Antigravity plugin (path 4), the Codex plugin (path 5), the Cursor plugin (path 6), and the Oh My Pi plugin (path 7), all installed from the same repo.
 - **The single file** (`antislop.md`) works with any agent that reads plain Markdown, including a plain chat window.
 
 The packaged skills use the open Agent Skills standard (folder per skill), so they drop into any tool that reads the standard.

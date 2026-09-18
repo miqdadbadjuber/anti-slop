@@ -38,7 +38,7 @@ There are four routes in, and the difference between them matters more than it l
 |-------|--------------|----------|
 | **The installer** | Copies the skill folders into your project or your home folder | Seven agents, no setup beyond a terminal |
 | **The skills directory** | Copies the same folders using the skills.sh tool | The agents that directory supports |
-| **A plugin door** | Loads antislop straight from this repository, nothing copied | Claude Code, Antigravity, Codex, Cursor |
+| **A plugin door** | Loads antislop straight from this repository, nothing copied | Claude Code, Antigravity, Codex, Cursor, Oh My Pi |
 | **The single file** | One Markdown file you hand to any AI | Anything that reads text, including a phone |
 
 Pick one. They load the same rules, so adding a second only gives you a second thing to keep updated.
@@ -47,7 +47,7 @@ Pick one. They load the same rules, so adding a second only gives you a second t
 
 - **The installer** if you want antislop in one project or everywhere, and you use any of the seven agents. It is the only route that covers OpenCode, Gemini CLI, and Hermes, and the only one that detects your agents for you.
 - **The skills directory** if you already use that directory's tool and want the folders without the installer's questions. It writes no pointer, so antislop reloads by description alone.
-- **A plugin door** if you use Claude Code, Antigravity, Codex, or Cursor and would rather not keep a copy in your project. You get updates from the plugin's own update command instead of re-running an installer.
+- **A plugin door** if you use Claude Code, Antigravity, Codex, Cursor, or Oh My Pi and would rather not keep a copy in your project. You get updates from the plugin's own update command instead of re-running an installer.
 - **The single file** if you have no terminal, or you want antislop in a chat window or on a phone.
 
 ### Before you start
@@ -131,7 +131,7 @@ What it does not do is write the pointer that reloads antislop every session. If
 
 A plugin is a feature of the agent, not of antislop. You point the agent at this repository once, and from then on the agent loads antislop directly from there. Nothing is copied into your project, so there is no snapshot that can quietly go stale. A new version arrives by updating the plugin, not by re-running an installer.
 
-Two things to know before you pick one. A plugin fits exactly one agent, so this route exists for four agents and not for the other three. And every agent below keeps its own local copy, so none of them updates by itself unless that agent says it does.
+Two things to know before you pick one. A plugin fits exactly one agent, so this route exists for five agents and not for the other two. And every agent below keeps its own local copy, so none of them updates by itself unless that agent says it does.
 
 #### Claude Code
 
@@ -167,6 +167,22 @@ agent plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
 
 Then, inside Cursor, open **Customize** in the sidebar, find **antislop**, and select **Install**, choosing project or user scope. From the dashboard, **Dashboard → Plugins → Add Marketplace → Import from Repo** does the same.
 
+
+#### Oh My Pi
+
+Add the marketplace once, then install the plugin:
+
+```bash
+omp plugin marketplace add oggiesutrisna/omp-anti-slop-integration
+omp plugin install antislop@anti-slop
+```
+
+Or from inside an active Oh My Pi session:
+
+```text
+/marketplace add oggiesutrisna/omp-anti-slop-integration
+/marketplace install antislop@anti-slop
+```
 ---
 
 ### The single file
@@ -287,6 +303,22 @@ agent plugin marketplace update https://github.com/miqdadbadjuber/anti-slop
 
 In the dashboard you can also enable **Auto Refresh** for the marketplace, or press **Refresh** by hand. Cursor re-indexes a marketplace at most once every ten minutes. If new plugins were added to the repo, re-importing the repository URL is what picks them up.
 
+
+#### Oh My Pi
+
+Update the marketplace catalog and upgrade the plugin:
+
+```bash
+omp plugin marketplace update anti-slop
+omp plugin upgrade antislop@anti-slop
+```
+
+Or inside an active session:
+
+```text
+/marketplace update anti-slop
+/marketplace upgrade antislop@anti-slop
+```
 ### The single file
 
 Download the file again and replace your copy. There is nothing else to update, since this route installs no folders.
@@ -336,6 +368,18 @@ Cursor documents no plugin uninstall command, so remove the plugin from the Cust
 
 ```bash
 agent plugin marketplace remove anti-slop
+```
+
+#### Oh My Pi
+
+```bash
+omp plugin uninstall antislop@anti-slop
+```
+
+To drop the marketplace as well:
+
+```bash
+omp plugin marketplace remove anti-slop
 ```
 
 ### The single file
@@ -400,7 +444,7 @@ If your `DESIGN.md` happens to ask for something antislop counts as slop, it doe
 
 ## Where is this going?
 
-antislop is packaged three ways at once: standard skill folders, native plugins for Claude Code, Antigravity, Codex, and Cursor, and the single-file core that works anywhere. Agent support grows over time. For the current release and what comes next, see the [roadmap](ROADMAP.md). For the full picture of every skill, see the [README](README.md).
+antislop is packaged three ways at once: standard skill folders, native plugins for Claude Code, Antigravity, Codex, Cursor, and Oh My Pi, and the single-file core that works anywhere. Agent support grows over time. For the current release and what comes next, see the [roadmap](ROADMAP.md). For the full picture of every skill, see the [README](README.md).
 
 ## Feedback
 

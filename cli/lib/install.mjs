@@ -7,6 +7,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const CORE = 'antislop'
 
+export const VERSION = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')).version
+
+/** The release an existing install came from, or null when it predates the VERSION file.
+ * Nothing else on disk names it, so without this an update cannot tell the user what
+ * they already have.
+ */
+export function installedVersion(targetPath) {
+  const file = path.join(targetPath, CORE, 'VERSION')
+  return fs.existsSync(file) ? fs.readFileSync(file, 'utf8').trim() : null
+}
+
 // Every row carries the entry file it writes, so a new agent cannot be added
 // without one: `entry` is what `updatePointers` needs and nothing else supplies it.
 // `readsAlso` lists the other project folders the agent loads skills from besides its

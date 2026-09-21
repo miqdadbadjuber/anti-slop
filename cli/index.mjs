@@ -12,7 +12,9 @@ import {
   detectConflicts,
   detectDuplicateReads,
   installSkills,
+  installedVersion,
   updatePointers,
+  VERSION,
 } from './lib/install.mjs'
 
 const EXTRA_SKILLS = [
@@ -36,7 +38,7 @@ function displayDir(agent, location) {
 
 async function main() {
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log('antislop 3.2.12')
+    console.log(`antislop ${VERSION}`)
     return
   }
 
@@ -98,11 +100,17 @@ async function main() {
   const conflicts = detectConflicts({ skills, targets })
   let overwrite = false
   if (conflicts.length > 0) {
+    // Overwriting is how an update happens, and the version on disk is the one fact
+    // the user cannot look up anywhere. Name both sides so the choice is obvious.
+    const found = [...new Set(targets.map((t) => installedVersion(t.path)).filter(Boolean))]
+    const have = found.length > 0 ? `antislop ${found.join(' and ')}` : 'an antislop old enough that it records no version'
+    log.warn(`Already here: ${have}. This installer carries ${VERSION}.`)
+
     const answer = await select({
       message: `${conflicts.length} skill folder(s) already exist. What should I do?`,
       options: [
-        { value: 'overwrite', label: 'Overwrite them', hint: 'replace with this version' },
-        { value: 'keep', label: 'Keep what is there', hint: 'leave the old version in place' },
+        { value: 'overwrite', label: 'Overwrite them', hint: `update to ${VERSION}` },
+        { value: 'keep', label: 'Keep what is there', hint: 'stay on what is installed' },
       ],
     })
     if (isCancel(answer)) stop('Install cancelled.')

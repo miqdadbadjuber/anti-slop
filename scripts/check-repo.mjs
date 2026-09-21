@@ -108,7 +108,8 @@ function versions() {
     ['.codex-plugin/plugin.json', json('.codex-plugin/plugin.json')?.version],
     ['.cursor-plugin/plugin.json', json('.cursor-plugin/plugin.json')?.version],
     ['.kimi-plugin/plugin.json', json('.kimi-plugin/plugin.json')?.version],
-    ['cli/index.mjs', read('cli/index.mjs').match(/antislop (\d+\.\d+\.\d+)/)?.[1]],
+    // Stamped into every install, so a stale one makes the installer misreport what is on disk.
+    ['skills/antislop/VERSION', read('skills/antislop/VERSION').trim()],
     ['cli/lib/banner.mjs', read('cli/lib/banner.mjs').match(/installer v(\d+\.\d+\.\d+)/)?.[1]],
     ['skills/antislop-human/contrast-mcp.py', read('skills/antislop-human/contrast-mcp.py').match(/SERVER_VERSION = "(\d+\.\d+\.\d+)"/)?.[1]],
   ]

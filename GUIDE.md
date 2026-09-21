@@ -222,9 +222,11 @@ The installer, the skills directory, and the plugin doors all need a terminal, s
 
 ## Update
 
-Nothing here is automatic unless a route below says it is. Every route updates by running that route's own command again, or by replacing the copy you made.
+Nothing here is automatic unless a route below says it is. Every route updates by running that route's own command again, or by replacing the copy you made. Whichever route you use, your agent loads skills when a session starts, so close the session you are in and open a new one afterwards. Until you do, the old rules are still the ones loaded.
 
-**First, how do you know a new version is out?** Nothing notifies you. Two places always carry the current one: the [releases page](https://github.com/miqdadbadjuber/anti-slop/releases) and the version badge at the top of the [README](README.md). Compare that against what you have, then use your route's section below. The installer route can skip the comparison, because its own command prints the version it would fetch.
+**First, how do you know a new version is out?** Nothing notifies you. Two places always carry the current one: the [releases page](https://github.com/miqdadbadjuber/anti-slop/releases) and the version badge at the top of the [README](README.md).
+
+**And which one do you have?** The installed `antislop` folder holds a `VERSION` file naming the release it came from. Open it, or ask your agent "which antislop version is installed?" and it reads the file for you. A folder with no `VERSION` file predates that file, so it is old enough to update without checking anything else. The installer route can skip this entirely: it prints both versions itself.
 
 ### The installer
 
@@ -234,7 +236,13 @@ The installer copies files, so your project holds a snapshot. When a new version
 npx antislop-ai
 ```
 
-Answer the questions exactly as you did the first time. Because the folders already exist, it now asks one extra question:
+Answer the questions exactly as you did the first time. When it reaches folders you already have, it prints what it found before asking anything:
+
+```
+▲ Already here: antislop 3.2.10. This installer carries 3.2.12.
+```
+
+Then it asks one extra question:
 
 - **Overwrite them** replaces your copies with the version it just downloaded. **This is the update.**
 - **Keep what is there** leaves your old files alone and installs nothing.

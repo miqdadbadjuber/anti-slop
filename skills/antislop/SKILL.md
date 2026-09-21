@@ -60,6 +60,19 @@ Notes:
 - The wizard needs file-write access for step 5 (the pointer block), and nothing else; the user approves once. It never needs network access.
 - The pointer block is the source of truth for which skills are installed. To add or remove a skill later, update the block to match (add or remove the file and its line).
 
+### Already installed, and the user asks how to update
+
+antislop never updates itself, and nothing announces a new release. Answer from the route the user installed with, and say which route you are assuming when you cannot tell:
+
+- **The installer** (`npx antislop-ai`): run it again, answer as before, and pick **Overwrite them**. It prints the version already on disk next to the version it carries, so nothing has to be compared by hand. *Keep what is there* installs nothing.
+- **The skills directory** (`npx skills add miqdadbadjuber/anti-slop`): run the same command again.
+- **A plugin door** (Claude Code, Antigravity, Codex, Cursor, Kimi Code): each agent has its own update command. `GUIDE.md` in the repo lists them one by one.
+- **This file alone**: download it again and replace the copy.
+
+The folder this skill sits in holds a `VERSION` file naming the release it came from, unless it was installed before that file shipped. The current release is on the repo's releases page.
+
+Skills load when a session starts, so the session asking the question keeps the old rules either way. Say so, and tell the user to start a new one.
+
 ---
 
 ## Two Usage Modes

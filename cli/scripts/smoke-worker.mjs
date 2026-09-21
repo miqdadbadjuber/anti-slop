@@ -9,7 +9,9 @@ import {
   detectConflicts,
   detectDuplicateReads,
   installSkills,
+  installedVersion,
   updatePointers,
+  VERSION,
 } from '../lib/install.mjs'
 
 const skills = ['antislop', 'antislop-ui']
@@ -120,6 +122,10 @@ check('F global targets', globalTargets.map((t) => `${t.agents.map((a) => a.id).
 const src = fs.readFileSync(path.join(skillSourceDir(), 'antislop-ui', 'SKILL.md'), 'utf8')
 const dst = fs.readFileSync(path.join(process.cwd(), '.claude', 'skills', 'antislop-ui', 'SKILL.md'), 'utf8')
 check('G antislop-ui SKILL.md identical', src === dst, true)
+
+// The conflict prompt reports the release on disk from this file alone.
+check('G installed version is stamped', installedVersion(targets[0].path), VERSION)
+check('G no install means no version', installedVersion(path.join(process.cwd(), 'nowhere')), null)
 
 updatePointers({ targets, skills })
 const entry = fs.readFileSync(path.join(process.cwd(), 'CLAUDE.md'), 'utf8')

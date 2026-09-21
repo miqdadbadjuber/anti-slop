@@ -80,7 +80,7 @@ One command, then answer the prompts. It asks which extra skills you want, where
 npx antislop-ai
 ```
 
-To update later, run the same command and choose **Overwrite them** when it finds the existing folders. Choosing **Keep what is there** installs nothing and leaves you on the old version.
+To update later, run the same command and choose **Overwrite them** when it finds the existing folders. See [Update](#update).
 
 ### 2. The skills directory
 
@@ -169,6 +169,23 @@ The core `antislop.md` alone is a complete filter you can paste into any chat wi
 ```bash
 curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/antislop.md
 ```
+
+## Update
+
+antislop does not update itself and nothing tells you a release is out. Every route updates by running its own command again:
+
+| Route | Update it with |
+|-------|----------------|
+| The installer | `npx antislop-ai`, then **Overwrite them**. It prints the version on disk next to the one it carries. |
+| The skills directory | `npx skills add miqdadbadjuber/anti-slop` |
+| The plugin (Claude Code) | `claude plugin update antislop@anti-slop` |
+| The plugin (Antigravity) | `agy plugin install https://github.com/miqdadbadjuber/anti-slop` |
+| The plugin (Codex) | `codex plugin marketplace upgrade anti-slop` |
+| The plugin (Cursor) | `agent plugin marketplace update https://github.com/miqdadbadjuber/anti-slop` |
+| The plugin (Kimi Code) | `/plugins install https://github.com/miqdadbadjuber/anti-slop` |
+| Manual | download `antislop.md` again |
+
+Skills load when a session starts, so start a new one afterwards. To see which version you are on, open the `VERSION` file in the installed `antislop` folder, or ask your agent. [GUIDE.md](GUIDE.md#update) covers each route step by step.
 
 ## Skills
 

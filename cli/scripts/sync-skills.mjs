@@ -16,6 +16,8 @@ const CORE_FRONTMATTER = [
   '',
 ].join('\n')
 
+const version = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')).version
+
 const coreBody = fs.readFileSync(path.join(repoRoot, 'antislop.md'), 'utf8')
   .replace(/\r\n/g, '\n')
   .trim()
@@ -27,10 +29,14 @@ if (/https?:\/\/raw\.githubusercontent\.com/.test(coreBody)) {
 
 fs.writeFileSync(path.join(repoSkills, 'antislop', 'SKILL.md'), CORE_FRONTMATTER + coreBody + '\n')
 
+// An installed copy is a snapshot with nothing in it that names the release it came from,
+// so an update could not say what was on disk. Every install route copies this folder.
+fs.writeFileSync(path.join(repoSkills, 'antislop', 'VERSION'), version + '\n')
+
 // Python leaves a __pycache__ beside the contrast checker; it must not reach the tarball.
 fs.rmSync(cliSkills, { recursive: true, force: true })
 fs.cpSync(repoSkills, cliSkills, {
   recursive: true,
   filter: (src) => path.basename(src) !== '__pycache__',
 })
-console.log('Regenerated skills/antislop/SKILL.md from antislop.md and synced to cli/skills/')
+console.log(`Regenerated skills/antislop/SKILL.md and VERSION (${version}) and synced to cli/skills/`)

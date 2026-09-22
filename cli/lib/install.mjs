@@ -168,7 +168,7 @@ function scanMarkers(lines) {
         mark = m[1][0]
         len = m[1].length
         from = i
-      } else if (m[1][0] === mark && m[1].length >= len) {
+      } else if (m[1][0] === mark && m[1].length >= len && /^[ \t]*$/.test(line.slice(m[0].length))) {
         mark = null
         from = -1
       }

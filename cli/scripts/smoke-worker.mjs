@@ -169,6 +169,18 @@ write('# Mine\n\n````md\n```md\n<!-- antislop:start -->\n<!-- antislop:end -->\n
 updatePointers({ targets, skills })
 check('J four-backtick example untouched', read().includes('````md\n```md\n<!-- antislop:start -->'), true)
 
+// A fence-like line with trailing text is code, not a closing fence.
+for (const fence of ['```', '~~~']) {
+  const example = `${fence}md\n${fence}js\n<!-- antislop:start -->\nKeep this example.\n<!-- antislop:end -->\n${fence}`
+  write(`# Mine\n\n${example}\n`)
+  updatePointers({ targets, skills })
+  check(`J ${fence} with info string keeps the example`, read().includes(example), true)
+  check(`J ${fence} real block added outside the example`, (read().match(/antislop:start/g) || []).length, 2)
+  const first = read()
+  updatePointers({ targets, skills })
+  check(`J ${fence} example stays intact on reinstall`, read(), first)
+}
+
 // A stray end marker below the block is ours too, and must not survive.
 write('# Mine\n<!-- antislop:start -->\nold\n<!-- antislop:end -->\nTail text\n<!-- antislop:end -->\n')
 updatePointers({ targets, skills })

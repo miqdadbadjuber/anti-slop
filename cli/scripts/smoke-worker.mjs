@@ -1,6 +1,8 @@
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import assert from 'node:assert/strict'
+import { configureMode, readSettings, resolveSettingsPath } from '../lib/settings.mjs'
 import {
   AGENTS,
   CORE,
@@ -18,6 +20,50 @@ import {
 } from '../lib/install.mjs'
 
 const skills = ['antislop', 'antislop-ui']
+
+assert.equal(
+  resolveSettingsPath({ platform: 'linux', env: {}, home: '/home/ada' }),
+  '/home/ada/.config/antislop/settings.json'
+)
+assert.equal(
+  resolveSettingsPath({ platform: 'darwin', env: {}, home: '/Users/ada' }),
+  '/Users/ada/.config/antislop/settings.json'
+)
+assert.equal(
+  resolveSettingsPath({ platform: 'win32', env: { APPDATA: 'C:\\Users\\Ada\\AppData\\Roaming' }, home: 'C:\\Users\\Ada' }),
+  'C:\\Users\\Ada\\AppData\\Roaming\\antislop\\settings.json'
+)
+assert.equal(
+  resolveSettingsPath({ platform: 'win32', env: {}, home: 'C:\\Users\\Ada' }),
+  'C:\\Users\\Ada\\.config\\antislop\\settings.json'
+)
+
+const settingsFile = path.join(process.cwd(), 'preferences', 'settings.json')
+assert.match(configureMode([], settingsFile), /ask \(default\)/)
+assert.equal(fs.existsSync(settingsFile), false)
+for (const mode of ['during', 'after', 'ask']) {
+  assert.match(configureMode([mode], settingsFile), new RegExp(`global mode: ${mode}`))
+  assert.equal(readSettings(settingsFile).mode, mode)
+  assert.match(configureMode([], settingsFile), new RegExp(`global mode: ${mode}`))
+}
+fs.writeFileSync(settingsFile, '{"other":true,"mode":"during"}')
+configureMode(['after'], settingsFile)
+assert.deepEqual(readSettings(settingsFile), { other: true, mode: 'after' })
+assert.throws(() => configureMode(['invalid'], settingsFile), /Usage:/)
+assert.throws(() => configureMode(['during', 'extra'], settingsFile), /Usage:/)
+assert.equal(readSettings(settingsFile).mode, 'after')
+for (const content of ['{broken', 'null', '[]', '"during"']) {
+  fs.writeFileSync(settingsFile, content)
+  assert.throws(() => configureMode(['during'], settingsFile))
+  assert.equal(fs.readFileSync(settingsFile, 'utf8'), content)
+}
+for (const mode of ['invalid', null, 1]) {
+  fs.writeFileSync(settingsFile, JSON.stringify({ mode }))
+  assert.throws(() => configureMode([], settingsFile), /Invalid mode/)
+  configureMode(['during'], settingsFile)
+  assert.equal(readSettings(settingsFile).mode, 'during')
+}
+console.log('ok   global mode preferences: persistence, validation, and preservation')
 
 const failures = []
 
@@ -46,6 +92,16 @@ let pointers = updatePointers({ targets, skills })
 console.log('B targets:', targets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
 console.log('B written:', written.map((w) => `${w.agents.join('+')}:${w.skill}`).join(', '))
 check('B pointers', pointers.map((p) => path.basename(p)), ['CLAUDE.md'])
+const pointer = fs.readFileSync(pointers[0], 'utf8')
+assert.match(pointer, /explicit session instruction first, then global preference, then ask/)
+assert.match(pointer, /A session instruction always wins/)
+assert.ok(pointer.includes('antislop active: <mode> (session override).'))
+assert.ok(pointer.includes('antislop active: <mode> (global preference).'))
+assert.ok(pointer.includes('ask during/after and end the response'))
+assert.ok(pointer.includes('only at the start of the final answer, never in progress messages'))
+assert.ok(pointer.includes('announce before the first edit and omit it from the final answer'))
+assert.ok(pointer.includes('`.claude/skills/antislop/SKILL.md`'))
+assert.ok(pointer.includes('`.claude/skills/antislop-ui/SKILL.md`'))
 
 const conflicts = detectConflicts({ skills, targets })
 written = installSkills({ skills, targets, overwrite: false })
@@ -153,6 +209,17 @@ check('F global targets', globalTargets.map((t) => `${t.agents.map((a) => a.id).
 ])
 
 // Copies are identical and the pointer block dedupes.
+// A shared entry file must point to an installed copy, even with several agents.
+const sharedTargets = resolveTargets('project', ['codex', 'opencode'])
+installSkills({ skills, targets: sharedTargets, overwrite: false })
+updatePointers({ targets: sharedTargets, skills })
+const sharedPointer = fs.readFileSync('AGENTS.md', 'utf8')
+for (const skill of skills) {
+  const installedPath = `.codex/skills/${skill}/SKILL.md`
+  assert.ok(sharedPointer.includes(`\`${installedPath}\``))
+  assert.equal(fs.readFileSync(installedPath, 'utf8'), fs.readFileSync(path.join(skillSourceDir(), skill, 'SKILL.md'), 'utf8'))
+}
+
 const src = fs.readFileSync(path.join(skillSourceDir(), 'antislop-ui', 'SKILL.md'), 'utf8')
 const dst = fs.readFileSync(path.join(process.cwd(), '.claude', 'skills', 'antislop-ui', 'SKILL.md'), 'utf8')
 check('G antislop-ui SKILL.md identical', src === dst, true)
@@ -259,6 +326,31 @@ check('K update says nothing when nothing is installed', updateAll({ locations: 
 check('K update writes no pointer when nothing is installed', updateAll({ locations: ['project'] }).pointers.length, 0)
 process.chdir(here)
 fs.rmSync(clean, { recursive: true, force: true })
+
+// --update can combine folders with different extras. Every pointer must resolve,
+// and a separate entry file must not list another agent's unavailable extras.
+const mixed = fs.mkdtempSync(path.join(os.tmpdir(), 'antislop-mixed-'))
+try {
+  process.chdir(mixed)
+  installSkills({ skills: [CORE], targets: resolveTargets('project', ['codex']), overwrite: false })
+  installSkills({ skills: [CORE, 'antislop-ui'], targets: resolveTargets('project', ['opencode']), overwrite: false })
+  installSkills({ skills: [CORE, 'antislop-copywriting'], targets: resolveTargets('project', ['claude']), overwrite: false })
+  updateAll({ locations: ['project'] })
+  const shared = fs.readFileSync('AGENTS.md', 'utf8')
+  const separate = fs.readFileSync('CLAUDE.md', 'utf8')
+  assert.ok(shared.includes('`.codex/skills/antislop/SKILL.md`'))
+  assert.ok(shared.includes('`.opencode/skills/antislop-ui/SKILL.md`'))
+  assert.equal(shared.includes('antislop-copywriting'), false)
+  assert.ok(separate.includes('`.claude/skills/antislop-copywriting/SKILL.md`'))
+  assert.equal(separate.includes('antislop-ui'), false)
+  for (const pointer of [shared, separate]) {
+    for (const match of pointer.matchAll(/`([^`]+\/SKILL\.md)`/g)) assert.ok(fs.existsSync(match[1]))
+  }
+  console.log('ok   K mixed selections retain valid per-skill paths and separate entry files')
+} finally {
+  process.chdir(here)
+  fs.rmSync(mixed, { recursive: true, force: true })
+}
 
 // A door row without a command would print a blank line where the answer belongs.
 check('K every plugin door names itself and its command', PLUGIN_DOORS.filter((d) => !d.id || !d.label || !d.update).map((d) => d.id), [])

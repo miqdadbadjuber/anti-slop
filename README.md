@@ -262,10 +262,20 @@ Pick what matches the work:
 
 ## Usage modes
 
-antislop is used one of two ways, chosen at the start of a session:
+antislop is used one of two ways, chosen at the start of each session by default:
 
 - **During** guides the work while it is built, ending with the Delivery Gate. Use it when building new UI.
 - **After** audits finished work: a numbered findings list, you approve which to fix, then a follow-up report. Use it to clean up existing output.
+
+Saving a preference is opt-in. With no settings file, antislop keeps asking in every new session exactly as it does today. Save your preferred mode once to skip that question:
+
+```bash
+npx antislop-ai --mode during
+```
+
+Use `after` instead for audits, `ask` to restore the question in every session, or `--mode` alone to view the setting. The shared settings file is `~/.config/antislop/settings.json` on Linux and macOS, and `%APPDATA%\antislop\settings.json` on Windows (falling back to `~/.config` when `%APPDATA%` is unset). You can also ask your agent to "remember during as my global antislop mode".
+
+When a saved preference is active, the skill announces **"antislop active: during (global preference)."** Mode resolution follows a strict order: an explicit mode request in the current chat, then the saved preference, then the question. A session request always wins and does not change the saved setting. The skill announces a saved preference or session override exactly once. With no saved `during` or `after` preference, it asks as before. Update existing skill installations and project pointers to use this behavior; older copies still contain the unconditional question. For installer-managed project pointers, rerun the installer in each project. Plugin users should update their plugin.
 
 ## Roadmap
 
@@ -274,6 +284,12 @@ antislop is used one of two ways, chosen at the start of a session:
 - **Oh My Pi is a plugin door.** It reads the marketplace catalog at `.omp-plugin/marketplace.json`, so `omp plugin marketplace add miqdadbadjuber/anti-slop` follows this repo directly, with nothing copied into your project.
 - **The door is live, not assumed.** It was verified against Oh My Pi 18.3.2 on a real install: the marketplace was added from this repository, the plugin installed, and all six skills landed in the plugin's folder. The version Oh My Pi reported came from this catalog's own `version` field.
 - **The manifest that came with the contribution is gone.** Oh My Pi resolves a plugin's manifest from `.claude-plugin/plugin.json`, a root `plugin.json`, or `package.json`, and never from `.omp-plugin/`, so that file was removed rather than kept as decoration.
+
+### Proposed v3.2.20 addition
+
+- **Usage-mode preferences are opt-in.** With no settings file, antislop asks during or after in every session as before. Save `during` or `after` to skip the question, or save `ask` to restore it.
+- **A saved mode announces itself.** The first antislop activation says which mode is active and whether it came from the global preference or a session override.
+- **Settings follow the platform.** Linux and macOS use `~/.config/antislop/settings.json`; Windows uses `%APPDATA%\antislop\settings.json`, with a `~/.config` fallback when `%APPDATA%` is unset.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 

@@ -245,15 +245,17 @@ const SKILL_LINES = {
 
 export const SKILL_NAMES = Object.keys(SKILL_LINES)
 
-// Names the skills rather than importing the core: an `@` import pulls all 46 KB
-// of it into every session, including ones that touch no UI.
-function pointerBlock(skills) {
+// Explicit paths avoid resolving a same-named, older user-level skill. No `@`
+// import: the core should only be read when the task needs it.
+function pointerBlock(skills, skillPaths) {
   return [
     POINTER_START,
     '## antislop',
-    'For UI, copy, people, mobile layout, or code comments work, load the antislop skill for the task:',
-    ...skills.filter((s) => SKILL_LINES[s]).map((s) => `- ${SKILL_LINES[s]}`),
-    'Before starting, ask the user when antislop applies: during the work, or after it is done.',
+    'For UI, copy, people, mobile layout, or code comments work, read these installed skill files directly (use these paths even if a same-named global skill exists):',
+    ...skills.filter((s) => SKILL_LINES[s] && skillPaths.has(s)).map((s) => `- ${SKILL_LINES[s]}: \`${skillPaths.get(s)}\``),
+    'Before starting, follow the core\'s "Two Usage Modes" section in strict order: explicit session instruction first, then global preference, then ask. A session instruction always wins. For a resolved mode, say `antislop active: <mode> (session override).` or `antislop active: <mode> (global preference).` once before presenting findings or making edits, using the actual mode and source. Acknowledging the user\'s request without naming the source does not replace this notice.',
+    'Only an explicit choice of antislop during or after selects a session mode. A request to review, audit, or avoid file edits does not select a mode; read the global preference in that case. Another skill\'s mode does not select antislop\'s mode.',
+    'If the mode is unresolved, ask during/after and end the response; wait for the answer before any UI review, planning, or concept. For read-only tasks, put the active-mode notice only at the start of the final answer, never in progress messages. For editing tasks, announce before the first edit and omit it from the final answer.',
     'To update antislop later: `npx antislop-ai --update`, or run `npx antislop-ai` and pick Overwrite them.',
     POINTER_END,
   ]
@@ -330,16 +332,26 @@ function writeBlock(entry, block) {
 }
 
 export function updatePointers({ targets, skills }) {
-  const entries = new Set()
+  const entries = new Map()
   for (const t of targets) {
-    if (fs.existsSync(path.join(t.path, CORE))) for (const a of t.agents) entries.add(a.entry)
+    if (fs.existsSync(path.join(t.path, CORE))) {
+      for (const a of t.agents) {
+        if (!entries.has(a.entry)) entries.set(a.entry, new Map())
+        const skillPaths = entries.get(a.entry)
+        for (const skill of skills) {
+          const file = path.join(t.path, skill, 'SKILL.md')
+          if (!skillPaths.has(skill) && fs.existsSync(file)) {
+            skillPaths.set(skill, path.relative(process.cwd(), file).split(path.sep).join('/'))
+          }
+        }
+      }
+    }
   }
 
-  const block = pointerBlock(skills)
   const written = []
-  for (const name of entries) {
+  for (const [name, skillPaths] of entries) {
     const entry = path.join(process.cwd(), name)
-    writeBlock(entry, block)
+    writeBlock(entry, pointerBlock(skills, skillPaths))
     written.push(entry)
   }
   return written

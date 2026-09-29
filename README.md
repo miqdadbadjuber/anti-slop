@@ -165,10 +165,20 @@ Install one, several, or the core alone.
 
 ## Usage modes
 
-antislop runs one of two ways, and the agent asks which at the start of a session. Both end with a report you can check; they differ in when the rules apply.
+antislop runs one of two ways, and by default the agent asks which at the start of every session. Both end with a report you can check; they differ in when the rules apply.
 
 - **During** guides the work while it is built, and the session closes with the Delivery Gate report. Use it when you are building something new.
 - **After** audits work that already exists: a numbered findings list, you approve which to fix, then a follow-up report. Use it to clean up output you already have.
+
+Saving a preference is opt-in. With no settings file, antislop keeps asking in every new session exactly as it does today. Save your preferred mode once to skip that question:
+
+```bash
+npx antislop-ai --mode during
+```
+
+Use `after` instead for audits, `ask` to restore the question in every session, or `--mode` alone to view the setting. The shared settings file is `~/.config/antislop/settings.json` on Linux and macOS, and `%APPDATA%\antislop\settings.json` on Windows (falling back to `~/.config` when `%APPDATA%` is unset). You can also ask your agent to "remember during as my global antislop mode".
+
+When a saved preference is active, the skill announces **"antislop active: during (global preference)."** Mode resolution follows a strict order: an explicit mode request in the current chat, then the saved preference, then the question. A session request always wins and does not change the saved setting. The skill announces a saved preference or session override exactly once. With no saved `during` or `after` preference, it asks as before. Update existing skill installations and project pointers to use this behavior; older copies still contain the unconditional question. For installer-managed project pointers, rerun the installer in each project. Plugin users should update their plugin.
 
 ## Update
 
@@ -193,7 +203,7 @@ A folder that goes deeper into one concern, holding a `SKILL.md` with its rules.
 
 ## Roadmap
 
-**v3.2.19** is the current release.
+**v3.2.20** adds opt-in usage-mode preferences and announces the active mode and its source. It builds on the v3.2.19 changes:
 
 - **The community files.** CONTRIBUTING.md, CODE_OF_CONDUCT.md, issue templates, and a pull request template, so the repository reads as one you can join and not only one you can install.
 - **A README rebuilt.** One heading per install route, and the detail that used to be repeated here moved to the guide, where it is written out in more depth.
@@ -211,7 +221,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.19" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.20" alt="antislop contributors" />
   </a>
 </p>
 

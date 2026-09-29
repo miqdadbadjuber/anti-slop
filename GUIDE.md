@@ -524,7 +524,7 @@ Use this when you have no terminal, or when your AI is a chat window you cannot 
 
    If you pasted the contents instead of giving the file, say: "Follow the install instructions I pasted. I want the UI and copywriting skill." The AI follows the instructions and sets antislop up. Say "core only" to skip skills.
 
-3. Answer the wizard's questions. It confirms which skills you want and asks when antislop should apply: while the AI is working (during), or after the work is done, to check it (after). Pick "during" for new work.
+3. Answer the wizard's questions. It confirms which skills you want and asks when antislop should apply: while the AI is working (during), or after the work is done, to check it (after). Pick "during" for new work. With no saved preference, the agent keeps asking in every new session. To opt out, run `npx antislop-ai --mode during` (or `after`); `--mode ask` restores the question and `--mode` alone shows the setting. The shared setting lives in `~/.config/antislop/settings.json` on Linux and macOS, and `%APPDATA%\antislop\settings.json` on Windows, falling back to `~/.config` if `%APPDATA%` is unset. The skill announces the active mode and its source; an explicit mode requested in chat overrides the saved preference for that session.
 
 #### Update
 

@@ -53,6 +53,14 @@ if (!coreInstalled) reasons.push('core SKILL.md was not installed')
 // Loading it needs the cli's dependencies, so a bare checkout reports a skip instead.
 const cliDeps = fs.existsSync(path.join(__dirname, '..', 'node_modules', '@clack'))
 if (cliDeps) {
+  const invalidMode = spawnSync(process.execPath, [path.join(__dirname, '..', 'index.mjs'), '--mode', 'invalid'], {
+    cwd: tmp,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  })
+  if (invalidMode.status !== 1 || !/Usage: antislop-ai --mode/.test(invalidMode.stderr)) {
+    reasons.push('mode command did not validate its argument before the terminal guard')
+  }
   const noTty = spawnSync(process.execPath, [path.join(__dirname, '..', 'index.mjs')], {
     cwd: tmp,
     encoding: 'utf8',

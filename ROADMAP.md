@@ -11,9 +11,10 @@
 
 ## Where we are
 
-The latest release is **v3.2.19**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
+The latest release is **v3.2.20**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
 
 - **The core.** 38 rules in three tiers (Hard Gate, Purpose-Gate, Quality Locks), a Liveliness Toolkit, a mandatory Delivery Gate, and two usage modes (During / After). The single-file `antislop.md` is the same filter, pasteable into any chat window.
+- **Usage-mode preferences.** Saving a global mode is opt-in. Without a settings file, every session still asks during or after. Saved modes announce their source, explicit session choices take precedence, and `--mode ask` restores the question.
 - **The skills.** `antislop` (the core), plus `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, and `antislop-code`. Each loads only when a task needs it.
 - **Distribution.** Eleven install paths from one repository: the interactive installer (`npx antislop-ai`), the skills.sh directory, native plugin doors for Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, and Oh My Pi, the Pi package read from the root `package.json`, and the single file you paste into any chat. The README lists the commands; the guide walks each route from zero.
 - **Agent support.** Twelve agents, each read from its own documented skills folder, so no door depends on another vendor's convention holding.

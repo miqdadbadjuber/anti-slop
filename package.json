@@ -1,6 +1,6 @@
 {
   "name": "antislop",
-  "version": "3.2.23",
+  "version": "3.2.24",
   "private": true,
   "type": "module",
   "description": "Anti Slop: Rules for AI Coding Agents.",

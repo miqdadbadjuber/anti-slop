@@ -17,13 +17,13 @@ export const END = '<!-- antislop:skills:end -->'
 // description is written for an agent to match on, not for a person to read.
 const NOTES = {
   antislop:
-    'The core, and it is always loaded. All 38 rules and the Delivery Gate live here, so every task gets them whether or not you pick anything else. The five skills below add depth to it.',
+    'The core, and it is always loaded. All 40 rules and the Delivery Gate live here, so every task gets them whether or not you pick anything else. The five skills below add depth to it.',
   'antislop-ui':
-    'Load it when the AI builds or restyles anything you can see: color, layout, cards, buttons, motion.',
+    'Load it when the AI builds or restyles anything you can see: color, layout, cards, buttons, motion. Sized media and load priority are built in.',
   'antislop-copywriting':
     'Load it when the AI writes or edits text: headlines, buttons, emails, or a page of prose. It removes the excited, empty voice and the made-up numbers.',
   'antislop-human':
-    'Load it when real people have to use the result. Readable colors, keyboard use, visible focus, button states, and the contrast checker.',
+    'Load it when real people have to use the result. Readable colors, keyboard use, visible focus, button states, the pointer cursor and other interaction affordances, WCAG 2.2 references, and the contrast checker.',
   'antislop-layoutmobile':
     'Load it when the same page has to work on a phone and on a desktop. Reflow, breakpoints, overflow, tap targets, mobile navigation.',
   'antislop-code':

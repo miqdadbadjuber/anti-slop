@@ -11,9 +11,9 @@
 
 ## Where we are
 
-The latest release is **v3.2.23**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
+The latest release is **v3.2.24**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
 
-- **The core.** 38 rules in three tiers (Hard Gate, Purpose-Gate, Quality Locks), a Liveliness Toolkit, a mandatory Delivery Gate, and two usage modes (During / After). The single-file `antislop.md` is the same filter, pasteable into any chat window.
+- **The core.** 40 rules in three tiers (Hard Gate, Purpose-Gate, Quality Locks), a Liveliness Toolkit, a mandatory Delivery Gate, and two usage modes (During / After). The single-file `antislop.md` is the same filter, pasteable into any chat window.
 - **Usage-mode preferences.** Saving a global mode is opt-in. Without a settings file, every session still asks during or after. Saved modes announce their source, explicit session choices take precedence, and `--mode ask` restores the question.
 - **The skills.** `antislop` (the core), plus `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, and `antislop-code`. Each loads only when a task needs it.
 - **Distribution.** Eleven install paths from one repository: the interactive installer (`npx antislop-ai`), the skills.sh directory, native plugin doors for Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, and Oh My Pi, the Pi package read from the root `package.json`, and the single file you paste into any chat. The README lists the commands; the guide walks each route from zero.
@@ -64,6 +64,7 @@ Up to v3.0.0 each +0.1 shipped exactly one new skill, which kept the filter pull
 | v3.2.21 | The contrast checker reads the threshold from the unrounded ratio, so a pairing between 4.495 and 4.5 no longer reports 4.50 and passes 4.5:1. From community PR #43. |
 | v3.2.22 | Maintenance round. The installer names all seven plugin doors, adding Kimi Code, Cline, and Oh My Pi, and CI runs on macOS alongside Linux and Windows. |
 | v3.2.23 | The plugin-door probes report the newest copy when a store holds more than one, Codex versions compare as numbers, and `--update` run from the home folder no longer writes a pointer there. |
+| v3.2.24 | Two Hard Gate rules: R-39 for semantics and interaction affordances, with page-level semantics only when the task produces a whole document, and R-40 for the performance mechanisms the code shows (sized media, an eager hero image, no render-blocking third-party script, no unmeasured numbers). The depth is native to `antislop-human` and `antislop-ui`, with WCAG 2.2, accessibility-pattern, and Core Web Vitals references adapted from the MIT-licensed web-quality-skills and read on demand. From community PR #46. |
 
 ## What's next
 
@@ -77,7 +78,6 @@ Every door is verified against the vendor's current documentation before its ver
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.24 | Community PR | Three Hard Gate rules: semantics and interaction affordances, a Core Web Vitals budget, and page basics with a security baseline. |
 | v3.2.25 | Community PR | Additional copywriting rules in antislop-copywriting. |
 | v3.2.26 | DeepSeek harness plugin | The harness becomes the eighth plugin door once its documentation is confirmed. |
 

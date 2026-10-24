@@ -178,7 +178,7 @@ Anything presented as fact (testimonials, statistics, security claims) is real a
 
 ## Part 1: AI Slop Patterns (Warning Signs)
 
-These are the most common patterns found in AI-generated designs. Use this table to **audit** your output: scan for clusters, then ask each one "what does this serve?" A single pattern from this list is fine if it serves a purpose, unless a **Hard Gate** rule in Part 2 forbids it (R-02, R-03, R-17, R-18, R-23 to R-28, R-32 to R-38). What makes a design slop is many of these appearing together with no reason. This is a **diagnostic scan, not a ban list**: Part 1 itself bans nothing, but the Hard Gate rules in Part 2 are absolute, and every other pattern must pass the purpose test (Part 2, Purpose-Gate group).
+These are the most common patterns found in AI-generated designs. Use this table to **audit** your output: scan for clusters, then ask each one "what does this serve?" A single pattern from this list is fine if it serves a purpose, unless a **Hard Gate** rule in Part 2 forbids it (R-02, R-03, R-17, R-18, R-23 to R-28, R-32 to R-40). What makes a design slop is many of these appearing together with no reason. This is a **diagnostic scan, not a ban list**: Part 1 itself bans nothing, but the Hard Gate rules in Part 2 are absolute, and every other pattern must pass the purpose test (Part 2, Purpose-Gate group).
 
 ### Visual & Color
 
@@ -270,9 +270,9 @@ These are the most common patterns found in AI-generated designs. Use this table
 
 ---
 
-## Part 2: Mandatory Rules (R-01 to R-38, grouped)
+## Part 2: Mandatory Rules (R-01 to R-40, grouped)
 
-All 38 rules still apply. They are grouped into three tiers so the mechanism is explicit: **Hard Gate** rules are absolute, **Purpose-Gate** rules allow the technique but require a written reason, **Quality Locks** are consistency requirements.
+All 40 rules still apply. They are grouped into three tiers so the mechanism is explicit: **Hard Gate** rules are absolute, **Purpose-Gate** rules allow the technique but require a written reason, **Quality Locks** are consistency requirements.
 
 ### Group 1: Hard Gate (absolute, no exceptions)
 
@@ -428,6 +428,30 @@ If an element genuinely cannot have a destination yet, remove it instead of ship
 - **FORBIDDEN**: fabricating content that looks realistic (fake testimonials, invented features, fake statistics, ghost links, fictional team or people)
 - Placeholders are written as what they are: `[REAL DATA]`, "Coming soon", never disguised as final (see R-23)
 - An empty section is better than a fabricated one
+
+#### R-39 — Accessible Semantics & Interaction Affordances
+
+Every control the task builds or edits must say what it is and that it can be used. Keyboard operation and the focus indicator are R-32; touch target size is R-03.
+
+- **REQUIRED**: every enabled interactive element (`a[href]`, `button`, `summary`, `select`, `label[for]`, checkbox, radio, custom `role="button"`/`tab`/`switch`) shows `cursor: pointer`, set once in the base CSS layer; disabled controls show `cursor: not-allowed`
+- **REQUIRED**: actions are `<button>`, navigation is `<a href>` to a real destination; no clickable `div`/`span`, and a custom control that cannot be native also meets R-32
+- **REQUIRED**: every control has an accessible name (icon-only buttons get `aria-label` or visually hidden text, the icon gets `aria-hidden="true"`); every image has `alt` (empty `alt=""` when decorative); every form field has a visible `<label>`
+- **REQUIRED**: distinct hover, active, and disabled states, never color alone
+- **REQUIRED**: non-essential motion stops under `prefers-reduced-motion: reduce`; anything moving longer than 5 seconds has a pause control
+- **FORBIDDEN**: ARIA that contradicts the native role
+- **Only when the task produces a whole HTML document** (a page or an app shell, not a component):
+  - **REQUIRED**: `<html lang>`, a unique `<title>`, landmarks (`header`, `nav`, `main`, `footer`), one `h1` and no skipped heading levels
+  - **FORBIDDEN**: `user-scalable=no` or `maximum-scale=1` in the viewport meta
+- A UI that looks finished but cannot be perceived or operated by everyone is unfinished
+
+#### R-40 — Performance Mechanisms
+
+The gate checks what the code shows. The Core Web Vitals thresholds (LCP, INP, CLS at p75) are field data from real users, which the agent writing the page does not have, so they live in `antislop-ui`'s `references/CORE-WEB-VITALS.md` for when real measurements exist.
+
+- **REQUIRED**: every `<img>`, `<video>`, and `<iframe>` has `width` and `height` (or `aspect-ratio`); space for late content (ads, embeds, banners) is reserved
+- **REQUIRED**: the hero image is an `<img>` in the HTML, never `loading="lazy"`, with `fetchpriority="high"`
+- **REQUIRED**: no render-blocking third-party script in `<head>`; non-critical scripts are `defer`/`async` or loaded on interaction
+- **FORBIDDEN**: reporting a Lighthouse score or a Web Vitals number that was not measured (see R-36). If it was not measured, say "not measured"
 
 ### Group 2: Purpose-Gate (technique allowed, purpose required)
 
@@ -672,6 +696,8 @@ Before declaring the design done, answer every question below. All answers must 
 - [ ] Are there any fabricated security, compliance, performance, or customer claims? *(R-36)*
 - [ ] Was the design built without direction and not labeled *"draft without direction"* with honest default dials ENERGY 1 / RHYTHM 1 / MOTION 1? *(R-37)*
 - [ ] Is there any realistically-styled content that was fabricated (testimonials, features, statistics, ghost links, fictional team) without a real source? *(R-38)*
+- [ ] Does any control lack `cursor: pointer`, a native element, an accessible name, or hover/active/disabled states; any field a visible label or image its `alt`; does motion ignore `prefers-reduced-motion`; or does a whole document lack `lang`, `<title>`, or landmarks, or block zoom? *(R-39)*
+- [ ] Does any media element ship without dimensions, the hero image load lazily or without `fetchpriority="high"`, a third-party script block render in `<head>`, or a performance number get reported that was not measured? *(R-40)*
 
 ### Block 2: Purpose-Gate (technique allowed, reason required)
 

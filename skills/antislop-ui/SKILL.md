@@ -290,6 +290,32 @@ The patterns above are landing-page shapes. These are the app-side equivalents: 
 - **Why:** a page where everything animates has no focal point. Motion becomes wallpaper.
 - **Fix:** choreograph motion to a purpose and to the MOTION dial (R-19). Not everything moves. The hero speaks, the supporting elements stay calm. Claimed "cinematic" pages must actually move; claimed "static" pages must not.
 
+## Performance
+
+A page that looks finished but shifts under the thumb or shows its main image last was built for the screenshot, not for use. R-40 gates what the code shows; the LCP, INP, and CLS thresholds are field data and live in [references/CORE-WEB-VITALS.md](references/CORE-WEB-VITALS.md), read when a real measurement exists. Never report a number that was not measured (R-36).
+
+### Unsized Media That Shifts the Layout
+
+- **Tell:** `<img>`, `<video>`, `<iframe>`, ads, or embeds with no `width`/`height` or `aspect-ratio`; a banner or late font that pushes content down.
+- **Why:** the page jumps while people read or tap, and they hit the wrong control (R-40).
+- **Fix:** give every media element intrinsic dimensions or `aspect-ratio`, reserve space for anything that loads late, and overlay banners instead of inserting them above content.
+
+### Hero Image Loaded Like Any Other Image
+
+- **Tell:** the largest above-the-fold image is `loading="lazy"`, set as a CSS background, or injected by JavaScript.
+- **Why:** the browser discovers the most important pixel last, and the first impression is an empty box (R-40).
+- **Fix:** an `<img>` in the HTML with `fetchpriority="high"`, never lazy; lazy-load only what is below the fold.
+
+### Render-Blocking Third-Party Script
+
+- **Tell:** synchronous analytics, chat, or tag-manager scripts in `<head>`.
+- **Why:** nothing paints until someone else's server answers, which on a phone on a slow network is the whole first impression (R-40).
+- **Fix:** `defer`/`async`, or load on interaction.
+
+### Web Baseline (optional)
+
+[references/WEB-BASELINE.md](references/WEB-BASELINE.md) lists page basics and security defaults (doctype, mixed content, client secrets). It is a checklist to run when the task asks for it, not a gate.
+
 ## UI Skill Checklist
 
 Run these alongside the core Delivery Gate when the task is UI work. All answers must be **yes**:
@@ -309,3 +335,4 @@ Run these alongside the core Delivery Gate when the task is UI work. All answers
 - [ ] Do empty form fields and table cells stay empty or carry honest placeholders (Your Name, email@example.com) instead of fake-looking data (John Doe, johndoe@example.com)? (R-23, R-38)
 - [ ] Do the empty, loading, and error states name the cause and the next action instead of saying "No data"? (R-27)
 - [ ] Does the page hold up at every breakpoint, theme, and state, and pass keyboard-only use? (R-03, R-34, C-4)
+- [ ] Is every media element sized, the hero image in the HTML with `fetchpriority="high"` and not lazy, no third-party script blocking render, and every reported metric actually measured? (R-40, R-36)

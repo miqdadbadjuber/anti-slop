@@ -21,9 +21,9 @@ import {
 } from './lib/install.mjs'
 
 const EXTRA_SKILLS = [
-  { value: 'antislop-ui', label: 'antislop-ui', hint: 'UI and visual design rules' },
+  { value: 'antislop-ui', label: 'antislop-ui', hint: 'UI and visual design rules, with performance mechanisms' },
   { value: 'antislop-copywriting', label: 'antislop-copywriting', hint: 'copywriting and text rules' },
-  { value: 'antislop-human', label: 'antislop-human', hint: 'accessibility, with the contrast checker' },
+  { value: 'antislop-human', label: 'antislop-human', hint: 'accessibility (WCAG 2.2, affordances), with the contrast checker' },
   { value: 'antislop-layoutmobile', label: 'antislop-layoutmobile', hint: 'responsive layout rules' },
   { value: 'antislop-code', label: 'antislop-code', hint: 'code comment rules' },
 ]

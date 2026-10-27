@@ -15,7 +15,7 @@
     "plugins": [
       {
         "paths": ["./.cline-plugin/plugin.js"],
-        "capabilities": []
+        "capabilities": ["skills"]
       }
     ]
   }

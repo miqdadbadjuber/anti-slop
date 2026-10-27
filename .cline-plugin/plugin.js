@@ -2,5 +2,5 @@
 // registers nothing. It exists to give the manifest an entry point to resolve.
 export default {
   name: 'antislop',
-  manifest: { capabilities: [] },
+  manifest: { capabilities: ['skills'] },
 }

@@ -1,6 +1,6 @@
 {
   "name": "antislop-ai",
-  "version": "3.2.24",
+  "version": "3.2.25",
   "description": "Interactive installer for the antislop skills. Anti Slop: Rules for AI Coding Agents.",
   "type": "module",
   "bin": {
@@ -23,7 +23,7 @@
     "accessibility"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20.12.0"
   },
   "files": [
     "index.mjs",

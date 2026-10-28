@@ -113,13 +113,13 @@ Here is how to open a terminal:
 - macOS: press Cmd and Space together, type `terminal`, and press Enter.
 - Linux: open your terminal.
 
-You also need Node.js 18 or newer. Check it by typing this and pressing Enter:
+You also need Node.js 20.12 or newer. Check it by typing this and pressing Enter:
 
 ```bash
 node -v
 ```
 
-If you see something like `v22.11.0`, you are ready. If you see an error instead, install Node from [nodejs.org](https://nodejs.org) first, then close the terminal and open it again so it picks up the new command.
+If you see `v20.12.0` or a higher number, such as `v22.11.0`, you are ready. An older version stops the installer before it starts, so update Node first. If you see an error instead, install Node from [nodejs.org](https://nodejs.org) first, then close the terminal and open it again so it picks up the new command.
 
 ### The installer
 
@@ -185,7 +185,7 @@ npx antislop-ai
 Answer the questions exactly as you did the first time. When it reaches folders you already have, it prints what it found before asking anything:
 
 ```
-▲ Already here: antislop 3.2.23. This installer carries 3.2.24.
+▲ Already here: antislop 3.2.24. This installer carries 3.2.25.
 ```
 
 Then it asks one extra question:

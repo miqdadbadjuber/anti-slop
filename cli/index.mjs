@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import path from 'node:path'
 import pc from 'picocolors'
-import { intro, outro, select, multiselect, confirm, isCancel, cancel, log, spinner } from '@clack/prompts'
 import { banner } from './lib/banner.mjs'
 import { configureMode } from './lib/settings.mjs'
 import {
@@ -20,6 +19,21 @@ import {
   updatePointers,
   VERSION,
 } from './lib/install.mjs'
+
+// Filled in by loadPrompts() once main() reaches the wizard. --version, --mode and --update
+// never touch them, so they keep working on a Node the prompts cannot load on.
+let intro, outro, select, multiselect, confirm, isCancel, cancel, log, spinner
+
+// @clack/core needs util.styleText (Node 20.12.0), so a static import would crash an older
+// Node inside node_modules. Check first, then load; keep the number in step with engines.
+async function loadPrompts() {
+  const [major, minor] = process.versions.node.split('.').map(Number)
+  if (major < 20 || (major === 20 && minor < 12)) {
+    console.error(`antislop: the installer needs Node.js 20.12 or newer, and this is ${process.version}. Update Node, then run it again.`)
+    process.exit(1)
+  }
+  ;({ intro, outro, select, multiselect, confirm, isCancel, cancel, log, spinner } = await import('@clack/prompts'))
+}
 
 const EXTRA_SKILLS = [
   { value: 'antislop-ui', label: 'antislop-ui', hint: 'UI and visual design rules, with performance mechanisms' },
@@ -97,6 +111,7 @@ async function main() {
     process.exit(1)
   }
 
+  await loadPrompts()
   console.log(banner())
   intro('Install antislop into your agent setup')
 

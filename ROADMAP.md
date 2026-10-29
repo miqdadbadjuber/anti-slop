@@ -87,7 +87,7 @@ Beyond the numbered plan, with no promised version:
 - **OpenAI public directory listing** (deferred). A versioned skill bundle, a submission document, and public privacy and terms pages. Parked until identity verification on the OpenAI Platform can proceed.
 - **Gemini CLI** (deferred). Consumer access ended on 18 June 2026 and Antigravity CLI replaced it, which already has a door. Enterprise Code Assist licenses and paid API keys still work, so `.gemini/skills/` stays. Parked with antislop-compact.
 - **Kiro** (candidate). Reads `.kiro/skills/` per project and `~/.kiro/skills/` globally, activating skills by description. Outside the shared `.agents` standard, so it would be an installer row and an `AGENTS.md` pointer rather than a marketplace door.
-- **Roo** (candidate). Sources disagree on its skill folder: some say `.roo/skills/`, others `.roo/rules/`. The path has to be settled against Roo's own documentation before this can be a version.
+- **Roo** (not planned). The project was archived on 15 May 2026, so there is no vendor left to verify a door against. Its last release already reads `.agents/skills/` per project and `~/.agents/skills/` globally, which the installer fills for other agents.
 - **More plugin doors** as other agents grow plugin systems antislop can ride from the same repository.
 - **antislop-compact** (deferred). A standalone cheat-sheet version of each skill would have to track every change to the full ones, and it is only sound if it keeps the one-line why per rule and the Delivery Gate.
 - **Skill candidates** still open: `antislop-docs` and `antislop-identity`.

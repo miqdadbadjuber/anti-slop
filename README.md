@@ -212,13 +212,7 @@ A folder that goes deeper into one concern, holding a `SKILL.md` with its rules.
 
 ## Roadmap
 
-**v3.2.25** is a maintenance round for the installer:
-
-- **Node.js 20.12 or newer, said plainly.** The prompt library needs it, and an older Node used to stop with an error from inside `node_modules`. The wizard now names the Node it found and asks for an update, while `--version`, `--mode`, and `--update` still run on an older one. CI runs the smoke test on 20.12 too.
-- **No pointer in the home folder.** Picking "This project" from the home folder no longer writes `~/CLAUDE.md`. From community PR #48.
-- **A real npm package page.** The package ships the README and LICENSE. From community PR #51.
-- **A smoke test that stays in its temp folder.** It gets its own home from launch, so no runtime can write into the real one.
-- **A core skill that carries only what a skill route uses.** The generated `SKILL.md` drops the single-file install wizard, about 7 KB that no skill route runs. From issue #54 and community PR #55.
+**v3.2.26** adds the `/antislop-settings` command for agent sessions, an interactive `--settings` CLI flag, and settings menu configuration for usage-mode preferences.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -232,7 +226,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.25" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.26" alt="antislop contributors" />
   </a>
 </p>
 

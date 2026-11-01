@@ -27,7 +27,14 @@ if (/https?:\/\/raw\.githubusercontent\.com/.test(coreBody)) {
   throw new Error('antislop.md carries a runtime download URL; remove it before syncing (Snyk W012)')
 }
 
-fs.writeFileSync(path.join(repoSkills, 'antislop', 'SKILL.md'), CORE_FRONTMATTER + coreBody + '\n')
+// The core SKILL.md is loaded on a skill route where folders and pointers already exist.
+// Strip the First-Run Install Wizard (setup for the single-file route only) to avoid
+// feeding ~7 KB of unnecessary setup instructions into every session context (#54).
+const skillBody = coreBody
+  .replace(/## First-Run Install Wizard[\s\S]*?(?=### Already installed)/, '')
+  .replace('### Already installed', '## Already installed')
+
+fs.writeFileSync(path.join(repoSkills, 'antislop', 'SKILL.md'), CORE_FRONTMATTER + skillBody + '\n')
 
 // An installed copy is a snapshot with nothing in it that names the release it came from,
 // so an update could not say what was on disk. Every install route copies this folder.

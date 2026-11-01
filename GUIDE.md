@@ -636,13 +636,13 @@ To find out what you have, open the installed `antislop` folder and read its `VE
 
 antislop runs one of two ways, and by default the agent asks which at the start of every session. **During** guides the work as it is built and closes with the Delivery Gate report. **After** audits work you already have and lists what to fix.
 
-To stop that question, save a preference once:
+To stop that question, save a preference once. In your agent chat, run `/antislop-settings` to open the settings menu and choose Always Ask, During, or After. You can also save it from your terminal:
 
 ```bash
 npx antislop-ai --mode during
 ```
 
-`after` saves the other mode, `ask` restores the question in every session, and `--mode` on its own prints the setting. The preference is shared, so one command covers every agent and every project. It lives in `~/.config/antislop/settings.json` on Linux and macOS and in `%APPDATA%\antislop\settings.json` on Windows. A mode you ask for in the current chat still wins for that session and never changes the saved one. If your agent can write files, asking it to remember a mode works too.
+`after` saves the other mode, `ask` restores the question in every session, `--settings` opens the interactive terminal menu, and `--mode` on its own prints the setting. The preference is shared, so one command covers every agent and every project. It lives in `~/.config/antislop/settings.json` on Linux and macOS and in `%APPDATA%\antislop\settings.json` on Windows. A mode you ask for in the current chat still wins for that session and never changes the saved one. If your agent can write files, asking it to remember a mode works too.
 
 ### Where each agent reads antislop from
 

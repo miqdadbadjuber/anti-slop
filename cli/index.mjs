@@ -2,7 +2,7 @@
 import path from 'node:path'
 import pc from 'picocolors'
 import { banner } from './lib/banner.mjs'
-import { configureMode } from './lib/settings.mjs'
+import { configureMode, readSettings } from './lib/settings.mjs'
 import {
   CORE,
   AGENTS,
@@ -75,6 +75,36 @@ async function main() {
       console.error(`antislop: ${error.message}`)
       process.exit(1)
     }
+    return
+  }
+  if (process.argv.includes('--settings')) {
+    if (!process.stdin.isTTY) {
+      console.error('antislop: --settings requires an interactive terminal.')
+      process.exit(1)
+    }
+    await loadPrompts()
+    console.log(banner())
+    intro('Configure antislop settings')
+    let currentMode = 'ask'
+    try {
+      const s = readSettings()
+      if (s.mode) currentMode = s.mode
+    } catch {}
+    const chosen = await select({
+      message: 'When do you want to use antislop?',
+      options: [
+        { value: 'ask', label: 'Always Ask', hint: 'ask in every new session (default)' },
+        { value: 'during', label: 'During', hint: 'apply rules while working (planning & execution)' },
+        { value: 'after', label: 'After', hint: 'audit finished work with a findings list' },
+      ],
+      initialValue: currentMode,
+    })
+    if (isCancel(chosen)) {
+      outro('Settings unchanged.')
+      return
+    }
+    console.log(configureMode([chosen]))
+    outro('Settings saved.')
     return
   }
   if (process.argv.includes('--version') || process.argv.includes('-v')) {

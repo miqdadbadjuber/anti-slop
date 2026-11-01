@@ -179,13 +179,13 @@ antislop runs one of two ways, and by default the agent asks which at the start 
 - **During** guides the work while it is built, and the session closes with the Delivery Gate report. Use it when you are building something new.
 - **After** audits work that already exists: a numbered findings list, you approve which to fix, then a follow-up report. Use it to clean up output you already have.
 
-Saving a preference is opt-in. With no settings file, antislop keeps asking in every new session exactly as it does today. Save your preferred mode once to skip that question:
+Saving a preference is opt-in. With no settings file, antislop keeps asking in every new session exactly as it does today. You can open the settings menu in chat with `/antislop-settings` or save your preferred mode once via CLI:
 
 ```bash
 npx antislop-ai --mode during
 ```
 
-Use `after` instead for audits, `ask` to restore the question in every session, or `--mode` alone to view the setting. The file is shared, so one command covers every agent and every project: `~/.config/antislop/settings.json` on Linux and macOS, `%APPDATA%\antislop\settings.json` on Windows.
+Use `after` instead for audits, `ask` to restore the question in every session, or `--mode` alone to view the setting. You can also run `npx antislop-ai --settings` for the interactive menu. The file is shared, so one command covers every agent and every project: `~/.config/antislop/settings.json` on Linux and macOS, `%APPDATA%\antislop\settings.json` on Windows.
 
 A mode you ask for in the current chat always wins for that session and never changes what is saved. When a saved preference applies, the skill says so once: **"antislop active: during (global preference)."** Older installs still carry the unconditional question, so run the update below to pick this up.
 

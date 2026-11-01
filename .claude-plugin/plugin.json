@@ -10,6 +10,7 @@
   "license": "MIT",
   "keywords": ["ai-slop", "design-rules", "copy-rules", "agent-skills", "ui", "accessibility"],
   "skills": ["./skills/"],
+  "commands": ["./commands/"],
   "mcpServers": {
     "antislop-contrast": {
       "command": "node",

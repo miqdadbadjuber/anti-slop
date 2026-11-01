@@ -50,7 +50,25 @@ This order is strict. An explicit session instruction always wins over a saved p
 
 The notice tells the user both the active mode and why it was selected. A generic acknowledgement such as "I'll use during mode" omits the source and does not replace it. Use the notice above in English; translate it for other chat languages while retaining both mode and source.
 
-To opt into a saved default across new sessions, the user can run `npx antislop-ai --mode during` (or `after`). `npx antislop-ai --mode ask` restores the default question for every session, and `npx antislop-ai --mode` displays the current setting. The file is a JSON object, for example `{"mode":"during"}`. If the user explicitly asks you to remember a mode, create or update the platform-specific file above, preserving other fields; confirm only after a successful write. Do not overwrite malformed settings. A one-session answer does not authorize saving a default. If file access is unavailable, explain that persistence is unavailable and use the session choice.
+To opt into a saved default across new sessions, the user can run `/antislop-settings`, ask you to open antislop settings, or run `npx antislop-ai --mode during` (or `after`). `npx antislop-ai --mode ask` restores the default question for every session, and `npx antislop-ai --mode` displays the current setting. The file is a JSON object, for example `{"mode":"during"}`. If the user explicitly asks you to remember a mode, create or update the platform-specific file above, preserving other fields; confirm only after a successful write. Do not overwrite malformed settings. A one-session answer does not authorize saving a default. If file access is unavailable, explain that persistence is unavailable and use the session choice.
+
+### Settings Menu (/antislop-settings)
+
+When the user runs `/antislop-settings` or asks to change antislop settings, open the settings menu:
+1. Check the current setting from the platform settings file above.
+2. Present the menu in the user's chat language:
+
+> **When do you want to use antislop?**
+> 1. **Always Ask** (`ask`): Ask in every new session (default).
+> 2. **During** (`during`): Apply rules while working (planning & execution). Slop is prevented from the start.
+> 3. **After** (`after`): Audit finished work. A numbered findings list is produced for review.
+>
+> Which one, 1, 2, or 3?
+
+3. When the user selects an option:
+   - Update the `mode` field (`ask`, `during`, or `after`) in the platform-specific settings file, preserving other fields. Confirm only after a successful write.
+   - For `during` or `after`: explain that the agent will use this mode in future sessions without asking.
+   - For `ask`: explain that the agent will ask for your preferred mode in each new session.
 
 Ask this only when no mode has been resolved, in the user's chat language. Do not start UI work until they answer:
 
@@ -59,6 +77,7 @@ Ask this only when no mode has been resolved, in the user's chat language. Do no
 > 2. **AFTER** the project is finished. I will audit what exists: a numbered findings list with priorities, you pick which numbers to fix, then I fix and report.
 >
 > Which one, 1 or 2?
+> *(Tip: run `/antislop-settings` to configure your default and skip this question.)*
 
 - **Mode 1 (During):** follow the rules while generating. This prevents slop from the start and ends with the Delivery Gate. Use it when building new UI.
 - **Mode 2 (After):** audit an already-finished project. Produce a numbered findings list in `anti-slop/audit-001-YYYY-MM-DD.md` (numbers keep rising). Each finding cites the violated rule (R-XX) and a one-line reason. Priority follows the rule tier: Hard Gate = HIGH, Purpose-Gate = MEDIUM, Quality Locks = LOW. Do not modify anything until the user approves specific numbers; numbers not mentioned are not touched. Then fix the approved items and write a follow-up report.

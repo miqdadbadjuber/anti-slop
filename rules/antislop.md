@@ -8,5 +8,5 @@ For UI, copy, people, mobile layout, or code comments work, load the matching an
 - People: skills/antislop-human/SKILL.md
 - Mobile / responsive: skills/antislop-layoutmobile/SKILL.md
 - Code comments: skills/antislop-code/SKILL.md
-Before starting, follow the core's "Two Usage Modes" section: explicit session instruction first, then global preference, then ask. For a resolved mode, announce `antislop active: <mode> (session override).` or `antislop active: <mode> (global preference).` once, using the actual mode and source. Ask only when no mode is resolved.
+Before starting, follow the core's "Two Usage Modes" section: explicit session instruction first, then global preference, then ask. For a resolved mode, announce `antislop active: <mode> (session override).` or `antislop active: <mode> (global preference).` once, using the actual mode and source. Ask only when no mode is resolved. If the user runs `/antislop-settings` or asks to configure antislop settings, open the settings menu (Always Ask, During, After) and update the saved preference.
 </EXTREMELY_IMPORTANT>

@@ -27,7 +27,12 @@ if (/https?:\/\/raw\.githubusercontent\.com/.test(coreBody)) {
   throw new Error('antislop.md carries a runtime download URL; remove it before syncing (Snyk W012)')
 }
 
-fs.writeFileSync(path.join(repoSkills, 'antislop', 'SKILL.md'), CORE_FRONTMATTER + coreBody + '\n')
+// The wizard installs the single-file route. Every route that ships this SKILL.md has already
+// placed the folders, so the wizard would only cost context there; the update steps stay.
+const WIZARD = /^## First-Run Install Wizard\n[\s\S]*?^### (Already installed, and the user asks how to update)$/m
+if (!WIZARD.test(coreBody)) throw new Error('antislop.md: install wizard headings not found')
+const skillBody = coreBody.replace(WIZARD, '## $1')
+fs.writeFileSync(path.join(repoSkills, 'antislop', 'SKILL.md'), CORE_FRONTMATTER + skillBody + '\n')
 
 // An installed copy is a snapshot with nothing in it that names the release it came from,
 // so an update could not say what was on disk. Every install route copies this folder.

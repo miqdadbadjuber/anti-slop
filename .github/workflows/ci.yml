@@ -58,3 +58,23 @@ jobs:
       - name: Installer smoke test
         run: node cli/scripts/smoke-test.mjs
 
+  # The installer's prompts import util.styleText, which Node added in 20.12.0,
+  # so that is the oldest Node the package can claim. Run the installer there.
+  minimum-node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20.12.0
+          cache: npm
+          cache-dependency-path: cli/package-lock.json
+
+      - name: Install cli dependencies
+        working-directory: cli
+        run: npm ci
+
+      - name: Installer smoke test
+        run: node cli/scripts/smoke-test.mjs
+

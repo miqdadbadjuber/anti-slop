@@ -11,7 +11,7 @@
 
 ## Where we are
 
-The latest release is **v3.2.24**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
+The latest release is **v3.2.25**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
 
 - **The core.** 40 rules in three tiers (Hard Gate, Purpose-Gate, Quality Locks), a Liveliness Toolkit, a mandatory Delivery Gate, and two usage modes (During / After). The single-file `antislop.md` is the same filter, pasteable into any chat window.
 - **Usage-mode preferences.** Saving a global mode is opt-in. Without a settings file, every session still asks during or after. Saved modes announce their source, explicit session choices take precedence, and `--mode ask` restores the question.
@@ -65,6 +65,7 @@ Up to v3.0.0 each +0.1 shipped exactly one new skill, which kept the filter pull
 | v3.2.22 | Maintenance round. The installer names all seven plugin doors, adding Kimi Code, Cline, and Oh My Pi, and CI runs on macOS alongside Linux and Windows. |
 | v3.2.23 | The plugin-door probes report the newest copy when a store holds more than one, Codex versions compare as numbers, and `--update` run from the home folder no longer writes a pointer there. |
 | v3.2.24 | Two Hard Gate rules: R-39 for semantics and interaction affordances, with page-level semantics only when the task produces a whole document, and R-40 for the performance mechanisms the code shows (sized media, an eager hero image, no render-blocking third-party script, no unmeasured numbers). The depth is native to `antislop-human` and `antislop-ui`, with WCAG 2.2, accessibility-pattern, and Core Web Vitals references adapted from the MIT-licensed web-quality-skills and read on demand. From community PR #46. |
+| v3.2.25 | Maintenance round. The installer asks for Node.js 20.12, the floor its prompt library needs, in one line instead of a crash, the interactive installer writes no pointer in the home folder (community PR #48), the npm package ships the README and LICENSE (community PR #51), and the smoke test gets a home of its own from launch so it never writes into the real one. |
 
 ## What's next
 
@@ -78,7 +79,6 @@ Every door is verified against the vendor's current documentation before its ver
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.25 | Maintenance round | Installer repairs: the Node floor, the home-folder pointer, the npm package page, and the smoke test writing into the real home. |
 | v3.2.26 | Community PR | Additional copywriting rules in antislop-copywriting. |
 | v3.2.27 | DeepSeek harness plugin | The harness becomes the eighth plugin door once its documentation is confirmed. |
 

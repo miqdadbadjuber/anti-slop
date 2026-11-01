@@ -369,11 +369,15 @@ check('K every plugin door names itself and its command', PLUGIN_DOORS.filter((d
 
 // A store holding an old copy beside the new one used to report whichever folder listed
 // first. The old copy is named to list first, so only a version sort reports 3.2.22.
-const fakeHome = fs.mkdtempSync(path.join(os.tmpdir(), 'antislop-home-'))
-const savedEnv = { ...process.env }
+// The home is the throwaway one smoke-test.mjs launched this worker with. Writing here
+// outside that run would touch a real install, so refuse instead.
+const fakeHome = os.homedir()
+const inTmp = path.relative(fs.realpathSync(os.tmpdir()), fs.realpathSync(fakeHome))
+if (inTmp.startsWith('..') || path.isAbsolute(inTmp)) {
+  console.error(`refusing to write into ${fakeHome}: run this worker through smoke-test.mjs`)
+  process.exit(1)
+}
 try {
-  for (const k of ['KIMI_CODE_HOME', 'CLINE_DIR', 'XDG_DATA_HOME']) delete process.env[k]
-  process.env.HOME = process.env.USERPROFILE = fakeHome
   const copy = (dir, version) => {
     fs.mkdirSync(path.join(fakeHome, dir, 'skills', CORE), { recursive: true })
     fs.writeFileSync(path.join(fakeHome, dir, 'skills', CORE, 'VERSION'), version + '\n')
@@ -398,8 +402,6 @@ try {
   check('L install from home writes no pointer', updatePointers({ targets: resolveTargets('project', ['claude']), skills: [CORE] }), [])
 } finally {
   process.chdir(here)
-  process.env = savedEnv
-  fs.rmSync(fakeHome, { recursive: true, force: true })
 }
 
 if (failures.length > 0) {

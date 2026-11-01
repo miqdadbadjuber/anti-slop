@@ -218,6 +218,7 @@ A folder that goes deeper into one concern, holding a `SKILL.md` with its rules.
 - **No pointer in the home folder.** Picking "This project" from the home folder no longer writes `~/CLAUDE.md`. From community PR #48.
 - **A real npm package page.** The package ships the README and LICENSE. From community PR #51.
 - **A smoke test that stays in its temp folder.** It gets its own home from launch, so no runtime can write into the real one.
+- **A core skill that carries only what a skill route uses.** The generated `SKILL.md` drops the single-file install wizard, about 7 KB that no skill route runs. From issue #54 and community PR #55.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 

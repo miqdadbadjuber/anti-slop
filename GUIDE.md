@@ -1,43 +1,38 @@
 # The antislop guide
 
-antislop is a filter you give to the AI assistant you already use. It stops that assistant producing slop: pages, text, and code comments that look generic and obviously made by AI.
+antislop is a set of rules and optional skills for the AI assistant you already use. It helps prevent generic UI, copy, and code comments.
 
-This guide goes from zero to installed. Every route below carries its own update and removal in the same place, so you pick one route once and never have to look anywhere else for it. New to antislop? Read [What is antislop?](#what-is-antislop) and [What is slop?](#what-is-slop) first.
+Use this guide to choose an installation route and follow its install, update, or removal steps. If you are new to antislop, start with [What is antislop?](#what-is-antislop). If you already know what you need, jump to [Choose an installation route](#choose-an-installation-route).
 
 ## Table of Contents
 
-- [What is antislop?](#what-is-antislop)
-- [What is slop?](#what-is-slop)
-- [What you can use it for](#what-you-can-use-it-for)
+- [About antislop](#what-is-antislop)
+  - [What is slop?](#what-is-slop)
+  - [What you can use it for](#what-you-can-use-it-for)
 - [Install, update, and remove](#install-update-and-remove)
-  - [Which route should I pick?](#which-route-should-i-pick)
+  - [Choose an installation route](#choose-an-installation-route)
   - [Before you start](#before-you-start)
   - [The installer](#the-installer)
   - [The skills directory](#the-skills-directory)
-  - [Claude Code plugin](#claude-code-plugin)
-  - [Antigravity plugin](#antigravity-plugin)
-  - [Codex plugin](#codex-plugin)
-  - [Cursor plugin](#cursor-plugin)
-  - [Kimi Code plugin](#kimi-code-plugin)
-  - [Cline plugin](#cline-plugin)
-  - [Oh My Pi plugin](#oh-my-pi-plugin)
+  - [Agent plugins](#agent-plugins)
+    - [Claude Code plugin](#claude-code-plugin)
+    - [Antigravity plugin](#antigravity-plugin)
+    - [Codex plugin](#codex-plugin)
+    - [Cursor plugin](#cursor-plugin)
+    - [Kimi Code plugin](#kimi-code-plugin)
+    - [Cline plugin](#cline-plugin)
+    - [Oh My Pi plugin](#oh-my-pi-plugin)
   - [The Pi package](#the-pi-package)
   - [The single file](#the-single-file)
   - [On a phone](#on-a-phone)
 - [Skills](#skills)
-  - [antislop](#antislop)
-  - [antislop-ui](#antislop-ui)
-  - [antislop-copywriting](#antislop-copywriting)
-  - [antislop-human](#antislop-human)
-  - [antislop-layoutmobile](#antislop-layoutmobile)
-  - [antislop-code](#antislop-code)
 - [Reference](#reference)
   - [Which version do I have?](#which-version-do-i-have)
   - [Usage modes](#usage-modes)
   - [Where each agent reads antislop from](#where-each-agent-reads-antislop-from)
   - [What is a skill?](#what-is-a-skill)
   - [What antislop does not do](#what-antislop-does-not-do)
-- [Something is wrong](#something-is-wrong)
+- [Troubleshooting](#something-is-wrong)
 - [Where is this going?](#where-is-this-going)
 - [Contributing](#contributing)
 
@@ -77,7 +72,7 @@ The core file covers all of it. Skills (see [What is a skill?](#what-is-a-skill)
 
 ## Install, update, and remove
 
-There are eleven routes in, and the difference between them matters more than it looks:
+Choose one route below. Each section explains how to install, update, and remove antislop with that route. The installer and skills directory copy files; plugins and the Pi package use their own managers; the single-file route works with any AI that can read text.
 
 | Route | What it does | Works on |
 |-------|--------------|----------|
@@ -87,21 +82,21 @@ There are eleven routes in, and the difference between them matters more than it
 | The Pi package | Loads antislop through Pi's own package manager, nothing copied | Pi |
 | The single file | One Markdown file you hand to any AI | Anything that reads text, including a phone |
 
-Those five rows are eleven routes: one installer, one directory, seven plugin doors, one package, and one file.
+The seven plugin routes are listed individually below. Pick one route to avoid maintaining duplicate installations. Unless a route says otherwise, updates are manual.
 
-Pick one. They load the same rules, so adding a second only gives you a second thing to keep updated.
+After installing or updating, start a new agent session. Skills load when a session starts, so an open session continues using the version it already loaded.
 
-Every route below is built the same way: a one-line summary, then three headings in the same order, **Install**, **Update**, and **Remove**. Nothing updates by itself unless the route says so.
+### Choose an installation route
 
-One thing is true of all of them: an agent loads skills when a session starts, so after installing or updating, close the session you are in and open a new one. Until you do, the old rules are the ones still loaded.
+| If you want to... | Choose |
+|-------------------|--------|
+| Install for one project or across projects, with agent detection | [The installer](#the-installer) |
+| Copy skill folders using the skills.sh tool | [The skills directory](#the-skills-directory) |
+| Install through your agent's plugin manager | One of the [agent plugins](#agent-plugins) |
+| Let Pi manage the package | [The Pi package](#the-pi-package) |
+| Use antislop in a chat app or on a phone | [The single file](#the-single-file) |
 
-### Which route should I pick?
-
-- The installer, if you want antislop in one project or everywhere, and you use any of the twelve agents. It is the only route that covers OpenCode, Amp, Gemini CLI, Hermes, and GitHub Copilot, and the only one that detects your agents for you.
-- The skills directory, if you already use that directory's tool and want the folders without the installer's questions. It writes no pointer, so antislop reloads by description alone.
-- A plugin door, if you use one of the seven agents that has one. A plugin is a feature of the agent, not of antislop: you point the agent at this repository once and it loads antislop from there. Nothing is copied into your project, so there is no snapshot that can quietly go stale, and a new version arrives by running the agent's own plugin update command rather than an installer.
-- The Pi package, if you use Pi and would rather have it installed and updated by Pi itself, from the same repository.
-- The single file, if you have no terminal, or you want antislop in a chat window or on a phone.
+The installer supports twelve agents, including OpenCode, Amp, Gemini CLI, Hermes, and GitHub Copilot. It is the only route here that detects installed agents. The skills directory copies the same folders without writing a session pointer. Plugin routes use the agent's own manager and load from this repository.
 
 ### Before you start
 
@@ -113,13 +108,13 @@ Here is how to open a terminal:
 - macOS: press Cmd and Space together, type `terminal`, and press Enter.
 - Linux: open your terminal.
 
-You also need Node.js 20.12 or newer. Check it by typing this and pressing Enter:
+The installer and skills directory routes need Node.js 20.12 or newer. Check it by typing this and pressing Enter:
 
 ```bash
 node -v
 ```
 
-If you see `v20.12.0` or a higher number, such as `v22.11.0`, you are ready. An older version stops the installer before it starts, so update Node first. If you see an error instead, install Node from [nodejs.org](https://nodejs.org) first, then close the terminal and open it again so it picks up the new command.
+If you see `v20.12.0` or a higher number, such as `v22.11.0`, you are ready. An older version stops the installer before it starts, so update Node first. If you see an error instead, install Node from [nodejs.org](https://nodejs.org), then close and reopen the terminal.
 
 ### The installer
 
@@ -248,7 +243,11 @@ With no skill names it shows a selection menu, `--all` takes every skill it inst
 
 This route writes the same folders the installer writes and no pointer, so removing them by hand works too: that is the first of the two steps listed under [The installer](#the-installer). There is no pointer block to remove.
 
-### Claude Code plugin
+### Agent plugins
+
+Use the plugin route for the agent you run. Each plugin has its own install, update, and removal commands. These routes do not copy antislop into your project.
+
+#### Claude Code plugin
 
 *Loads antislop through Claude Code's own plugin system. Nothing is copied into your project.*
 
@@ -279,7 +278,7 @@ If you would rather it updated itself, open `/plugin`, go to Marketplaces, selec
 
 Adding the marketplace and installing the plugin are two separate steps, so removing the plugin leaves the marketplace behind. `/plugin marketplace remove anti-slop` removes that too, and it also uninstalls any plugin that came from it.
 
-### Antigravity plugin
+#### Antigravity plugin
 
 *Loads antislop through Antigravity's own plugin system. Nothing is copied into your project.*
 
@@ -307,7 +306,7 @@ agy plugin uninstall antislop
 
 `agy plugin disable antislop` switches it off without deleting it. The plugin lives in `~/.gemini/config/plugins/antislop/`.
 
-### Codex plugin
+#### Codex plugin
 
 *Loads antislop through Codex's own plugin system. Nothing is copied into your project.*
 
@@ -332,7 +331,7 @@ That one command is both the marketplace refresh and the plugin update, because 
 codex plugin remove antislop@anti-slop
 ```
 
-### Cursor plugin
+#### Cursor plugin
 
 *Loads antislop through Cursor's own plugin marketplace. Nothing is copied into your project.*
 
@@ -364,7 +363,7 @@ Cursor documents no plugin uninstall command, so remove the plugin from the Cust
 agent plugin marketplace remove anti-slop
 ```
 
-### Kimi Code plugin
+#### Kimi Code plugin
 
 *Loads antislop through Kimi Code's own plugin system. Nothing is copied into your project.*
 
@@ -396,7 +395,7 @@ Kimi Code has no plugin update command, so run the same install command again:
 
 It asks for confirmation. `/plugins disable antislop` switches it off without removing it. Removing only deletes the installation record, so the copy under `$KIMI_CODE_HOME/plugins/managed/antislop/` (default `~/.kimi-code/plugins/managed/antislop/`) stays on disk until you delete it.
 
-### Cline plugin
+#### Cline plugin
 
 *Loads antislop through the Cline CLI's own plugin system. Nothing is copied into your project.*
 
@@ -430,7 +429,7 @@ cline plugin uninstall antislop
 
 `remove` and `rm` are aliases, and `--cwd .` makes Cline search the project's `.cline/plugins/` before the global one. If your CLI does not have the command yet, delete the folder that holds antislop's `skills/` under `~/.cline/plugins/_installed/` instead; the folder name carries a source hash, so open it and check before deleting. Nothing was copied into your project, so either way that is the whole removal.
 
-### Oh My Pi plugin
+#### Oh My Pi plugin
 
 *Loads antislop through Oh My Pi's own plugin system. Nothing is copied into your project.*
 

@@ -5,7 +5,7 @@
 <div align="center">
 
 <a href="https://trendshift.io/repositories/137042?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-137042" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/137042/daily?language=JavaScript" alt="Trendshift Daily Trending" width="250" height="55"/></a>
-<a href="https://trendshift.io/repositories/137042?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-137042" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/137042/weekly?language=JavaScript" alt="Trendshift Weekly Trending" width="250" height="55"/></a>
+<a href="https://trendshift.io/repositories/137042?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-137042" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/137042/monthly?language=JavaScript" alt="Trendshift Monthly Trending" width="250" height="55"/></a>
 
 [![npm version](https://img.shields.io/npm/v/antislop-ai?style=flat-square&color=cb3837&label=npm)](https://www.npmjs.com/package/antislop-ai)
 [![Node.js](https://img.shields.io/badge/Node.js-20.12%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white)](cli/package.json)
@@ -212,13 +212,11 @@ A folder that goes deeper into one concern, holding a `SKILL.md` with its rules.
 
 ## Roadmap
 
-**v3.2.25** is a maintenance round for the installer:
+**v3.2.26** adds three copywriting patterns to `antislop-copywriting`, from community PR #57:
 
-- **Node.js 20.12 or newer, said plainly.** The prompt library needs it, and an older Node used to stop with an error from inside `node_modules`. The wizard now names the Node it found and asks for an update, while `--version`, `--mode`, and `--update` still run on an older one. CI runs the smoke test on 20.12 too.
-- **No pointer in the home folder.** Picking "This project" from the home folder no longer writes `~/CLAUDE.md`. From community PR #48.
-- **A real npm package page.** The package ships the README and LICENSE. From community PR #51.
-- **A smoke test that stays in its temp folder.** It gets its own home from launch, so no runtime can write into the real one.
-- **A core skill that carries only what a skill route uses.** The generated `SKILL.md` drops the single-file install wizard, about 7 KB that no skill route runs. From issue #54 and community PR #55.
+- **Temporal runway clichés.** Openings like "in today's fast-paced digital landscape" that set a broad scene before saying an ordinary thing.
+- **Theatrical takeaways.** "Read that again." and "Let that sink in." telling the reader how to react instead of letting the claim stand.
+- **Title case in list elements.** Bullets and feature cards that capitalize every word. Proper nouns and real titles keep their capitals.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -232,7 +230,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.25" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.26" alt="antislop contributors" />
   </a>
 </p>
 

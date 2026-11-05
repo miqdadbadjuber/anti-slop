@@ -581,10 +581,10 @@ Load it when the AI writes or edits text: headlines, buttons, emails, or a page 
 
 | What it covers | The patterns it names |
 |----------------|-----------------------|
-| Tone & Voice | Empty AI Vocabulary, Significance Inflation, Empty Claims and Social Proof with No Evidence, Weasel Attributions, Persuasive Authority Tropes, Chatbot Closers, Fake-Candid Openers, Signposting Announcements, All-Caps Emphasis, Actorless Passive, Inanimate Subject, Human Verb |
-| Rhythm & Structure | Rule of Three Overuse, Negative Parallelism and Tailing Negations, Aphorism Formulas, Staccato Drama, Synonym Cycling, False Ranges |
+| Tone & Voice | Empty AI Vocabulary, Significance Inflation, Empty Claims and Social Proof with No Evidence, Weasel Attributions, Persuasive Authority Tropes, Chatbot Closers, Fake-Candid Openers, Signposting Announcements, Temporal Runway Clichés, All-Caps Emphasis, Actorless Passive, Inanimate Subject, Human Verb |
+| Rhythm & Structure | Rule of Three Overuse, Negative Parallelism and Tailing Negations, Aphorism Formulas, Staccato Drama, Theatrical Takeaways, Synonym Cycling, False Ranges |
 | Honesty & Evidence | Fabricated Specifics, Speculative Gap-Filling, Generic Positive Conclusion |
-| Hygiene & Markdown | Em Dashes, Boldface Overuse, Excessive Quotation Marks, Inline-Header Lists, Emojis in Headings, Filler Phrases, Excessive Hedging |
+| Hygiene & Markdown | Em Dashes, Boldface Overuse, Excessive Quotation Marks, Inline-Header Lists, Title Case in List Elements, Emojis in Headings, Filler Phrases, Excessive Hedging |
 
 ### antislop-human
 

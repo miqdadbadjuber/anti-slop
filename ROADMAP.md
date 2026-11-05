@@ -80,7 +80,8 @@ Every door is verified against the vendor's current documentation before its ver
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.27 | DeepSeek harness plugin | The harness becomes the eighth plugin door once its documentation is confirmed. |
+| v3.2.27 | Maintenance round | The contrast MCP rejects malformed hex instead of reporting a false pass (issue #59, PR #60). |
+| v3.2.28 | DeepSeek harness plugin | The harness becomes the eighth plugin door once its documentation is confirmed. |
 
 Beyond the numbered plan, with no promised version:
 

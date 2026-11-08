@@ -65,6 +65,14 @@ One file, run twice.
 |:--|:--|
 | <a href="assets/compare/code/before.webp"><img src="assets/compare/code/before.webp" alt="Python with box-drawing section banners, emoji, and a comment on every constant that restates the constant" width="100%"></a> | <a href="assets/compare/code/after.webp"><img src="assets/compare/code/after.webp" alt="The same Python with the banners and emoji gone, one comment left that says what the module does, and the code itself untouched" width="100%"></a> |
 
+### Accessibility
+
+One sign-in form, built both ways. The colors barely change, so the difference is in the numbers and in what a keyboard and a screen reader get. The screen reader lines come from the browser's accessibility tree, not written by hand.
+
+| Before | After |
+|:--|:--|
+| <a href="assets/compare/human/before.webp"><img src="assets/compare/human/before.webp" alt="A sign-in form with placeholder-only labels at 2.05:1, a focused field with no visible focus, an error shown only as a red border, an unnamed icon button, white on sky blue at 1.67:1, and a forgot password link that Tab never reaches" width="100%"></a> | <a href="assets/compare/human/after.webp"><img src="assets/compare/human/after.webp" alt="The same form with antislop-human: visible labels, a 3px focus ring, an error message in text, a Show password button with a name, a 5.93:1 sign-in button, and a real link the keyboard can reach" width="100%"></a> |
+
 Every image here opens full size if you click it.
 
 ## Install

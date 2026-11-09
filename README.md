@@ -212,11 +212,9 @@ A folder that goes deeper into one concern, holding a `SKILL.md` with its rules.
 
 ## Roadmap
 
-**v3.2.26** adds three copywriting patterns to `antislop-copywriting`, from community PR #57:
+**v3.2.27** is a maintenance round for the contrast MCP:
 
-- **Temporal runway clichés.** Openings like "in today's fast-paced digital landscape" that set a broad scene before saying an ordinary thing.
-- **Theatrical takeaways.** "Read that again." and "Let that sink in." telling the reader how to react instead of letting the claim stand.
-- **Title case in list elements.** Bullets and feature cards that capitalize every word. Proper nouns and real titles keep their capitals.
+- **Malformed hex returns an error.** `contrast-mcp.py` now accepts only 3 or 6 hex digits, the same check `contrast-check.py` makes. `#00000080` used to report 21:1 and pass; it now returns `isError`, as do `#12345` and `#1234567`. From issue #59 and community PR #60.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -230,7 +228,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.26" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.27" alt="antislop contributors" />
   </a>
 </p>
 

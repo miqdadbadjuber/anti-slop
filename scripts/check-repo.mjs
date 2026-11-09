@@ -318,7 +318,7 @@ function repoUrls() {
   return bad
 }
 
-/** The WCAG formula is duplicated, and only contrast-check.py has a selftest. */
+/** The WCAG formula and the hex check are duplicated, and only contrast-check.py has a selftest. */
 function contrastTwins() {
   const check = read('skills/antislop-human/contrast-check.py')
   const mcp = read('skills/antislop-human/contrast-mcp.py')
@@ -330,6 +330,11 @@ function contrastTwins() {
       bad.push(`the WCAG constant ${c} appears in only one of contrast-check.py and contrast-mcp.py`)
     }
   }
+
+  if (check.includes('[0-9A-Fa-f]{6}') !== mcp.includes('[0-9A-Fa-f]{6}')) {
+    bad.push('the hex check appears in only one of contrast-check.py and contrast-mcp.py')
+  }
+
   return bad
 }
 

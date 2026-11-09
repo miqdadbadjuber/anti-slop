@@ -82,7 +82,7 @@ Every door is verified against the vendor's current documentation before its ver
 | Version | Item | What it means |
 |---------|------|---------------|
 | v3.2.28 | DeepSeek harness plugin | The harness becomes the eighth plugin door once its documentation is confirmed. |
-| v3.2.29 | Muse agent plugin | The Agent becomes the eighth plugin door once its documentation is confirmed. |
+| v3.2.29 | Muse agent plugin | Muse becomes the ninth plugin door once its documentation is confirmed. |
 | v4.0.0 | /antislop-pixel | The new skills |
 
 Beyond the numbered plan, with no promised version:

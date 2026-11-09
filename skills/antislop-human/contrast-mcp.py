@@ -4,11 +4,12 @@
 All logging goes to stderr; stdout is reserved for JSON-RPC responses.
 """
 import json
+import re
 import sys
 
 PROTOCOL_VERSION = "2024-11-05"
 SERVER_NAME = "antislop-contrast"
-SERVER_VERSION = "3.2.26"
+SERVER_VERSION = "3.2.27"
 
 TOOLS = [
     {
@@ -35,6 +36,9 @@ def relative_luminance(hex_color):
     h = hex_color.strip().lstrip("#")
     if len(h) == 3:
         h = "".join(ch * 2 for ch in h)
+    # Slicing reads any length, so #00000080 would pass as opaque black. Same check as contrast-check.py.
+    if not re.fullmatch(r"[0-9A-Fa-f]{6}", h):
+        raise ValueError(f"expected a hex color like #FFFFFF, got {hex_color!r}")
     r, g, b = (int(h[i : i + 2], 16) for i in (0, 2, 4))
     return 0.2126 * _channel(r) + 0.7152 * _channel(g) + 0.0722 * _channel(b)
 

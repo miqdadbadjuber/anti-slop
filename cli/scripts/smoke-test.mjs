@@ -84,6 +84,13 @@ if (cliDeps) {
   console.log('no-terminal run: skipped, cli dependencies are not installed')
 }
 
+// cli/skills is a build artifact: prepublishOnly generates it, so a plain checkout has
+// none and the plugin below would read a missing folder.
+if (!fs.existsSync(path.join(__dirname, '..', 'skills'))) {
+  const synced = spawnSync(process.execPath, [path.join(__dirname, 'sync-skills.mjs')], { encoding: 'utf8' })
+  if (synced.status !== 0) reasons.push(`could not build cli/skills: ${synced.stderr.trim()}`)
+}
+
 // The DSH plugin reads the same folders, so a frontmatter edit can break it without
 // any installer change. Load it the way DeepSeek Harness would.
 try {

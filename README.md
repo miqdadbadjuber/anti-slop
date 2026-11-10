@@ -135,6 +135,8 @@ That is the desktop route. From a terminal instead, name the profile you use:
 dsh plugin --profile desktop add antislop-ai
 ```
 
+pnpm holds back packages published in the last 24 hours, so on release day name the version: `dsh plugin --profile desktop add antislop-ai@3.2.28`.
+
 ### Cline - Plugin
 
 ```bash

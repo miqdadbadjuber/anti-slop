@@ -489,15 +489,17 @@ From a terminal instead, name the profile you use. A CLI install needs pnpm on y
 dsh plugin --profile desktop add antislop-ai
 ```
 
+pnpm holds back a package published in the last 24 hours, so an install made on release day can land on the previous version. Name the version to take the newest one, for example `antislop-ai@3.2.28`.
+
 The plugin registers all six skills as bundled skills. A folder install of the same skill outranks it, so pick one route per agent.
 
 ##### Update
 
-DeepSeek Harness lists an update when a newer `antislop-ai` is on npm. If the button is not there, remove the plugin and add it again, which fetches the newest release:
+DeepSeek Harness lists an update when a newer `antislop-ai` is on npm, and the same 24-hour hold applies. If the button is not there, remove the plugin and add it again, naming the version:
 
 ```bash
 dsh plugin --profile desktop remove antislop-ai
-dsh plugin --profile desktop add antislop-ai
+dsh plugin --profile desktop add antislop-ai@3.2.28
 ```
 
 ##### Remove

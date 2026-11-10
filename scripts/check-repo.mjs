@@ -242,9 +242,13 @@ function manifestPaths() {
     } catch {
       continue
     }
+    // cli/package.json describes its own package; the plugin manifests describe the repo root.
+    const base = file === 'cli/package.json' ? 'cli' : ''
     for (const m of text.matchAll(/"(\.\/[^"]+)"/g)) {
       const target = m[1].replace(/^\.\//, '')
-      if (!existsExactly(target)) bad.push(`${file} points at ${m[1]}, which does not exist`)
+      // An exports key may name a glob, which has no single file to check.
+      if (target.includes('*')) continue
+      if (!existsExactly(path.join(base, target))) bad.push(`${file} points at ${m[1]}, which does not exist`)
     }
     // A plugin-root path is absolute only once the agent expands it, so check the tail.
     for (const m of text.matchAll(/"\$\{CLAUDE_PLUGIN_ROOT\}\/([^"]+)"/g)) {
@@ -338,6 +342,37 @@ function contrastTwins() {
   return bad
 }
 
+/** The DSH bundle loads from the installed package, so its patch and exports must survive npm pack. */
+function dshBundle() {
+  const pkg = JSON.parse(read('cli/package.json'))
+  const bad = []
+  const patch = pkg.dsh?.bundle?.patch
+  if (!patch) return ['cli/package.json declares no dsh.bundle.patch']
+  if (!(pkg.files ?? []).includes('dsh/')) bad.push('cli/package.json files does not ship dsh/')
+
+  const patchFile = path.join('cli', patch.replace(/^\.\//, ''))
+  if (!existsExactly(patchFile)) return [...bad, `${patchFile} does not exist`]
+
+  const rows = [...read(patchFile).matchAll(/name:\s*'([^']+)'/g)]
+  if (rows.length === 0) bad.push(`${patchFile} declares no plugin row`)
+  for (const m of rows) {
+    const subpath = m[1].startsWith(pkg.name + '/') ? './' + m[1].slice(pkg.name.length + 1) : null
+    if (!subpath) {
+      bad.push(`${patchFile} names ${m[1]}, which is not a subpath of ${pkg.name}`)
+      continue
+    }
+    const target = pkg.exports?.[subpath]
+    if (!target) {
+      bad.push(`${patchFile} names ${m[1]}, but ${pkg.name} exports no ${subpath}`)
+      continue
+    }
+    if (!existsExactly(path.join('cli', target.replace(/^\.\//, '')))) {
+      bad.push(`${pkg.name} exports ${subpath} to ${target}, which does not exist`)
+    }
+  }
+  return bad
+}
+
 /** The guide carries a generated catalogue, so a skill that adds a pattern cannot leave it behind. */
 function skillIndex() {
   const guide = read('GUIDE.md').replace(/\r\n/g, '\n')
@@ -372,6 +407,7 @@ const CHECKS = [
   ['every doc link resolves', docLinks],
   ['every URL in a community file resolves', repoUrls],
   ['both contrast implementations use the same formula', contrastTwins],
+  ['the DeepSeek Harness bundle resolves', dshBundle],
   ['the skill index in the guide is current', skillIndex],
 ]
 

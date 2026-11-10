@@ -84,8 +84,8 @@ const fresh = detectAgents('project')
 check('A detected (fresh project)', fresh, [])
 const defaultTargets = resolveTargets('project')
 console.log('A default targets:', defaultTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
-// Copilot, Kimi Code, and Amp share Antigravity's folder, so twelve resolve to nine.
-check('A twelve agents over nine folders', [AGENTS.length, defaultTargets.length], [12, 9])
+// Copilot, Kimi Code, Amp, and DeepSeek Harness share Antigravity's folder, so thirteen resolve to nine.
+check('A thirteen agents over nine folders', [AGENTS.length, defaultTargets.length], [13, 9])
 check('A copilot and kimi share the antigravity folder', resolveTargets('project', ['antigravity', 'copilot', 'kimi']).length, 1)
 
 // Claude Code only, via explicit selection (old behavior preserved).
@@ -190,7 +190,7 @@ check('D6 hermes writes a project pointer', updatePointers({ targets: hermesProj
 
 // Detection now sees the agents that were installed.
 const after = detectAgents('project')
-check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'gemini', 'hermes', 'kimi', 'opencode', 'pi'])
+check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kimi', 'opencode', 'pi'])
 
 // OpenCode reads .claude/skills and .agents/skills too, so a project that installs into
 // two of them holds the same names twice and OpenCode picks between them unpredictably.

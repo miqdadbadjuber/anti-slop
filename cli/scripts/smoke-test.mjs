@@ -2,7 +2,7 @@
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { spawnSync } from 'node:child_process'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -82,6 +82,36 @@ if (cliDeps) {
 
 } else {
   console.log('no-terminal run: skipped, cli dependencies are not installed')
+}
+
+// The DSH plugin reads the same folders, so a frontmatter edit can break it without
+// any installer change. Load it the way DeepSeek Harness would.
+try {
+  const mod = await import(pathToFileURL(path.join(__dirname, '..', 'dsh', 'index.js')).href)
+  let provider
+  mod.apply({
+    skills: {
+      registerProvider: (make) => {
+        provider = make()
+      },
+    },
+  })
+  const skills = await provider.list()
+  const names = skills.map((s) => s.name).sort()
+  const folders = fs
+    .readdirSync(path.join(__dirname, '..', 'skills'), { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+    .sort()
+  if (JSON.stringify(names) !== JSON.stringify(folders)) {
+    reasons.push(`the DSH plugin lists ${names.join(', ') || 'nothing'}`)
+  }
+  for (const skill of skills) {
+    const body = await provider.get(skill)
+    if (!body.content.startsWith('---')) reasons.push(`the DSH plugin read no body for ${skill.name}`)
+  }
+} catch (err) {
+  reasons.push(`the DSH plugin failed: ${err.message}`)
 }
 
 fs.rmSync(tmp, { recursive: true, force: true })

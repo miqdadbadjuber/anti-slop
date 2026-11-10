@@ -121,6 +121,20 @@ Then open **Customize**, find **antislop**, and select **Install**.
 /plugins install https://github.com/miqdadbadjuber/anti-slop
 ```
 
+### DeepSeek Harness - Plugin
+
+Open **Plugins**, choose **Add plugin**, paste this package name, and select **Install**:
+
+```text
+antislop-ai
+```
+
+That is the desktop route. From a terminal instead, name the profile you use:
+
+```bash
+dsh plugin --profile desktop add antislop-ai
+```
+
 ### Cline - Plugin
 
 ```bash
@@ -205,16 +219,18 @@ A plugin keeps its own copy under the agent that installed it, so it updates thr
 No, a filter. It rejects technique without purpose and requires liveliness. Direction is yours.
 
 **Which agents does it work with?**
-Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, Pi, and Oh My Pi. The installer covers twelve of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
+Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Pi, and Oh My Pi. The installer covers thirteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
 
 **What is a skill?**
 A folder that goes deeper into one concern, holding a `SKILL.md` with its rules. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.
 
 ## Roadmap
 
-**v3.2.27** is a maintenance round for the contrast MCP:
+**v3.2.28** adds DeepSeek Harness as the eighth plugin door:
 
-- **Malformed hex returns an error.** `contrast-mcp.py` now accepts only 3 or 6 hex digits, the same check `contrast-check.py` makes. `#00000080` used to report 21:1 and pass; it now returns `isError`, as do `#12345` and `#1234567`. From issue #59 and community PR #60.
+- **One package, two jobs.** `antislop-ai` now also declares a DSH bundle, so Plugins, Add plugin, and `antislop-ai` loads all six skills without copying files.
+- **Bundled rank.** The skills load at the bundled rank, so a folder install of the same skill still wins when both exist.
+- **Installer target.** DeepSeek Harness joins the agent list and reads the shared `.agents/skills` folder.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -228,7 +244,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.27" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.28" alt="antislop contributors" />
   </a>
 </p>
 

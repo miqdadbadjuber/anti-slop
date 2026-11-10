@@ -11,13 +11,13 @@
 
 ## Where we are
 
-The latest release is **v3.2.27**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
+The latest release is **v3.2.28**. antislop is a packaged system: a lean, always-loaded core plus five additive skills, each a standard agent skill folder at `skills/<name>/SKILL.md`.
 
 - **The core.** 40 rules in three tiers (Hard Gate, Purpose-Gate, Quality Locks), a Liveliness Toolkit, a mandatory Delivery Gate, and two usage modes (During / After). The single-file `antislop.md` is the same filter, pasteable into any chat window.
 - **Usage-mode preferences.** Saving a global mode is opt-in. Without a settings file, every session still asks during or after. Saved modes announce their source, explicit session choices take precedence, and `--mode ask` restores the question.
 - **The skills.** `antislop` (the core), plus `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, and `antislop-code`. Each loads only when a task needs it.
-- **Distribution.** Eleven install paths from one repository: the interactive installer (`npx antislop-ai`), the skills.sh directory, native plugin doors for Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, and Oh My Pi, the Pi package read from the root `package.json`, and the single file you paste into any chat. The README lists the commands; the guide walks each route from zero.
-- **Agent support.** Twelve agents, each read from its own documented skills folder, so no door depends on another vendor's convention holding.
+- **Distribution.** Twelve install paths from one repository: the interactive installer (`npx antislop-ai`), the skills.sh directory, native plugin doors for Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, Oh My Pi, and DeepSeek Harness, the Pi package read from the root `package.json`, and the single file you paste into any chat. The README lists the commands; the guide walks each route from zero.
+- **Agent support.** Thirteen agents, each read from its own documented skills folder, so no door depends on another vendor's convention holding.
 
 ## Release history
 
@@ -68,6 +68,7 @@ Up to v3.0.0 each +0.1 shipped exactly one new skill, which kept the filter pull
 | v3.2.25 | Maintenance round. Node.js 20.12 is required with one line instead of a crash, no pointer is written in the home folder (community PR #48), the npm package ships the README and LICENSE (community PR #51), the smoke test gets its own home, and the core skill drops the single-file install wizard (issue #54). |
 | v3.2.26 | Three copywriting patterns: temporal runway clichés, theatrical takeaways, and title case in list elements. From community PR #57. |
 | v3.2.27 | Maintenance round. The contrast MCP rejects hex values that are not 3 or 6 digits, so `#00000080` no longer reports 21:1 and passes. From issue #59 and community PR #60. |
+| v3.2.28 | DeepSeek Harness becomes the eighth plugin door, shipped as a DSH bundle inside `antislop-ai` with an installer target for the shared `.agents/skills` folder. |
 
 ## What's next
 
@@ -81,7 +82,6 @@ Every door is verified against the vendor's current documentation before its ver
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.28 | DeepSeek harness plugin | The harness becomes the eighth plugin door once its documentation is confirmed. |
 | v3.2.29 | Muse agent plugin | Muse becomes the ninth plugin door once its documentation is confirmed. |
 | v4.0.0 | /antislop-pixel | The new skills |
 

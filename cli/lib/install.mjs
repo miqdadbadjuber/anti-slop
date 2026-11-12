@@ -50,6 +50,9 @@ export const AGENTS = [
   { id: 'kimi', label: 'Kimi Code', dir: '.agents/skills', entry: 'AGENTS.md' },
   // DeepSeek Harness reads the shared folder at both scopes, like Copilot and Kimi.
   { id: 'deepseek', label: 'DeepSeek Harness', dir: '.agents/skills', entry: 'AGENTS.md' },
+  // Muse Code reads the shared folder at both scopes, and a project's .claude/skills and
+  // .codex/skills too, with the shared folder outranking the other two.
+  { id: 'muse', label: 'Muse Code', dir: '.agents/skills', readsAlso: ['.claude/skills', '.codex/skills'], entry: 'AGENTS.md' },
   // Pi keeps a folder of its own at both scopes and also walks the shared .agents/skills,
   // so choosing it beside any .agents/skills agent fills two folders it reads.
   { id: 'pi', label: 'Pi', dir: '.pi/skills', globalDir: '.pi/agent/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },
@@ -86,8 +89,8 @@ export function resolveTargets(location, selected = AGENTS.map((a) => a.id)) {
   return [...byPath.values()]
 }
 
-// Seven rows read more than one project folder, so installing into two of them puts the
-// same names in both. Only Pi settles which copy wins, so name it either way.
+// Eight rows read more than one project folder, so installing into two of them puts the
+// same names in both. Pi and Muse Code settle which copy wins; the rest do not.
 export function detectDuplicateReads({ targets, location }) {
   if (location !== 'project') return []
   const paths = new Set(targets.map((t) => t.path))

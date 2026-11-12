@@ -151,6 +151,20 @@ cline plugin install https://github.com/miqdadbadjuber/anti-slop.git
 
 This door covers the Cline CLI. For the VS Code or JetBrains extension, use the installer.
 
+### Muse Code - Plugin
+
+Muse Code keeps its plugin system behind an opt-in flag, so set it first. On macOS and Linux:
+
+```bash
+export MUSE_EXPERIMENTAL_PLUGINS=1
+muse plugins marketplace add anti-slop miqdadbadjuber/anti-slop
+muse plugins install antislop@anti-slop
+```
+
+On Windows, set `$env:MUSE_EXPERIMENTAL_PLUGINS = "1"` in PowerShell first, then run the two `muse` lines unchanged.
+
+Skills load without another step. Run `muse plugins approve antislop` to enable the contrast MCP server.
+
 ### Oh My Pi - Plugin
 
 ```bash
@@ -227,18 +241,17 @@ A plugin keeps its own copy under the agent that installed it, so it updates thr
 No, a filter. It rejects technique without purpose and requires liveliness. Direction is yours.
 
 **Which agents does it work with?**
-Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Pi, and Oh My Pi. The installer covers thirteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
+Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Pi, and Oh My Pi. The installer covers fourteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
 
 **What is a skill?**
 A folder that goes deeper into one concern, holding a `SKILL.md` with its rules. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.
 
 ## Roadmap
 
-**v3.2.28** adds DeepSeek Harness as the eighth plugin door:
+**v3.2.29** adds Muse Code as the ninth plugin door:
 
-- **One package, two jobs.** `antislop-ai` now also declares a DSH bundle, so Plugins, Add plugin, and `antislop-ai` loads all six skills without copying files.
-- **Bundled rank.** The skills load at the bundled rank, so a folder install of the same skill still wins when both exist.
-- **Installer target.** DeepSeek Harness joins the agent list and reads the shared `.agents/skills` folder.
+- **Shared folder.** Muse Code reads `.agents/skills` at both scopes, the folder Antigravity, Copilot, Kimi Code, Amp, and DeepSeek Harness already share.
+- **One more step.** Muse Code keeps its plugin system behind `MUSE_EXPERIMENTAL_PLUGINS=1`, and the install section names that first.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -252,7 +265,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.28" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.29" alt="antislop contributors" />
   </a>
 </p>
 

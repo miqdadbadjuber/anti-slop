@@ -58,7 +58,7 @@ node scripts/skill-index.mjs
 node scripts/check-repo.mjs
 ```
 
-Thirteen checks, and they cover the things that break quietly: a manifest that no longer parses, a version that disagrees somewhere, a skill missing its frontmatter, a skill that is not registered in all four places the installer reads, a document link that points at a file that is gone or at a heading that no longer exists, and the catalogue of named patterns in [GUIDE.md](GUIDE.md) falling behind the skills it is generated from. The version check is the one that catches a bump you missed.
+Fourteen checks, and they cover the things that break quietly: a manifest that no longer parses, a version that disagrees somewhere, a skill missing its frontmatter, a skill that is not registered in all four places the installer reads, a document link that points at a file that is gone or at a heading that no longer exists, and the catalogue of named patterns in [GUIDE.md](GUIDE.md) falling behind the skills it is generated from. The version check is the one that catches a bump you missed.
 
 ### Run the installer tests
 

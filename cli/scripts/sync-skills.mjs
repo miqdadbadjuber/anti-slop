@@ -11,7 +11,8 @@ const CORE_FRONTMATTER = [
   '---',
   'name: antislop',
   'description: "Anti Slop: Rules for AI Coding Agents. The core filter. Load always to stop generic AI slop."',
-  'allowed-tools: Read Write Edit Glob Grep',
+  // Muse drops a whole plugin over the space-separated form the spec shows; Claude Code takes commas.
+  'allowed-tools: Read, Write, Edit, Glob, Grep',
   '---',
   '',
 ].join('\n')

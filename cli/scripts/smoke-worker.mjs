@@ -84,8 +84,9 @@ const fresh = detectAgents('project')
 check('A detected (fresh project)', fresh, [])
 const defaultTargets = resolveTargets('project')
 console.log('A default targets:', defaultTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
-// Copilot, Kimi Code, Amp, and DeepSeek Harness share Antigravity's folder, so thirteen resolve to nine.
-check('A thirteen agents over nine folders', [AGENTS.length, defaultTargets.length], [13, 9])
+// Copilot, Kimi Code, Amp, DeepSeek Harness, and Muse Code share Antigravity's folder,
+// so fourteen resolve to nine.
+check('A fourteen agents over nine folders', [AGENTS.length, defaultTargets.length], [14, 9])
 check('A copilot and kimi share the antigravity folder', resolveTargets('project', ['antigravity', 'copilot', 'kimi']).length, 1)
 
 // Claude Code only, via explicit selection (old behavior preserved).
@@ -182,6 +183,11 @@ check('D5 antigravity global target', agGlobal[0].path, path.join(os.homedir(), 
 // Kimi Code has no folder of its own here: both scopes are the shared .agents/skills.
 check('D7 kimi project target', resolveTargets('project', ['kimi'])[0].path, path.join(process.cwd(), '.agents', 'skills'))
 
+// Muse Code writes the shared folder at both scopes, and reads the Claude and Codex ones too.
+check('D11 muse project target', resolveTargets('project', ['muse'])[0].path, path.join(process.cwd(), '.agents', 'skills'))
+check('D11 muse global target', resolveTargets('global', ['muse'])[0].path, path.join(os.homedir(), '.agents', 'skills'))
+check('D11 muse duplicate read named', detectDuplicateReads({ targets: resolveTargets('project', ['claude', 'muse']), location: 'project' }).map((d) => [d.agent.id, d.paths.length]), [['muse', 2]])
+
 // updatePointers has no other source for the entry file, so no row may omit it.
 check('D6 every agent names an entry file', AGENTS.filter((a) => !a.entry).map((a) => a.id), [])
 
@@ -190,7 +196,7 @@ check('D6 hermes writes a project pointer', updatePointers({ targets: hermesProj
 
 // Detection now sees the agents that were installed.
 const after = detectAgents('project')
-check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kimi', 'opencode', 'pi'])
+check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kimi', 'muse', 'opencode', 'pi'])
 
 // OpenCode reads .claude/skills and .agents/skills too, so a project that installs into
 // two of them holds the same names twice and OpenCode picks between them unpredictably.

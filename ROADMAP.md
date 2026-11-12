@@ -83,6 +83,7 @@ Every door is verified against the vendor's current documentation before its ver
 
 | Version | Item | What it means |
 |---------|------|---------------|
+| v3.2.30 | Kilo Code | An installer target on the shared `.agents/skills` folder, with the Scaffold Sidebar pattern and the `@clack/prompts` refresh riding along. |
 | v4.0.0 | /antislop-pixel | The new skills |
 
 Beyond the numbered plan, with no promised version:

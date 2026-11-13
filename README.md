@@ -8,8 +8,13 @@
 
 <div align="center">
 
-<a href="https://trendshift.io/repositories/137042?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-137042" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/137042/daily?language=JavaScript" alt="Trendshift Daily Trending" width="250" height="55"/></a>
-<a href="https://trendshift.io/repositories/137042?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-137042" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/137042/monthly?language=JavaScript" alt="Trendshift Monthly Trending" width="250" height="55"/></a>
+# Anti Slop: Rules for AI Coding Agents
+
+A rulebook that stops an AI coding agent shipping generic UI, text, and AI-shaped code. A filter, not a style guide: no prescribed colors, fonts, or layouts, and direction stays yours.
+
+<code>npx antislop-ai</code>
+
+[Website](https://antislop.ai.id) · [Guide](GUIDE.md) · [Roadmap](ROADMAP.md) · [Install](#install) · [What it does](#what-it-does) · [Skills](#skills) · [FAQ](#faq)
 
 [![npm version](https://img.shields.io/npm/v/antislop-ai?style=flat-square&color=cb3837&label=npm)](https://www.npmjs.com/package/antislop-ai)
 [![Node.js](https://img.shields.io/badge/Node.js-20.12%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white)](cli/package.json)
@@ -17,17 +22,8 @@
 [![MIT license](https://img.shields.io/badge/license-MIT-f4c430?style=flat-square)](LICENSE)
 [![Discord](https://img.shields.io/badge/Discord-join-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/VWKggJfHFR)
 
-# Anti Slop: Rules for AI Coding Agents
-
-### A rulebook that stops an AI coding agent shipping generic UI, text, and AI-shaped code.
-
-**A filter, not a style guide.** No prescribed colors, fonts, or layouts, and direction stays yours.
-
-**[Website](https://antislop.ai.id) · [Guide](GUIDE.md) · [Install](https://antislop.ai.id/install)**
-
-[Before and after](#before-and-after) · [Install](#install) · [What it does](#what-it-does) · [Skills](#skills) · [FAQ](#faq)
-
-<code>npx antislop-ai</code>
+<a href="https://trendshift.io/repositories/137042?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-137042" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/137042/daily?language=JavaScript" alt="Trendshift Daily Trending" width="250" height="55"/></a>
+<a href="https://trendshift.io/repositories/137042?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-137042" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/137042/monthly?language=JavaScript" alt="Trendshift Monthly Trending" width="250" height="55"/></a>
 
 </div>
 
@@ -214,20 +210,18 @@ Install one, several, or the core alone.
 
 ## Usage modes
 
-antislop runs one of two ways, and by default the agent asks which at the start of every session. Both end with a report you can check; they differ in when the rules apply.
+antislop runs one of two ways, and by default the agent asks which at the start of every session.
 
-- **During** guides the work while it is built, and the session closes with the Delivery Gate report. Use it when you are building something new.
-- **After** audits work that already exists: a numbered findings list, you approve which to fix, then a follow-up report. Use it to clean up output you already have.
+- **During** guides the work while it is built, and closes with the Delivery Gate report.
+- **After** audits work that already exists: a numbered findings list, you approve what to fix, then a follow-up report.
 
-Saving a preference is opt-in. With no settings file, antislop keeps asking in every new session exactly as it does today. Save your preferred mode once to skip that question:
+To skip the question, save a preference once:
 
 ```bash
 npx antislop-ai --mode during
 ```
 
-Use `after` instead for audits, `ask` to restore the question in every session, or `--mode` alone to view the setting. The file is shared, so one command covers every agent and every project: `~/.config/antislop/settings.json` on Linux and macOS, `%APPDATA%\antislop\settings.json` on Windows.
-
-A mode you ask for in the current chat always wins for that session and never changes what is saved. When a saved preference applies, the skill says so once: **"antislop active: during (global preference)."** Older installs still carry the unconditional question, so run the update below to pick this up.
+Use `after` for the other mode. Everything else, from `--mode ask` to where the setting lives, is in [GUIDE.md](GUIDE.md#usage-modes).
 
 ## Update
 

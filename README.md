@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="./assets/antislop-banner.png" alt="antislop" width="100%" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/miqdadbadjuber/anti-slop/raw/main/assets/antislop-banner.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/miqdadbadjuber/anti-slop/raw/main/assets/antislop-banner-light.png">
+    <img src="https://github.com/miqdadbadjuber/anti-slop/raw/main/assets/antislop-banner-light.png" alt="antislop" width="100%" />
+  </picture>
 </p>
 
 <div align="center">

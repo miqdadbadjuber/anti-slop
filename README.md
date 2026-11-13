@@ -10,11 +10,9 @@
 
 # Anti Slop: Rules for AI Coding Agents
 
-A rulebook that stops an AI coding agent shipping generic UI, text, and AI-shaped code. A filter, not a style guide: no prescribed colors, fonts, or layouts, and direction stays yours.
-
 <code>npx antislop-ai</code>
 
-[Website](https://antislop.ai.id) · [Guide](GUIDE.md) · [Roadmap](ROADMAP.md) · [Install](#install) · [What it does](#what-it-does) · [Skills](#skills) · [FAQ](#faq)
+[Website](https://antislop.ai.id) · [Guide](GUIDE.md) · [Roadmap](ROADMAP.md) · [Install](#install) · [Skills](#skills) · [FAQ](#faq)
 
 [![npm version](https://img.shields.io/npm/v/antislop-ai?style=flat-square&color=cb3837&label=npm)](https://www.npmjs.com/package/antislop-ai)
 [![Node.js](https://img.shields.io/badge/Node.js-20.12%2B-339933?style=flat-square&logo=nodedotjs&logoColor=white)](cli/package.json)
@@ -28,6 +26,8 @@ A rulebook that stops an AI coding agent shipping generic UI, text, and AI-shape
 </div>
 
 ---
+
+**antislop** is a rulebook an AI coding agent reads every session. It stops generic UI, text, and AI-shaped code, and it is a filter, not a style guide: no colors, fonts, or layouts prescribed, direction stays yours. Inside are 40 rules in three tiers, a Liveliness Toolkit, a mandatory PASS/FAIL report, and six skills that load only when a task needs them. It cannot invent direction, so DESIGN.md supplies that, and antislop never beautifies on its own.
 
 ## Before and after
 
@@ -185,15 +185,6 @@ pi install git:github.com/miqdadbadjuber/anti-slop
 ```bash
 curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/antislop.md
 ```
-
-## What it does
-
-- **40 mandatory rules** (R-01 to R-40) in three tiers: Hard Gate, Purpose-Gate, and Quality Locks.
-- **A Liveliness Toolkit**: three dials (ENERGY / RHYTHM / MOTION) and a Design Read, so the result comes out alive rather than merely clean.
-- **A Delivery Gate**: a mandatory PASS/FAIL report in four blocks, run before anything ships.
-- **Six skills**, one per concern, so an agent loads only what a task needs.
-
-The core prevents slop but cannot invent direction. `DESIGN.md` (yours) supplies it, and a sterile result means the direction was missing, not that the filter failed (R-37). antislop never beautifies on its own.
 
 ## Skills
 

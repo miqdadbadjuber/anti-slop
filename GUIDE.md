@@ -668,7 +668,7 @@ Load it when the AI builds or restyles anything you can see: color, layout, card
 | Layout & Components | Monotonous Template Layout, Copy-Paste Feature Cards, Bento Grid, Uniform Spacing, "How It Works" Always 3 Steps, "Trusted By" Logo Bar, "Most Popular" Pricing Card, Demo Without a Product, 4-Column Template Footer, Uniform Section Rhythm |
 | Decorative Elements | Generic AI Icons, Lucide Icons, Emoji as Decoration, Small Arrows on Every Button, Colored Left Stripe, AI Capsule Badges, Eyebrow Badge Above the Headline, Decorative Status Dot, Generic AI Typography, Fake Terminal Window, Illustrations With No Connection |
 | Structural & Flow | Dead Navigation, Non-Functional Controls, Sections That Fill a Template |
-| App & Dashboard | Default Dashboard Shell, Stat Cards With Invented Numbers, Filler Activity Feed, Charts Without a Question, Generic Table Columns, Filler Data in Fields and Columns, Placeholder Empty and Loading States |
+| App & Dashboard | Default Dashboard Shell, Scaffold Sidebar, Stat Cards With Invented Numbers, Filler Activity Feed, Charts Without a Question, Generic Table Columns, Filler Data in Fields and Columns, Placeholder Empty and Loading States |
 | Motion | Endless Pulses and Loops, Template Animations Stacked |
 | Performance | Unsized Media That Shifts the Layout, Hero Image Loaded Like Any Other Image, Render-Blocking Third-Party Script |
 | Page Basics | Web Baseline Checklist |

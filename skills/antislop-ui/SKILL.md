@@ -240,6 +240,12 @@ The patterns above are landing-page shapes. These are the app-side equivalents: 
 - **Why:** it is the landing-page template problem in an app: a layout picked from memory instead of from the work the screen supports. Swap the labels and it belongs to any product.
 - **Fix:** name the screen's job and the one decision the user makes on it, then build the hierarchy around that (C-3, R-20). If the job is "spot the failing job and retry it", the failing jobs are the page and the stat row is a footnote. Sections that survive only because dashboards usually have them get cut (C-3).
 
+### Scaffold Sidebar
+
+- **Tell:** the page got a design pass and the navigation did not: one flat list of eight or more identical rows, "active" is only a slightly darker tint, no hover or pressed state, a collapse that clips labels mid-word, and on a phone the rail disappears with no trigger.
+- **Why:** the shell is on every screen, so its defects are paid on every navigation. It is the most-seen element in the product and the only one nobody designed. Avoiding the stat-row template is not permission to leave the shell at its starter value.
+- **Fix:** design the shell as a component. Group destinations with a quiet label, mark the current one with shape or weight as well as color, and keep that marker when the rail collapses to icons (R-24, R-25). Collapse is a real button with `aria-expanded`, every icon-only destination keeps an accessible name (R-39), and on a phone the control returns as a sheet with a trigger, Escape to close, and focus back on the trigger (R-26, C-4). Rows meet the touch target minimum (R-03), and destinations that load asynchronously arrive as skeleton rows instead of a jump (R-27).
+
 ### Stat Cards With Invented Numbers
 
 - **Tell:** a row of four cards reading 12,483 / 94.2% / $48.2K / 1,204, each with a green "+12% this week" delta.
@@ -337,6 +343,7 @@ Run these alongside the core Delivery Gate when the task is UI work. All answers
 - [ ] Is glass, glow, shadow, and radius used at their dose caps, not as a page-wide default? (R-10, R-11, R-12, R-13)
 - [ ] Is every colored dot and status light marking a real state, with no decorative glow or endless pulse? (R-13, R-19, R-31)
 - [ ] On an app screen, is the layout built around the decision the user makes there, rather than the sidebar plus stat row plus chart plus table default? (C-3, R-20)
+- [ ] On an app screen, is the navigation shell itself designed, with grouping, a current marker that survives icon-only and mobile, a working collapse, and a mobile trigger, rather than left at the starter default? (R-24, R-26, R-39)
 - [ ] Is every number, delta, feed entry, and table row real or a labelled placeholder, with no invented metrics? (R-17, R-18, R-38)
 - [ ] Do empty form fields and table cells stay empty or carry honest placeholders (Your Name, email@example.com) instead of fake-looking data (John Doe, johndoe@example.com)? (R-23, R-38)
 - [ ] Do the empty, loading, and error states name the cause and the next action instead of saying "No data"? (R-27)

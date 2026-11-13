@@ -78,7 +78,7 @@ Choose one route below. Each section explains how to install, update, and remove
 
 | Route | What it does | Works on |
 |-------|--------------|----------|
-| The installer | Copies the skill folders into your project or your home folder | Fourteen agents, no setup beyond a terminal |
+| The installer | Copies the skill folders into your project or your home folder | Fifteen agents, no setup beyond a terminal |
 | The skills directory | Copies the same folders using the skills.sh tool | The agents that directory supports |
 | Nine plugin doors | Loads antislop straight from this repository, nothing copied | Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, Oh My Pi, DeepSeek Harness, Muse Code |
 | The Pi package | Loads antislop through Pi's own package manager, nothing copied | Pi |
@@ -98,7 +98,7 @@ After installing or updating, start a new agent session. Skills load when a sess
 | Let Pi manage the package | [The Pi package](#the-pi-package) |
 | Use antislop in a chat app or on a phone | [The single file](#the-single-file) |
 
-The installer supports fourteen agents, including OpenCode, Amp, Gemini CLI, Hermes, and GitHub Copilot. It is the only route here that detects installed agents. The skills directory copies the same folders without writing a session pointer. Plugin routes use the agent's own manager and load from this repository.
+The installer supports fifteen agents, including OpenCode, Amp, Gemini CLI, Hermes, GitHub Copilot, and Kilo Code. It is the only route here that detects installed agents. The skills directory copies the same folders without writing a session pointer. Plugin routes use the agent's own manager and load from this repository.
 
 ### Before you start
 
@@ -122,7 +122,7 @@ If you see `v20.12.0` or a higher number, such as `v22.11.0`, you are ready. An 
 
 *Copies the skill folders into the folder you choose, and writes the pointer that reloads antislop every session.*
 
-It covers fourteen agents and detects which ones you have.
+It covers fifteen agents and detects which ones you have.
 
 #### Install
 
@@ -182,7 +182,7 @@ npx antislop-ai
 Answer the questions exactly as you did the first time. When it reaches folders you already have, it prints what it found before asking anything:
 
 ```
-▲ Already here: antislop 3.2.28. This installer carries 3.2.29.
+▲ Already here: antislop 3.2.29. This installer carries 3.2.30.
 ```
 
 Then it asks one extra question:
@@ -490,7 +490,7 @@ From a terminal instead, name the profile you use. A CLI install needs pnpm on y
 dsh plugin --profile desktop add antislop-ai
 ```
 
-pnpm holds back a package published in the last 24 hours, so an install made on release day can land on the previous version. Name the version to take the newest one, for example `antislop-ai@3.2.29`.
+pnpm holds back a package published in the last 24 hours, so an install made on release day can land on the previous version. Name the version to take the newest one, for example `antislop-ai@3.2.30`.
 
 The plugin registers all six skills as bundled skills. A folder install of the same skill outranks it, so pick one route per agent.
 
@@ -500,7 +500,7 @@ DeepSeek Harness lists an update when a newer `antislop-ai` is on npm, and the s
 
 ```bash
 dsh plugin --profile desktop remove antislop-ai
-dsh plugin --profile desktop add antislop-ai@3.2.29
+dsh plugin --profile desktop add antislop-ai@3.2.30
 ```
 
 ##### Remove
@@ -760,6 +760,7 @@ The installer writes into the folder your agent reads. This is what it writes an
 | Kimi Code | `.agents/skills/` |
 | DeepSeek Harness | `.agents/skills/` |
 | Muse Code | `.agents/skills/` |
+| Kilo Code | `.agents/skills/` |
 | Pi | `.pi/skills/` |
 
 #### Global installs differ for five agents
@@ -772,11 +773,13 @@ A global install writes the same folder under your home directory, with five exc
 - Amp documents `~/.config/agents/skills/` as its user-level folder, so a global install writes there and not to `~/.agents/skills/`, which Amp still reads at a lower rank.
 - Pi is the fifth: a project install writes `.pi/skills/`, and `~/.pi/agent/skills/` at user level, which is not the shared folder either.
 
-Copilot, OpenCode, Kimi Code, Pi, DeepSeek Harness, and Muse Code read that home-level folder too, so a global install reaches them through the folder name a project install uses.
+Copilot, OpenCode, Kimi Code, Pi, DeepSeek Harness, Muse Code, and Kilo Code read that home-level folder too, so a global install reaches them through the folder name a project install uses.
 
-#### Six agents share one folder
+#### Seven agents share one folder
 
-Antigravity, Copilot, Kimi Code, Amp, DeepSeek Harness, and Muse Code all read `.agents/skills/`. Copilot also reads `.github/skills/` and `.claude/skills/`, and Kimi Code also reads `.kimi-code/skills/`, but there is no reason to write a second copy, so picking them together installs once.
+Antigravity, Copilot, Kimi Code, Amp, DeepSeek Harness, Muse Code, and Kilo Code all read `.agents/skills/`. Copilot also reads `.github/skills/` and `.claude/skills/`, and Kimi Code also reads `.kimi-code/skills/`, but there is no reason to write a second copy, so picking them together installs once.
+
+Kilo Code also documents a `.kilo/skills/` folder of its own, and it loads `.claude/skills/` when Claude Code Compatibility is enabled, which is off by default. The installer writes only the shared folder, which Kilo loads by default. If you already keep skills in `.kilo/skills/`, do not copy antislop there as well: Kilo does not document which copy wins.
 
 Cline is the exception to the pattern: its own folder is `.cline/skills/`, and it reads `.claude/skills/` beside it, so there is a real second copy to worry about. Amp sits in both groups, because it shares the folder above and also reads `.claude/skills/`. Pi belongs to the second group only: its own folder is `.pi/skills/`, and it reads `.agents/skills/` beside it.
 
@@ -790,7 +793,7 @@ Two of the eight also resolve a collision that comes from scope rather than from
 
 #### The pointer file each agent reads
 
-On a project install the installer also writes the pointer that reloads antislop every session: into the project's `AGENTS.md` for Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Hermes, Copilot, Kimi Code, Pi, DeepSeek Harness, and Muse Code, into `CLAUDE.md` for Claude Code, and into `GEMINI.md` for Gemini CLI.
+On a project install the installer also writes the pointer that reloads antislop every session: into the project's `AGENTS.md` for Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Hermes, Copilot, Kimi Code, Pi, DeepSeek Harness, Muse Code, and Kilo Code, into `CLAUDE.md` for Claude Code, and into `GEMINI.md` for Gemini CLI.
 
 For OpenCode that is the whole mechanism: it loads the skill folders from `.opencode/skills/` and reads the pointer from `AGENTS.md`, which was verified against the opencode CLI.
 

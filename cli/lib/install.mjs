@@ -53,6 +53,9 @@ export const AGENTS = [
   // Muse Code reads the shared folder at both scopes, and a project's .claude/skills and
   // .codex/skills too, with the shared folder outranking the other two.
   { id: 'muse', label: 'Muse Code', dir: '.agents/skills', readsAlso: ['.claude/skills', '.codex/skills'], entry: 'AGENTS.md' },
+  // Kilo Code reads the shared folder at both scopes. Its .claude/skills is opt-in
+  // compatibility, so it is not counted as a second read here.
+  { id: 'kilo', label: 'Kilo Code', dir: '.agents/skills', entry: 'AGENTS.md' },
   // Pi keeps a folder of its own at both scopes and also walks the shared .agents/skills,
   // so choosing it beside any .agents/skills agent fills two folders it reads.
   { id: 'pi', label: 'Pi', dir: '.pi/skills', globalDir: '.pi/agent/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },

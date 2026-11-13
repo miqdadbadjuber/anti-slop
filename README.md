@@ -241,17 +241,17 @@ A plugin keeps its own copy under the agent that installed it, so it updates thr
 No, a filter. It rejects technique without purpose and requires liveliness. Direction is yours.
 
 **Which agents does it work with?**
-Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Pi, and Oh My Pi. The installer covers fourteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
+Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Kilo Code, Pi, and Oh My Pi. The installer covers fifteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
 
 **What is a skill?**
 A folder that goes deeper into one concern, holding a `SKILL.md` with its rules. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.
 
 ## Roadmap
 
-**v3.2.29** adds Muse Code as the ninth plugin door:
+**v3.2.30** adds Kilo Code to the installer:
 
-- **Shared folder.** Muse Code reads `.agents/skills` at both scopes, the folder Antigravity, Copilot, Kimi Code, Amp, and DeepSeek Harness already share.
-- **One more step.** Muse Code keeps its plugin system behind `MUSE_EXPERIMENTAL_PLUGINS=1`, and the install section names that first.
+- **Shared folder.** Kilo Code reads `.agents/skills` at both scopes, the folder Antigravity, Copilot, Kimi Code, Amp, DeepSeek Harness, and Muse Code already share.
+- **A folder of its own.** Kilo Code also documents `.kilo/skills/`, but the shared folder is loaded by default, so the installer writes one copy.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -265,7 +265,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.29" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.30" alt="antislop contributors" />
   </a>
 </p>
 

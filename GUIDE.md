@@ -24,6 +24,7 @@ Use this guide to choose an installation route and follow its install, update, o
     - [Oh My Pi plugin](#oh-my-pi-plugin)
     - [DeepSeek Harness plugin](#deepseek-harness-plugin)
     - [Muse Code plugin](#muse-code-plugin)
+    - [Qoder plugin](#qoder-plugin)
   - [The Pi package](#the-pi-package)
   - [The single file](#the-single-file)
   - [On a phone](#on-a-phone)
@@ -78,13 +79,13 @@ Choose one route below. Each section explains how to install, update, and remove
 
 | Route | What it does | Works on |
 |-------|--------------|----------|
-| The installer | Copies the skill folders into your project or your home folder | Fifteen agents, no setup beyond a terminal |
+| The installer | Copies the skill folders into your project or your home folder | Sixteen agents, no setup beyond a terminal |
 | The skills directory | Copies the same folders using the skills.sh tool | The agents that directory supports |
-| Nine plugin doors | Loads antislop straight from this repository, nothing copied | Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, Oh My Pi, DeepSeek Harness, Muse Code |
+| Ten plugin doors | Loads antislop straight from this repository, nothing copied | Claude Code, Antigravity, Codex, Cursor, Qoder, Kimi Code, Cline, Oh My Pi, DeepSeek Harness, Muse Code |
 | The Pi package | Loads antislop through Pi's own package manager, nothing copied | Pi |
 | The single file | One Markdown file you hand to any AI | Anything that reads text, including a phone |
 
-The nine plugin routes are listed individually below. Pick one route to avoid maintaining duplicate installations. Unless a route says otherwise, updates are manual.
+The ten plugin routes are listed individually below. Pick one route to avoid maintaining duplicate installations. Unless a route says otherwise, updates are manual.
 
 After installing or updating, start a new agent session. Skills load when a session starts, so an open session continues using the version it already loaded.
 
@@ -98,7 +99,7 @@ After installing or updating, start a new agent session. Skills load when a sess
 | Let Pi manage the package | [The Pi package](#the-pi-package) |
 | Use antislop in a chat app or on a phone | [The single file](#the-single-file) |
 
-The installer supports fifteen agents, including OpenCode, Amp, Gemini CLI, Hermes, GitHub Copilot, and Kilo Code. It is the only route here that detects installed agents. The skills directory copies the same folders without writing a session pointer. Plugin routes use the agent's own manager and load from this repository.
+The installer supports sixteen agents, including OpenCode, Amp, Gemini CLI, Hermes, GitHub Copilot, Kilo Code, and Qoder. It is the only route here that detects installed agents. The skills directory copies the same folders without writing a session pointer. Plugin routes use the agent's own manager and load from this repository.
 
 ### Before you start
 
@@ -122,7 +123,7 @@ If you see `v20.12.0` or a higher number, such as `v22.11.0`, you are ready. An 
 
 *Copies the skill folders into the folder you choose, and writes the pointer that reloads antislop every session.*
 
-It covers fifteen agents and detects which ones you have.
+It covers sixteen agents and detects which ones you have.
 
 #### Install
 
@@ -182,7 +183,7 @@ npx antislop-ai
 Answer the questions exactly as you did the first time. When it reaches folders you already have, it prints what it found before asking anything:
 
 ```
-▲ Already here: antislop 3.2.29. This installer carries 3.2.30.
+▲ Already here: antislop 3.2.29. This installer carries 3.2.31.
 ```
 
 Then it asks one extra question:
@@ -490,7 +491,7 @@ From a terminal instead, name the profile you use. A CLI install needs pnpm on y
 dsh plugin --profile desktop add antislop-ai
 ```
 
-pnpm holds back a package published in the last 24 hours, so an install made on release day can land on the previous version. Name the version to take the newest one, for example `antislop-ai@3.2.30`.
+pnpm holds back a package published in the last 24 hours, so an install made on release day can land on the previous version. Name the version to take the newest one, for example `antislop-ai@3.2.31`.
 
 The plugin registers all six skills as bundled skills. A folder install of the same skill outranks it, so pick one route per agent.
 
@@ -500,7 +501,7 @@ DeepSeek Harness lists an update when a newer `antislop-ai` is on npm, and the s
 
 ```bash
 dsh plugin --profile desktop remove antislop-ai
-dsh plugin --profile desktop add antislop-ai@3.2.30
+dsh plugin --profile desktop add antislop-ai@3.2.31
 ```
 
 ##### Remove
@@ -565,6 +566,38 @@ To drop the marketplace as well:
 ```bash
 muse plugins marketplace remove anti-slop
 ```
+
+#### Qoder plugin
+
+*Loads antislop through Qoder's own plugin system. Nothing is copied into your project.*
+
+##### Install
+
+Qoder imports a plugin from a local folder, so clone this repository first:
+
+```bash
+git clone https://github.com/miqdadbadjuber/anti-slop.git
+```
+
+Then open **Settings > Plugins** in Qoder, click **+ Create Plugin**, and choose the import-from-local-folder option. Point it at the folder you cloned. Qoder reads `.qoder-plugin/plugin.json`, which declares `skills/`, so all six skills load from the plugin.
+
+The plugin keeps its own copy under `~/.qoder/plugins/cache/`, so nothing is added to your project and there is no pointer to write.
+
+Qoder's documentation also names the skills.sh tool as an install route for it:
+
+```bash
+npx skills add miqdadbadjuber/anti-slop -a qoder
+```
+
+Pick one route per agent. If you want the folders in your project or home directory instead, [The installer](#the-installer) writes `.qoder/skills/` and `~/.qoder/skills/`.
+
+##### Update
+
+Import the newer release over the installed plugin: pull the clone, then import the same folder again in **Settings > Plugins**. `npx antislop-ai --update` names the plugin copy it finds and prints this route's update line, but the plugin store is Qoder's to replace. Start a new session afterwards.
+
+##### Remove
+
+Open **Settings > Plugins**, find antislop, and remove it. That deletes the store copy. A folder install made with [The installer](#the-installer) is separate and stays until you delete `.qoder/skills/` or `~/.qoder/skills/`.
 
 ### The Pi package
 
@@ -761,6 +794,7 @@ The installer writes into the folder your agent reads. This is what it writes an
 | DeepSeek Harness | `.agents/skills/` |
 | Muse Code | `.agents/skills/` |
 | Kilo Code | `.agents/skills/` |
+| Qoder | `.qoder/skills/` |
 | Pi | `.pi/skills/` |
 
 #### Global installs differ for five agents
@@ -793,7 +827,7 @@ Two of the eight also resolve a collision that comes from scope rather than from
 
 #### The pointer file each agent reads
 
-On a project install the installer also writes the pointer that reloads antislop every session: into the project's `AGENTS.md` for Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Hermes, Copilot, Kimi Code, Pi, DeepSeek Harness, Muse Code, and Kilo Code, into `CLAUDE.md` for Claude Code, and into `GEMINI.md` for Gemini CLI.
+On a project install the installer also writes the pointer that reloads antislop every session: into the project's `AGENTS.md` for Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Hermes, Copilot, Kimi Code, Pi, DeepSeek Harness, Muse Code, Kilo Code, and Qoder, into `CLAUDE.md` for Claude Code, and into `GEMINI.md` for Gemini CLI.
 
 For OpenCode that is the whole mechanism: it loads the skill folders from `.opencode/skills/` and reads the pointer from `AGENTS.md`, which was verified against the opencode CLI.
 

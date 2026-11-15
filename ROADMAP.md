@@ -4,13 +4,12 @@ How antislop grows from a single rules file into an installable, cross-agent ski
 
 ## Where we are
 
-The latest release is [v3.2.30](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.30): a lean core plus five additive skills. What changed is in the [release notes](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.30), and the queue below is what comes next.
+The latest release is [v3.2.31](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.31): a lean core plus five additive skills. What changed is in the [release notes](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.31), and the queue below is what comes next.
 
 ## What's next
 
 | Version | Item | What it means |
 |---------|------|---------------|
-| v3.2.31 | Qoder | Installer target on `.qoder/skills` with an `AGENTS.md` pointer, plus a `.qoder-plugin/plugin.json` door. PR #67. |
 | v3.2.32 | Qwen Code | Installer target on `.qwen/skills` with a `QWEN.md` pointer. No plugin door. Issue #68. |
 | v4.0.0 | /antislop-pixel | The new skills |
 
@@ -66,3 +65,4 @@ Every version below links to its notes on [GitHub](https://github.com/miqdadbadj
 | [v3.2.28](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.28) | DeepSeek Harness becomes the eighth plugin door, shipped as a DSH bundle with an installer target for the shared `.agents/skills` folder. |
 | [v3.2.29](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.29) | Muse Code becomes the ninth plugin door through its experimental plugin system, plus an installer target for `.agents/skills`. |
 | [v3.2.30](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.30) | Kilo Code joins the installer on the shared `.agents/skills` folder, with the Scaffold Sidebar pattern and a `@clack/prompts` refresh. |
+| [v3.2.31](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.31) | Qoder joins the installer on its own `.qoder/skills` folder with the `AGENTS.md` pointer, and `.qoder-plugin/plugin.json` makes the six skills importable in **Settings > Plugins**. The installer also names an installed plugin copy. |

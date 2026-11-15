@@ -28,6 +28,7 @@ const MANIFESTS = [
   '.codex-plugin/plugin.json',
   '.cursor-plugin/plugin.json',
   '.cursor-plugin/marketplace.json',
+  '.qoder-plugin/plugin.json',
   '.kimi-plugin/plugin.json',
   '.agents/plugins/marketplace.json',
   '.omp-plugin/marketplace.json',
@@ -136,6 +137,7 @@ function versions() {
     ['.claude-plugin/marketplace.json', json('.claude-plugin/marketplace.json')?.plugins?.[0]?.version],
     ['.codex-plugin/plugin.json', json('.codex-plugin/plugin.json')?.version],
     ['.cursor-plugin/plugin.json', json('.cursor-plugin/plugin.json')?.version],
+    ['.qoder-plugin/plugin.json', json('.qoder-plugin/plugin.json')?.version],
     ['.omp-plugin/marketplace.json', json('.omp-plugin/marketplace.json')?.plugins?.[0]?.version],
     ['.kimi-plugin/plugin.json', json('.kimi-plugin/plugin.json')?.version],
     // Stamped into every install, so a stale one makes the installer misreport what is on disk.

@@ -56,6 +56,8 @@ export const AGENTS = [
   // Kilo Code reads the shared folder at both scopes. Its .claude/skills is opt-in
   // compatibility, so it is not counted as a second read here.
   { id: 'kilo', label: 'Kilo Code', dir: '.agents/skills', entry: 'AGENTS.md' },
+  // Qoder reads .qoder/skills at both scopes, and it loads AGENTS.md as project rules.
+  { id: 'qoder', label: 'Qoder', dir: '.qoder/skills', entry: 'AGENTS.md' },
   // Pi keeps a folder of its own at both scopes and also walks the shared .agents/skills,
   // so choosing it beside any .agents/skills agent fills two folders it reads.
   { id: 'pi', label: 'Pi', dir: '.pi/skills', globalDir: '.pi/agent/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },
@@ -274,6 +276,25 @@ export const PLUGIN_DOORS = [
     label: 'Oh My Pi',
     update: 'omp plugin marketplace update anti-slop\nomp plugin upgrade antislop@anti-slop',
     find: findOmp,
+  },
+  {
+    id: 'qoder',
+    label: 'Qoder',
+    update: 'In Qoder: Settings > Plugins, import the newer release over antislop',
+    find() {
+      // Qoder keeps its plugin registry beside the cache, so read the registry rather
+      // than guess a folder name: a local import and a marketplace install differ there.
+      const registry = readJSON(path.join(os.homedir(), '.qoder', 'plugins', 'installed_plugins_v2.json'))
+      const copies = []
+      for (const [id, entries] of Object.entries(registry?.plugins ?? {})) {
+        if (id.split('@')[0] !== CORE) continue
+        for (const entry of entries ?? []) {
+          if (!entry?.installPath) continue
+          copies.push({ path: entry.installPath, version: entry.version ?? cloneVersion(entry.installPath) })
+        }
+      }
+      return newest(copies)
+    },
   },
 ]
 

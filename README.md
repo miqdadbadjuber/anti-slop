@@ -178,6 +178,12 @@ omp plugin install antislop@anti-slop
 pi install git:github.com/miqdadbadjuber/anti-slop
 ```
 
+### Qwen Code - Skills
+
+antislop ships no Qwen extension manifest, so Qwen Code uses the installer or the skills directory. The installer writes `.qwen/skills/` in a project and the shared `~/.agents/skills/` for a global install, and its session pointer goes into `QWEN.md`, which Qwen loads beside `AGENTS.md`.
+
+Qwen reads the `allowedTools` frontmatter field and ignores an `allowed-tools` field written for another agent, so the shipped field stays inert there. The skills are plain prose and need no adaptation.
+
 ### The single file
 
 `antislop.md` on its own is a complete filter you can paste into any chat window, with no packaging and no folders.
@@ -230,7 +236,7 @@ A plugin keeps its own copy under the agent that installed it, so it updates thr
 No, a filter. It rejects technique without purpose and requires liveliness. Direction is yours.
 
 **Which agents does it work with?**
-Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Kilo Code, Pi, and Oh My Pi. The installer covers fifteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
+Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Kilo Code, Pi, Qwen Code, and Oh My Pi. The installer covers sixteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
 
 **What is a skill?**
 A folder that goes deeper into one concern, holding a `SKILL.md` with its rules. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.

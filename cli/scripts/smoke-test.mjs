@@ -38,7 +38,7 @@ if (result.status !== 0) console.error('worker stderr:', result.stderr)
 console.log('\n--- files written to temp project ---')
 console.log(tree(tmp).join('\n'))
 
-for (const name of ['CLAUDE.md', 'AGENTS.md', 'GEMINI.md']) {
+for (const name of ['CLAUDE.md', 'AGENTS.md', 'GEMINI.md', 'QWEN.md']) {
   const entry = path.join(tmp, name)
   if (!fs.existsSync(entry)) continue
   console.log(`\n--- ${name} ---`)

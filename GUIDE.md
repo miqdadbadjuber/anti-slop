@@ -182,7 +182,7 @@ npx antislop-ai
 Answer the questions exactly as you did the first time. When it reaches folders you already have, it prints what it found before asking anything:
 
 ```
-▲ Already here: antislop 3.2.29. This installer carries 3.2.30.
+▲ Already here: antislop 3.2.29. This installer carries 3.2.32.
 ```
 
 Then it asks one extra question:
@@ -490,7 +490,7 @@ From a terminal instead, name the profile you use. A CLI install needs pnpm on y
 dsh plugin --profile desktop add antislop-ai
 ```
 
-pnpm holds back a package published in the last 24 hours, so an install made on release day can land on the previous version. Name the version to take the newest one, for example `antislop-ai@3.2.30`.
+pnpm holds back a package published in the last 24 hours, so an install made on release day can land on the previous version. Name the version to take the newest one, for example `antislop-ai@3.2.32`.
 
 The plugin registers all six skills as bundled skills. A folder install of the same skill outranks it, so pick one route per agent.
 
@@ -500,7 +500,7 @@ DeepSeek Harness lists an update when a newer `antislop-ai` is on npm, and the s
 
 ```bash
 dsh plugin --profile desktop remove antislop-ai
-dsh plugin --profile desktop add antislop-ai@3.2.30
+dsh plugin --profile desktop add antislop-ai@3.2.32
 ```
 
 ##### Remove

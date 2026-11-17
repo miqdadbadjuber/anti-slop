@@ -243,10 +243,10 @@ A folder that goes deeper into one concern, holding a `SKILL.md` with its rules.
 
 ## Roadmap
 
-**v3.2.30** adds Kilo Code to the installer:
+**v3.2.32** adds Qwen Code to the installer:
 
-- **Shared folder.** Kilo Code reads `.agents/skills` at both scopes, the folder Antigravity, Copilot, Kimi Code, Amp, DeepSeek Harness, and Muse Code already share.
-- **A folder of its own.** Kilo Code also documents `.kilo/skills/`, but the shared folder is loaded by default, so the installer writes one copy.
+- **Shared folder.** Qwen Code reads `.agents/skills` at both scopes, the folder Antigravity, Copilot, Kimi Code, Amp, DeepSeek Harness, Muse Code, and Kilo Code already share.
+- **A folder of its own.** Qwen Code reads `.qwen/skills/` in a project, and its session pointer goes into `QWEN.md`, which it loads beside `AGENTS.md`.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -260,7 +260,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.30" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.32" alt="antislop contributors" />
   </a>
 </p>
 

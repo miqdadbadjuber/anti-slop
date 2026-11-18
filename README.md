@@ -165,6 +165,18 @@ On Windows, set `$env:MUSE_EXPERIMENTAL_PLUGINS = "1"` in PowerShell first, then
 
 Skills load without another step. Run `muse plugins approve antislop` to enable the contrast MCP server.
 
+### Qoder - Plugin
+
+Qoder imports a plugin from a local folder, so clone this repository first:
+
+```bash
+git clone https://github.com/miqdadbadjuber/anti-slop.git
+```
+
+Then open **Settings > Plugins** in Qoder, click **+ Create Plugin**, and choose the import-from-local-folder option. Qoder reads `.qoder-plugin/plugin.json`, which points at the same `skills/` folder as every other door.
+
+Qoder's own documentation also names the skills directory route, with its agent flag: `npx skills add miqdadbadjuber/anti-slop -a qoder`. Pick one route, not both.
+
 ### Oh My Pi - Plugin
 
 ```bash
@@ -228,7 +240,7 @@ antislop does not update itself. If you installed through the installer, one com
 npx antislop-ai --update
 ```
 
-A plugin keeps its own copy under the agent that installed it, so it updates through its own command, and the Pi package updates through Pi. Every route is listed in [GUIDE.md](GUIDE.md#install-update-and-remove). Skills load when a session starts, so start a new one afterwards.
+A plugin keeps its own copy under the agent that installed it, so it updates through its own manager, and the Pi package updates through Pi. Every route is listed in [GUIDE.md](GUIDE.md#install-update-and-remove). Skills load when a session starts, so start a new one afterwards.
 
 ## FAQ
 
@@ -236,7 +248,7 @@ A plugin keeps its own copy under the agent that installed it, so it updates thr
 No, a filter. It rejects technique without purpose and requires liveliness. Direction is yours.
 
 **Which agents does it work with?**
-Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Kilo Code, Pi, Qwen Code, and Oh My Pi. The installer covers sixteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
+Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Kilo Code, Qoder, Pi, Qwen Code, and Oh My Pi. The installer covers seventeen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
 
 **What is a skill?**
 A folder that goes deeper into one concern, holding a `SKILL.md` with its rules. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.

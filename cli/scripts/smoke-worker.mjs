@@ -85,8 +85,8 @@ check('A detected (fresh project)', fresh, [])
 const defaultTargets = resolveTargets('project')
 console.log('A default targets:', defaultTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
 // Copilot, Kimi Code, Amp, DeepSeek Harness, Muse Code, and Kilo Code share Antigravity's
-// folder, so fifteen resolve to nine.
-check('A fifteen agents over nine folders', [AGENTS.length, defaultTargets.length], [15, 9])
+// folder, so sixteen resolve to ten.
+check('A sixteen agents over ten folders', [AGENTS.length, defaultTargets.length], [16, 10])
 check('A copilot and kimi share the antigravity folder', resolveTargets('project', ['antigravity', 'copilot', 'kimi']).length, 1)
 
 // Claude Code only, via explicit selection (old behavior preserved).
@@ -193,6 +193,14 @@ check('D12 kilo project target', resolveTargets('project', ['kilo'])[0].path, pa
 check('D12 kilo global target', resolveTargets('global', ['kilo'])[0].path, path.join(os.homedir(), '.agents', 'skills'))
 check('D12 kilo pointer', updatePointers({ targets: resolveTargets('project', ['kilo']), skills }).map((p) => path.basename(p)), ['AGENTS.md'])
 
+// Qoder keeps a folder of its own at both scopes and reads AGENTS.md in a project.
+const qoderProject = resolveTargets('project', ['qoder'])
+check('D13 qoder project target', qoderProject[0].path, path.join(process.cwd(), '.qoder', 'skills'))
+check('D13 qoder global target', resolveTargets('global', ['qoder'])[0].path, path.join(os.homedir(), '.qoder', 'skills'))
+check('D13 qoder written', installSkills({ skills, targets: qoderProject, overwrite: false }).length, 2)
+check('D13 qoder pointer', updatePointers({ targets: qoderProject, skills }).map((p) => path.basename(p)), ['AGENTS.md'])
+check('D13 qoder folder exists', fs.existsSync(path.join(process.cwd(), '.qoder', 'skills', 'antislop', 'SKILL.md')), true)
+
 // updatePointers has no other source for the entry file, so no row may omit it.
 check('D6 every agent names an entry file', AGENTS.filter((a) => !a.entry).map((a) => a.id), [])
 
@@ -201,7 +209,7 @@ check('D6 hermes writes a project pointer', updatePointers({ targets: hermesProj
 
 // Detection now sees the agents that were installed.
 const after = detectAgents('project')
-check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kilo', 'kimi', 'muse', 'opencode', 'pi'])
+check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kilo', 'kimi', 'muse', 'opencode', 'pi', 'qoder'])
 
 // OpenCode reads .claude/skills and .agents/skills too, so a project that installs into
 // two of them holds the same names twice and OpenCode picks between them unpredictably.
@@ -370,9 +378,9 @@ try {
 
 // A door dropped from the list stops being named after an install, and nothing else notices.
 check(
-  'K all seven plugin doors are probed',
+  'K all eight plugin doors are probed',
   PLUGIN_DOORS.map((d) => d.id).sort(),
-  ['antigravity', 'claude', 'cline', 'codex', 'cursor', 'kimi', 'omp']
+  ['antigravity', 'claude', 'cline', 'codex', 'cursor', 'kimi', 'omp', 'qoder']
 )
 
 // A door row without a command would print a blank line where the answer belongs.
@@ -399,11 +407,50 @@ try {
     copy(path.join('.omp', 'plugins', name), version)
     fs.mkdirSync(path.join(fakeHome, '.codex', 'plugins', 'cache', 'anti-slop', CORE, version), { recursive: true })
   }
+  // Qoder names a copy through its registry, so the door reads the registry, not the folder.
+  const qoderCopy = path.join(fakeHome, '.qoder', 'plugins', 'cache', 'local', CORE, '3.2.22')
+  copy(path.join('.qoder', 'plugins', 'cache', 'local', CORE, '3.2.22'), '3.2.22')
+  fs.writeFileSync(
+    path.join(fakeHome, '.qoder', 'plugins', 'installed_plugins_v2.json'),
+    JSON.stringify({ version: 2, plugins: { [`${CORE}@local`]: [{ scope: 'user', installPath: qoderCopy, version: '3.2.22' }] } })
+  )
   check(
     'L plugin doors report the newest copy in a store',
     detectPluginDoors().map((d) => `${d.door.id} ${d.version}`).sort(),
-    ['cline 3.2.22', 'codex 3.2.22', 'kimi 3.2.22', 'omp 3.2.22']
+    ['cline 3.2.22', 'codex 3.2.22', 'kimi 3.2.22', 'omp 3.2.22', 'qoder 3.2.22']
   )
+
+  // Qoder's registry can list an older copy first and an entry that predates the
+  // version field, so the VERSION file is the fallback and the newest known wins.
+  const qoderRegistry = path.join(fakeHome, '.qoder', 'plugins', 'installed_plugins_v2.json')
+  const qoderOld = path.join(fakeHome, '.qoder', 'plugins', 'cache', 'local', CORE, '3.2.9')
+  copy(path.join('.qoder', 'plugins', 'cache', 'local', CORE, '3.2.9'), '3.2.9')
+  fs.writeFileSync(
+    qoderRegistry,
+    JSON.stringify({ version: 2, plugins: { [`${CORE}@local`]: [
+      { scope: 'user', installPath: qoderOld, version: '3.2.9' },
+      { scope: 'user', installPath: qoderCopy },
+    ] } })
+  )
+  check('L qoder door falls back to the VERSION file and names the newest', detectPluginDoors().find((d) => d.door.id === 'qoder')?.version, '3.2.22')
+
+  // A marketplace install lands under another registry key, and another plugin's
+  // entry must not be read as ours however new it is.
+  const qoderMarket = path.join(fakeHome, '.qoder', 'plugins', 'cache', 'qoder-marketplace', CORE, '3.2.23')
+  copy(path.join('.qoder', 'plugins', 'cache', 'qoder-marketplace', CORE, '3.2.23'), '3.2.23')
+  fs.writeFileSync(
+    qoderRegistry,
+    JSON.stringify({ version: 2, plugins: {
+      [`${CORE}@local`]: [{ scope: 'user', installPath: qoderCopy, version: '3.2.22' }],
+      [`${CORE}@qoder-marketplace`]: [{ scope: 'user', installPath: qoderMarket, version: '3.2.23' }],
+      'unrelated@local': [{ scope: 'user', installPath: qoderMarket, version: '9.9.9' }],
+    } })
+  )
+  check('L qoder door reads marketplace installs and ignores other plugins', detectPluginDoors().find((d) => d.door.id === 'qoder')?.version, '3.2.23')
+
+  // A corrupt registry is a silent miss, not a crash that takes the other doors down.
+  fs.writeFileSync(qoderRegistry, '{not json')
+  check('L qoder door stays silent on a corrupt registry', detectPluginDoors().some((d) => d.door.id === 'qoder'), false)
 
   // Run from home, --update must treat it as the global scope only.
   installSkills({ skills: [CORE], targets: resolveTargets('global', ['claude']), overwrite: false })

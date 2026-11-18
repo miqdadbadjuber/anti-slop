@@ -19,6 +19,7 @@ package.json
 .claude-plugin/marketplace.json
 .codex-plugin/plugin.json
 .cursor-plugin/plugin.json
+.qoder-plugin/plugin.json
 .kimi-plugin/plugin.json
 .omp-plugin/marketplace.json
 skills/antislop/VERSION
@@ -26,7 +27,7 @@ cli/lib/banner.mjs
 skills/antislop-human/contrast-mcp.py
 ```
 
-Eleven files, and one of them counts twice: `cli/package-lock.json` carries the version at the top level and again inside `packages[""]`, so a bump that misses the second one still fails. `npm ci` installs from a stale lock without correcting it, which is why CI reads both.
+Twelve files, and one of them counts twice: `cli/package-lock.json` carries the version at the top level and again inside `packages[""]`, so a bump that misses the second one still fails. `npm ci` installs from a stale lock without correcting it, which is why CI reads both.
 
 One more is checked, and it is not a file of its own: the contributors image in [README.md](README.md) pins the release in its URL. contrib.rocks caches that image against the exact URL, so a new URL is the only thing that makes it redraw. The prose in [README.md](README.md) and [ROADMAP.md](ROADMAP.md) carries the version too, and no check reads that part.
 

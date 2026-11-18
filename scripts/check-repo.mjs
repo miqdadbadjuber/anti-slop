@@ -9,6 +9,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { buildIndex, START, END } from './skill-index.mjs'
+import { PLUGIN_DOORS } from '../cli/lib/install.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8')
@@ -196,6 +197,37 @@ function registration() {
       if (name === core && label.startsWith('cli/index.mjs')) continue
       if (!text.includes(name)) bad.push(`${name} is not registered in ${label}`)
     }
+  }
+  return bad
+}
+
+/** The single file names every door by hand, so a new door can ship unnamed there. */
+function doorList() {
+  const core = read('antislop.md')
+  const intro = core.match(/without it, these are the (\w+):/)
+  if (!intro) return ['antislop.md has no "without it, these are the ..." door list']
+
+  // slice(1) drops the empty remainder of the intro line itself.
+  const list = core.slice(intro.index + intro[0].length).split(/\r?\n/).slice(1)
+  const named = []
+  for (const line of list) {
+    const m = line.match(/^  - \*\*(.+?)\*\*/)
+    if (!m) break
+    named.push(m[1])
+  }
+
+  const bad = []
+  const want = PLUGIN_DOORS.map((d) => d.label)
+  for (const label of want) {
+    if (!named.includes(label)) bad.push(`the ${label} door is missing from the antislop.md door list`)
+  }
+  for (const label of named) {
+    if (!want.includes(label)) bad.push(`antislop.md names ${label}, which is not a plugin door`)
+  }
+  // The count is prose, so it drifts silently when a door is added to the list alone.
+  const words = { seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12 }
+  if (words[intro[1]] !== want.length) {
+    bad.push(`antislop.md says "these are the ${intro[1]}" but ${want.length} doors exist`)
   }
   return bad
 }
@@ -404,6 +436,7 @@ const CHECKS = [
   ['the version agrees everywhere', versions],
   ['every skill has usable frontmatter', frontmatter],
   ['every skill is registered everywhere', registration],
+  ['every plugin door is named in the single file', doorList],
   ['each rule sits in the gate block its tier implies', tiers],
   ['every manifest path resolves', manifestPaths],
   ['every doc link resolves', docLinks],

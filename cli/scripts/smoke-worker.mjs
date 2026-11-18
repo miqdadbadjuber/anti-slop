@@ -420,6 +420,38 @@ try {
     ['cline 3.2.22', 'codex 3.2.22', 'kimi 3.2.22', 'omp 3.2.22', 'qoder 3.2.22']
   )
 
+  // Qoder's registry can list an older copy first and an entry that predates the
+  // version field, so the VERSION file is the fallback and the newest known wins.
+  const qoderRegistry = path.join(fakeHome, '.qoder', 'plugins', 'installed_plugins_v2.json')
+  const qoderOld = path.join(fakeHome, '.qoder', 'plugins', 'cache', 'local', CORE, '3.2.9')
+  copy(path.join('.qoder', 'plugins', 'cache', 'local', CORE, '3.2.9'), '3.2.9')
+  fs.writeFileSync(
+    qoderRegistry,
+    JSON.stringify({ version: 2, plugins: { [`${CORE}@local`]: [
+      { scope: 'user', installPath: qoderOld, version: '3.2.9' },
+      { scope: 'user', installPath: qoderCopy },
+    ] } })
+  )
+  check('L qoder door falls back to the VERSION file and names the newest', detectPluginDoors().find((d) => d.door.id === 'qoder')?.version, '3.2.22')
+
+  // A marketplace install lands under another registry key, and another plugin's
+  // entry must not be read as ours however new it is.
+  const qoderMarket = path.join(fakeHome, '.qoder', 'plugins', 'cache', 'qoder-marketplace', CORE, '3.2.23')
+  copy(path.join('.qoder', 'plugins', 'cache', 'qoder-marketplace', CORE, '3.2.23'), '3.2.23')
+  fs.writeFileSync(
+    qoderRegistry,
+    JSON.stringify({ version: 2, plugins: {
+      [`${CORE}@local`]: [{ scope: 'user', installPath: qoderCopy, version: '3.2.22' }],
+      [`${CORE}@qoder-marketplace`]: [{ scope: 'user', installPath: qoderMarket, version: '3.2.23' }],
+      'unrelated@local': [{ scope: 'user', installPath: qoderMarket, version: '9.9.9' }],
+    } })
+  )
+  check('L qoder door reads marketplace installs and ignores other plugins', detectPluginDoors().find((d) => d.door.id === 'qoder')?.version, '3.2.23')
+
+  // A corrupt registry is a silent miss, not a crash that takes the other doors down.
+  fs.writeFileSync(qoderRegistry, '{not json')
+  check('L qoder door stays silent on a corrupt registry', detectPluginDoors().some((d) => d.door.id === 'qoder'), false)
+
   // Run from home, --update must treat it as the global scope only.
   installSkills({ skills: [CORE], targets: resolveTargets('global', ['claude']), overwrite: false })
   process.chdir(fakeHome)

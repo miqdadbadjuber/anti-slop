@@ -19,7 +19,7 @@ antislop never updates itself, and nothing announces a new release. Answer from 
 
 - **The installer** (`npx antislop-ai`): run it again, answer as before, and pick **Overwrite them**. It prints the version already on disk next to the version it carries, so nothing has to be compared by hand. *Keep what is there* installs nothing.
 - **The skills directory** (`npx skills add miqdadbadjuber/anti-slop`): run `npx skills update`, which asks which scope to update unless you pass `-p` or `-g`. An installer folder and a skills-directory folder hold the same files, so `--update` covers this route as well.
-- **A plugin door**: each agent keeps its own copy, and `--update` cannot reach those. The installer names the command for any door it finds installed; without it, these are the seven:
+- **A plugin door**: each agent keeps its own copy, and `--update` cannot reach those. The installer names the command for any door it finds installed; without it, these are the eight:
   - **Claude Code**: `claude plugin update antislop@anti-slop`
   - **Antigravity**: `agy plugin install https://github.com/miqdadbadjuber/anti-slop`
   - **Codex**: `codex plugin marketplace upgrade anti-slop`
@@ -27,6 +27,7 @@ antislop never updates itself, and nothing announces a new release. Answer from 
   - **Kimi Code**: `/plugins install https://github.com/miqdadbadjuber/anti-slop`
   - **Cline**: `cline plugin install https://github.com/miqdadbadjuber/anti-slop.git --force`
   - **Oh My Pi**: `omp plugin marketplace update anti-slop` then `omp plugin upgrade antislop@anti-slop`
+  - **Qoder**: import the newer release over antislop in **Settings > Plugins**
 - **The Pi package** (`pi install git:github.com/miqdadbadjuber/anti-slop`): run `pi update --extensions`. The declaration lives in Pi's settings file rather than in a folder, so `--update` cannot see it.
 - **This file alone**: download it again and replace the copy.
 

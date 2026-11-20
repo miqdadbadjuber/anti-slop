@@ -145,8 +145,6 @@ function versions() {
     ['skills/antislop/VERSION', read('skills/antislop/VERSION').trim()],
     ['cli/lib/banner.mjs', read('cli/lib/banner.mjs').match(/installer v(\d+\.\d+\.\d+)/)?.[1]],
     ['skills/antislop-human/contrast-mcp.py', read('skills/antislop-human/contrast-mcp.py').match(/SERVER_VERSION = "(\d+\.\d+\.\d+)"/)?.[1]],
-    // The contributors image is cached per URL, so a changed version is what makes it redraw.
-    ['README.md (contributors image)', read('README.md').match(/contrib\.rocks\/image\?repo=[^"'&\s]+&v=(\d+\.\d+\.\d+)/)?.[1]],
   ]
 
   return found

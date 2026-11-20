@@ -268,13 +268,7 @@ Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
 ## Contributors
 
-Thanks to everyone who helps make antislop better.
-
-<p align="center">
-  <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.32" alt="antislop contributors" />
-  </a>
-</p>
+Thanks to everyone who helps make antislop better. The full list is on the [contributors graph](https://github.com/miqdadbadjuber/anti-slop/graphs/contributors).
 
 Found a new slop pattern, a rule that missed something, or a bug in the installer? Open an [issue](https://github.com/miqdadbadjuber/anti-slop/issues). What a pull request has to carry is in [CONTRIBUTING.md](CONTRIBUTING.md), and behavior in issues and pull requests is covered by [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 

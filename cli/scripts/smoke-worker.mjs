@@ -85,8 +85,8 @@ check('A detected (fresh project)', fresh, [])
 const defaultTargets = resolveTargets('project')
 console.log('A default targets:', defaultTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
 // Copilot, Kimi Code, Amp, DeepSeek Harness, Muse Code, and Kilo Code share Antigravity's
-// folder, so sixteen resolve to ten.
-check('A sixteen agents over ten folders', [AGENTS.length, defaultTargets.length], [16, 10])
+// folder, and Qwen Code adds a project folder of its own, so seventeen resolve to eleven.
+check('A seventeen agents over eleven folders', [AGENTS.length, defaultTargets.length], [17, 11])
 check('A copilot and kimi share the antigravity folder', resolveTargets('project', ['antigravity', 'copilot', 'kimi']).length, 1)
 
 // Claude Code only, via explicit selection (old behavior preserved).
@@ -160,6 +160,17 @@ check('D10 pi folder exists', fs.existsSync(path.join(process.cwd(), '.pi', 'ski
 // Pi loads the shared folder too, so Pi plus Antigravity holds the same names twice.
 check('D10 pi duplicate read named', detectDuplicateReads({ targets: resolveTargets('project', ['antigravity', 'pi']), location: 'project' }).map((d) => [d.agent.id, d.paths.length]), [['pi', 2]])
 
+// Qwen Code keeps a project folder of its own, reads the shared .agents/skills at
+// both scopes, and loads QWEN.md beside AGENTS.md, so its pointer entry is QWEN.md.
+const qwenProject = resolveTargets('project', ['qwen'])
+check('D13 qwen project target', qwenProject[0]?.path, path.join(process.cwd(), '.qwen', 'skills'))
+check('D13 qwen global target', resolveTargets('global', ['qwen'])[0]?.path, path.join(os.homedir(), '.agents', 'skills'))
+check('D13 qwen shares the global agents folder', resolveTargets('global', ['kimi', 'qwen']).length, 1)
+check('D13 qwen written', installSkills({ skills, targets: qwenProject, overwrite: false }).length, 2)
+check('D13 qwen pointer', updatePointers({ targets: qwenProject, skills }).map((p) => path.basename(p)), ['QWEN.md'])
+check('D13 qwen folder exists', fs.existsSync(path.join(process.cwd(), '.qwen', 'skills', 'antislop', 'SKILL.md')), true)
+check('D13 qwen duplicate read named', detectDuplicateReads({ targets: resolveTargets('project', ['kimi', 'qwen']), location: 'project' }).map((d) => [d.agent.id, d.paths.length]), [['qwen', 2]])
+
 // Hermes reads a project's .hermes/skills, and ~/.hermes/skills for a global install.
 const hermesProject = resolveTargets('project', ['hermes'])
 const hermesGlobal = resolveTargets('global', ['hermes'])
@@ -209,7 +220,7 @@ check('D6 hermes writes a project pointer', updatePointers({ targets: hermesProj
 
 // Detection now sees the agents that were installed.
 const after = detectAgents('project')
-check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kilo', 'kimi', 'muse', 'opencode', 'pi', 'qoder'])
+check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kilo', 'kimi', 'muse', 'opencode', 'pi', 'qoder', 'qwen'])
 
 // OpenCode reads .claude/skills and .agents/skills too, so a project that installs into
 // two of them holds the same names twice and OpenCode picks between them unpredictably.

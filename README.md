@@ -190,6 +190,12 @@ omp plugin install antislop@anti-slop
 pi install git:github.com/miqdadbadjuber/anti-slop
 ```
 
+### Qwen Code - Skills
+
+antislop ships no Qwen extension manifest, so Qwen Code uses the installer or the skills directory. The installer writes `.qwen/skills/` in a project and the shared `~/.agents/skills/` for a global install, and its session pointer goes into `QWEN.md`, which Qwen loads beside `AGENTS.md`.
+
+Qwen reads the `allowedTools` frontmatter field and ignores an `allowed-tools` field written for another agent, so the shipped field stays inert there. The skills are plain prose and need no adaptation.
+
 ### The single file
 
 `antislop.md` on its own is a complete filter you can paste into any chat window, with no packaging and no folders.
@@ -242,17 +248,17 @@ A plugin keeps its own copy under the agent that installed it, so it updates thr
 No, a filter. It rejects technique without purpose and requires liveliness. Direction is yours.
 
 **Which agents does it work with?**
-Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Kilo Code, Qoder, Pi, and Oh My Pi. The installer covers sixteen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
+Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, DeepSeek Harness, Muse Code, Kilo Code, Qoder, Pi, Qwen Code, and Oh My Pi. The installer covers seventeen of them and detects which ones you have, and the plugin doors install from this same repository. [GUIDE.md](GUIDE.md) lists the folder each agent reads.
 
 **What is a skill?**
 A folder that goes deeper into one concern, holding a `SKILL.md` with its rules. Skills reference the core rules by number and never duplicate them, so adding one does not change the core.
 
 ## Roadmap
 
-**v3.2.31** adds Qoder to the installer and the plugin doors:
+**v3.2.32** adds Qwen Code to the installer:
 
-- **A folder of its own.** Qoder reads `.qoder/skills/` in a project and `~/.qoder/skills/` at user level, and it loads `AGENTS.md` as project rules, so a project install writes the pointer block there too.
-- **The plugin.** `.qoder-plugin/plugin.json` points at the same `skills/` folder, so a folder import in **Settings > Plugins** loads all six skills from this repository. The installer also names an installed plugin copy when `--update` runs.
+- **Shared folder.** Qwen Code reads `.agents/skills` at both scopes, the folder Antigravity, Copilot, Kimi Code, Amp, DeepSeek Harness, Muse Code, and Kilo Code already share.
+- **A folder of its own.** Qwen Code reads `.qwen/skills/` in a project, and its session pointer goes into `QWEN.md`, which it loads beside `AGENTS.md`.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 
@@ -266,7 +272,7 @@ Thanks to everyone who helps make antislop better.
 
 <p align="center">
   <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.31" alt="antislop contributors" />
+    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop&v=3.2.32" alt="antislop contributors" />
   </a>
 </p>
 

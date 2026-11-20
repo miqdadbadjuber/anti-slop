@@ -61,6 +61,9 @@ export const AGENTS = [
   // Pi keeps a folder of its own at both scopes and also walks the shared .agents/skills,
   // so choosing it beside any .agents/skills agent fills two folders it reads.
   { id: 'pi', label: 'Pi', dir: '.pi/skills', globalDir: '.pi/agent/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },
+  // Qwen Code reads .qwen/skills in a project and the shared .agents/skills at both
+  // scopes, and loads QWEN.md beside AGENTS.md, so its pointer entry is QWEN.md.
+  { id: 'qwen', label: 'Qwen Code', dir: '.qwen/skills', globalDir: '.agents/skills', readsAlso: ['.agents/skills'], entry: 'QWEN.md' },
 ]
 
 export function skillSourceDir() {

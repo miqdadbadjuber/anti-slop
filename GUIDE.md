@@ -712,10 +712,10 @@ Load it when the AI writes or edits text: headlines, buttons, emails, or a page 
 
 | What it covers | The patterns it names |
 |----------------|-----------------------|
-| Tone & Voice | Empty AI Vocabulary, Significance Inflation, Empty Claims and Social Proof with No Evidence, Weasel Attributions, Persuasive Authority Tropes, Chatbot Closers, Fake-Candid Openers, Signposting Announcements, Temporal Runway Clichés, All-Caps Emphasis, Actorless Passive, Inanimate Subject, Human Verb |
-| Rhythm & Structure | Rule of Three Overuse, Negative Parallelism and Tailing Negations, Aphorism Formulas, Staccato Drama, Theatrical Takeaways, Synonym Cycling, False Ranges |
-| Honesty & Evidence | Fabricated Specifics, Speculative Gap-Filling, Generic Positive Conclusion |
-| Hygiene & Markdown | Em Dashes, Boldface Overuse, Excessive Quotation Marks, Inline-Header Lists, Title Case in List Elements, Emojis in Headings, Filler Phrases, Excessive Hedging |
+| Tone & Voice | Empty AI Vocabulary, Significance Inflation, Empty Claims and Social Proof with No Evidence, Weasel Attributions, Persuasive Authority Tropes, Chatbot Closers, Fake-Candid Openers, Signposting Announcements, Temporal Runway Clichés, All-Caps Emphasis, Actorless Passive, Inanimate Subject, Human Verb, Chatbot Openers, Teaser Reveals, Scene-Setting Hypotheticals, Faux-Intimate Reader Address, Audience Sweep, Straw-Man Setup, Copula Avoidance, Vague Quantifiers, Nominalized Verbs |
+| Rhythm & Structure | Rule of Three Overuse, Negative Parallelism and Tailing Negations, Aphorism Formulas, Staccato Drama, Theatrical Takeaways, Synonym Cycling, False Ranges, Deferred Subject, Self-Answered Questions, Participial Tack-Ons, Anaphora Stacks, Escalation Tails, Mic-Drop Closers, Summary Echo, Reflexive Concession |
+| Honesty & Evidence | Fabricated Specifics, Speculative Gap-Filling, Generic Positive Conclusion, Knowledge-Cutoff Disclaimers |
+| Hygiene & Markdown | Em Dashes, Boldface Overuse, Excessive Quotation Marks, Inline-Header Lists, Title Case in List Elements, Emojis in Headings, Filler Phrases, Excessive Hedging, Colon-Reveal Headings, Template Section Names, Bullets for an Argument, Exclamation Stacking, Line-Per-Sentence Posts |
 
 ### antislop-human
 

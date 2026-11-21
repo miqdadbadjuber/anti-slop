@@ -143,6 +143,101 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 - **Rule:** R-02, R-16 (specific language over claims).
 - **Not a ban:** ordinary product verbs are fine, and so are established idioms. "The report shows", "the form submits", "the filter narrows the list" describe what the thing does. The tell is a verb that needs a mind behind it: understands, knows, decides, wants, believes, cares.
 
+### Chatbot Openers
+
+- **The pattern:** "Great question!", "Certainly!", "Absolutely!", "I'd be happy to help!", or praise for the reader's idea before any answer to it.
+- **Why it reads as AI:** these are conversation artifacts, the same as Chatbot Closers at the other end of the reply. They appear when model chat output is pasted straight into a deliverable, and praise with no reason attached reads as flattery.
+- **Before:**
+  > Great question! Choosing the right plan can feel overwhelming, but I'm happy to walk you through it. The Starter plan covers three seats.
+- **After:**
+  > The Starter plan covers three seats.
+- **Rule:** R-02 (text must feel natural and human).
+
+### Teaser Reveals
+
+- **The pattern:** a one-word question or a label with a colon, placed to unveil an ordinary point: "The result?", "The kicker:", "The best part?", "Spoiler:", "Plot twist:".
+- **Why it reads as AI:** it manufactures suspense around a fact that needs none. The reader is made to wait one beat for something the sentence before it could have said.
+- **Before:**
+  > We moved the build to a single cache layer. The result? Deploys that finish in under a minute.
+- **After:**
+  > After we moved the build to a single cache layer, deploys finish in under a minute.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** a colon that introduces a list, a definition, or a quotation is punctuation. The tell is a question mark or colon that stages a pause before a point that could simply be stated.
+
+### Scene-Setting Hypotheticals
+
+- **The pattern:** an opening that asks the reader to imagine a situation before the real subject arrives: "Picture this:", "Imagine a world where", "Let's say you're a busy founder".
+- **Why it reads as AI:** the invented scene stands in for a real example the writer does not have. It is generic enough to fit any product, and it delays the subject.
+- **Before:**
+  > Picture this: it's Monday morning, your inbox is overflowing, and your team is waiting on you. Our inbox view sorts the messages that block a teammate to the top.
+- **After:**
+  > The inbox view sorts the messages that block a teammate to the top.
+- **Rule:** R-02, R-16 (specific language over claims).
+- **Not a ban:** a real scenario the user supplied, or a worked example with concrete details, can open a piece. The tell is a hypothetical that carries no detail the reader could not have imagined alone.
+
+### Faux-Intimate Reader Address
+
+- **The pattern:** lines that claim to know what the reader is thinking or has lived: "You might be wondering", "We've all been there", "Sound familiar?", "If you're like most people".
+- **Why it reads as AI:** the writer has no idea what the reader is wondering. The line simulates rapport, then answers a question nobody asked.
+- **Before:**
+  > You might be wondering how this works with your existing tools. We've all been there. It imports projects from Jira and Linear.
+- **After:**
+  > It imports projects from Jira and Linear.
+- **Rule:** R-02 (text must feel natural and human).
+
+### Audience Sweep
+
+- **The pattern:** "Whether you're a seasoned pro or just starting out", "Whether you run a startup or an enterprise", used to claim the product is for everyone.
+- **Why it reads as AI:** naming both ends of a scale avoids naming the real audience. Copy addressed to everyone reads the same on every product page.
+- **Before:**
+  > Whether you're a seasoned developer or just getting started, our CLI has you covered.
+- **After:**
+  > [Name the audience the user gave, for example: "The CLI is for developers who deploy more than once a day." If no audience was given, cut the clause and say what the CLI does.]
+- **Rule:** R-16 (specific language over claims).
+
+### Straw-Man Setup
+
+- **The pattern:** an unnamed group invented so the copy can disagree with it: "Many people think X. But the reality is Y.", "Conventional wisdom says", "Most teams get this wrong".
+- **Why it reads as AI:** the opponent exists only to be knocked down, which lets an ordinary claim pose as a correction. Nobody is named, so nothing can be checked.
+- **Before:**
+  > Most people think onboarding is about tutorials. The truth is, it's about momentum.
+- **After:**
+  > [State the claim directly and source it. Example with a real source: "In [named study], new users who finished one task in the first session were more likely to return." With no source, state it as the team's own observation.]
+- **Rule:** R-36 (no fabricated claims), C-5 (evidence over claims).
+- **Not a ban:** correcting a misconception that is real and named (a cited survey, the user's own stated belief, a documented myth) is ordinary writing.
+
+### Copula Avoidance
+
+- **The pattern:** "serves as", "stands as", "functions as", "boasts", "offers", "represents" used where "is" or "has" would do.
+- **Why it reads as AI:** models avoid the plain verbs "is" and "has" and reach for grander substitutes. The sentence gets longer and more ceremonial without saying more.
+- **Before:**
+  > The dashboard serves as a central hub for reports and boasts filters for date, owner, and status.
+- **After:**
+  > The dashboard is where reports live. It has filters for date, owner, and status.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** the literal senses stay. A lawyer represents a client, a relay functions as a switch, a store offers a discount. The tell is the verb standing in for a plain "is" or "has", sentence after sentence.
+
+### Vague Quantifiers
+
+- **The pattern:** "countless", "a myriad of", "a plethora of", "numerous", "a wide range of" standing in for a number or a list the writer does not have.
+- **Why it reads as AI:** the quantity sounds large and commits to nothing. It is the soft form of Fabricated Specifics: no false number, but no real one either.
+- **Before:**
+  > Choose from a myriad of integrations to streamline countless workflows.
+- **After:**
+  > [Name the real ones, for example: "It connects to Slack, GitHub, and Google Drive." If the list is not in the source, ask for it or write "It connects to the tools listed on the integrations page."]
+- **Rule:** R-16, R-17 (no number without a real source).
+
+### Nominalized Verbs
+
+- **The pattern:** an action turned into a noun and propped up with a weak verb: "conduct an analysis of", "perform the implementation of", "provide assistance with", "carry out an evaluation of".
+- **Why it reads as AI:** it is the formal register a model defaults to when it wants to sound official. Two or three in a paragraph make product copy read like a procurement document.
+- **Before:**
+  > Our team will conduct an analysis of your setup and provide assistance with the implementation.
+- **After:**
+  > We will review your setup and help you install it.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** a noun that names a real thing stays ("the analysis is attached", "the migration takes an hour"). The tell is a weak verb plus a noun where one verb would do.
+
 ## Rhythm & Structure
 
 ### Rule of Three Overuse
@@ -215,6 +310,92 @@ allowed-tools: Read, Write, Edit, Glob, Grep
   > Handles quotes, invoices, and payment reminders.
 - **Rule:** R-36.
 
+### Deferred Subject
+
+- **The pattern:** the real subject held back behind an empty setup clause and released after a colon: "It's the silent killer of productivity: context switching.", "There's one thing every founder misses: distribution."
+- **Why it reads as AI:** the delay is manufactured suspense. The sentence spends its first half on "it" or "there's one thing" so the second half can land like a reveal.
+- **Before:**
+  > There's one thing slowing your releases down: manual QA.
+- **After:**
+  > Manual QA slows your releases down.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** a setup that introduces a real list ("There are three plans: Starter, Team, and Enterprise") is ordinary. The tell is a single ordinary noun staged as a reveal.
+
+### Self-Answered Questions
+
+- **The pattern:** a question asked only so the next sentence can answer it: "So what does this mean for you? It means...", "Why does this matter? Because...", "How does it work? Simple."
+- **Why it reads as AI:** the writer interviews themselves to create rhythm. The question carries no information, and deleting it loses nothing.
+- **Before:**
+  > Why does this matter? Because every minute of downtime costs you customers.
+- **After:**
+  > Every minute of downtime costs you customers.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** an FAQ, or a question a real user asked, is a question. The tell is the writer asking and answering in back-to-back sentences.
+
+### Participial Tack-Ons
+
+- **The pattern:** a trailing "-ing" clause that adds a verdict to a fact: "..., highlighting its commitment to quality.", "..., making it ideal for teams of any size.", "..., ensuring peace of mind.", "..., underscoring the importance of security."
+- **Why it reads as AI:** the fact ends, then the model appends an interpretation nobody can check. It is Significance Inflation attached to the end of a sentence, and it tends to appear on sentence after sentence.
+- **Before:**
+  > The app encrypts files before upload, ensuring your data stays safe and giving you peace of mind.
+- **After:**
+  > The app encrypts files before upload.
+- **Rule:** R-16 (evidence, not claims), R-36, C-5.
+- **Not a ban:** a participle that adds a fact ("the job runs nightly, starting at 02:00") is grammar. The tell is a participle that adds praise, importance, or suitability.
+
+### Anaphora Stacks
+
+- **The pattern:** three or more sentences in a row that open with the same word or frame: "It's faster. It's cheaper. It's simpler.", "You get X. You get Y. You get Z."
+- **Why it reads as AI:** the repetition supplies rhythm, not meaning. The same content fits in one sentence, and the stack usually arrives together with Rule of Three Overuse and Staccato Drama.
+- **Before:**
+  > It syncs in real time. It works offline. It never loses a draft.
+- **After:**
+  > It syncs in real time, works offline, and saves every draft.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** a speech, a slogan, or a voice sample that repeats on purpose can keep one stack. The tell is the same opening frame returning in section after section.
+
+### Escalation Tails
+
+- **The pattern:** a line that promises more is coming instead of saying it: "But that's not all.", "And that's just the beginning.", "And it gets better."
+- **Why it reads as AI:** it is an infomercial transition. A strong next point needs no announcement, and a weak one is oversold by it.
+- **Before:**
+  > It imports your contacts in one click. But that's not all: it also removes duplicates.
+- **After:**
+  > It imports your contacts in one click and removes duplicates.
+- **Rule:** R-02 (text must feel natural and human).
+
+### Mic-Drop Closers
+
+- **The pattern:** a paragraph or section that ends on a short, quotable line restating its point: "Because in the end, simplicity wins.", "Ship fast, break nothing.", "And that changes everything."
+- **Why it reads as AI:** models end nearly every paragraph this way, so the text lands the same beat again and again. The line adds no fact; it tells the reader the paragraph is over.
+- **Before:**
+  > The new editor saves every keystroke locally. Because when it comes to your work, nothing should ever be lost.
+- **After:**
+  > The new editor saves every keystroke locally, so a crash loses nothing.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** one strong closing line on a page, such as a tagline the user supplied, is a choice. The tell is a quotable closer on paragraph after paragraph.
+
+### Summary Echo
+
+- **The pattern:** a closing sentence that restates what the reader just read, opened with "In summary,", "In conclusion,", "Overall,", "All in all,", "At the end of the day,".
+- **Why it reads as AI:** short copy does not need a recap. The echo repeats the body in vaguer words and pads the length.
+- **Before:**
+  > Dark mode is live, exports run twice as fast, and SSO is on for every plan. All in all, this update makes the app faster, safer, and easier to use.
+- **After:**
+  > Dark mode is live, exports run twice as fast, and SSO is on for every plan.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** a long report can close with a summary that adds a decision, an owner, or a date. The tell is a recap of a few paragraphs the reader has just finished.
+
+### Reflexive Concession
+
+- **The pattern:** a sentence of balance with no content of its own: "While X has its merits,", "Of course, every situation is different.", "That said, there's no one-size-fits-all answer."
+- **Why it reads as AI:** the concession names no condition under which the claim fails, so it is balance as a gesture. Excessive Hedging stacks qualifiers inside one claim; this spends a whole clause on one.
+- **Before:**
+  > While every team is different, most will benefit from weekly releases.
+- **After:**
+  > [Name the real exception if the source gives one, for example: "Weekly releases suit teams with automated tests. Teams that test by hand may need a longer cycle." With no known exception, cut the concession: "Most teams benefit from weekly releases."]
+- **Rule:** R-02 (text must feel natural and human).
+
 ## Honesty & Evidence
 
 ### Fabricated Specifics
@@ -246,6 +427,16 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 - **After:**
   > (Cut the sentence. End on the last concrete fact, or state real plans if they exist.)
 - **Rule:** R-36.
+
+### Knowledge-Cutoff Disclaimers
+
+- **The pattern:** model caveats left inside a deliverable: "As of my last update", "As of my knowledge cutoff", "I don't have access to real-time data", "I cannot browse the internet, but".
+- **Why it reads as AI:** only a language model talks about its training cutoff. In copy, the disclaimer is a leftover from a chat, and it marks a fact nobody verified.
+- **Before:**
+  > As of my last update, the API supports three regions.
+- **After:**
+  > [Verify the number with the user or the source, then state it plainly: "The API supports three regions." If it cannot be verified, leave the number out (R-17).]
+- **Rule:** R-02, R-17 (no number without a real source).
 
 ## Hygiene & Markdown
 
@@ -344,6 +535,73 @@ allowed-tools: Read, Write, Edit, Glob, Grep
   > This may be why the feature went unused.
 - **Rule:** R-36.
 
+### Colon-Reveal Headings
+
+- **The pattern:** a heading built as a metaphor, a colon, then the real topic: "The Elephant in the Server Room: Why Latency Matters", "The Silent Killer: Slow Builds", "Beyond the Dashboard: Rethinking Analytics".
+- **Why it reads as AI:** the first half performs and the second half does the labelling. Models produce this shape for almost every title, so a page of them reads as generated before the body is read.
+- **Before:**
+  > ## The Silent Killer: Why Your Builds Are Slow
+- **After:**
+  > ## Why your builds are slow
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** a colon that separates a product name from its description ("Starter: for teams of three") is a label. So is a headline that states a specific benefit or asks a question the section answers.
+
+### Template Section Names
+
+- **The pattern:** sections named after the shape of an essay instead of their content: "Introduction", "Overview", "Key Takeaways", "Final Thoughts", "Conclusion", "Wrapping Up".
+- **Why it reads as AI:** the names come from a template, not from the material. A "Key Takeaways" block usually repeats the body, and a "Final Thoughts" block usually holds a Generic Positive Conclusion.
+- **Before:**
+  > ## Key Takeaways
+  > - Caching speeds up builds
+  > - Smaller images deploy faster
+- **After:**
+  > (Cut the section. If the page needs a summary, put one line at the top, where it saves the reader time.)
+- **Rule:** R-05 (structure built around actual content needs).
+- **Not a ban:** formats with a fixed convention keep their names: an academic paper, a README, an API reference. The tell is essay scaffolding on a landing page, a blog post, or an email.
+
+### Bullets for an Argument
+
+- **The pattern:** reasoning chopped into bullet points, so each step of an argument becomes a separate fragment with no "because" or "so" between them.
+- **Why it reads as AI:** bullets are for items a reader scans or compares. An argument is a chain, and bullets remove the links. Models bullet by default because the result looks organized.
+- **Before:**
+  > - Users drop off at signup
+  > - The form has twelve fields
+  > - Shorter forms convert better
+- **After:**
+  > Users drop off at signup because the form asks for twelve fields. Shorter forms convert better, so cut the fields we do not need.
+- **Rule:** R-05 (structure built around actual content needs).
+- **Not a ban:** steps, options, specs, and checklists belong in lists.
+
+### Exclamation Stacking
+
+- **The pattern:** exclamation marks on neutral statements, several to a paragraph: "Setup takes two minutes! You'll love the new dashboard!"
+- **Why it reads as AI:** the punctuation supplies excitement the content does not. Like All-Caps Emphasis, it flattens the real peaks by making every line loud.
+- **Before:**
+  > We've shipped dark mode! It's live for everyone today! Try it out!
+- **After:**
+  > Dark mode is live for everyone today.
+- **Rule:** R-02 (text must feel natural and human).
+- **Not a ban:** one exclamation in a voice that is genuinely excited, or in dialogue, can stay. The tell is one on every line. Minimize, do not strip every one.
+
+### Line-Per-Sentence Posts
+
+- **The pattern:** a social post with every sentence on its own line: a one-line hook, a blank line, "Here's what I learned:", a numbered list, an "Agree?" ending, and a wall of hashtags.
+- **Why it reads as AI:** the format began with human growth-posters, and models now reproduce it for any topic. The layout is the same whatever the content, so readers recognize the template before they read a word.
+- **Before:**
+  > We rewrote our onboarding last month.
+  >
+  > It changed everything.
+  >
+  > Here's what I learned:
+  >
+  > 1. Shorter forms win.
+  >
+  > Agree? #onboarding #growth #saas #startup #product
+- **After:**
+  > We rewrote our onboarding last month and cut the signup form to three fields. Shorter forms won. Has anyone seen the opposite? #onboarding
+- **Rule:** R-02, R-05 (no template layouts).
+- **Not a ban:** a single line set apart for emphasis is fine, and so is a user's own posting style when they supply a sample. The tell is the whole template at once.
+
 ## What NOT to flag
 
 A clean human writer can hit several patterns above without any AI involvement. Before editing, sanity-check that you are not gutting legitimate prose. These are **not** reliable indicators on their own:
@@ -401,6 +659,12 @@ Run these alongside the core Delivery Gate when the task is copy work. Every lin
 - [ ] Every sentence names its actor: no actorless passive, no abstraction given a human verb, where a real subject was available (R-02, R-16)
 - [ ] CTAs specific to the action, not generic templates (R-15)
 - [ ] No AI-rhythm tells: no forced rule of three, no negative parallelism, no staccato drama, no theatrical takeaways, no aphorism formulas, no false ranges (R-36)
+- [ ] No manufactured suspense: no deferred subjects, teaser reveals ("The result?"), self-answered questions, or scene-setting hypotheticals in place of a real example (R-02, R-16)
+- [ ] No participial tack-ons adding praise or importance at the end of a sentence, and no mic-drop closers or summary echoes at the end of a paragraph (R-02, R-36, C-5)
+- [ ] No chatbot openers, faux-intimate reader address, audience sweeps, straw-man setups, reflexive concessions, or knowledge-cutoff disclaimers (R-02, R-16, R-36)
+- [ ] No keynote cadence: no anaphora stacks, escalation tails ("But that's not all"), or exclamation marks on neutral statements (R-02)
+- [ ] Plain verbs and real quantities: no copula avoidance ("serves as", "boasts"), nominalized verbs, or vague quantifiers ("a myriad of") (R-02, R-16, R-17)
+- [ ] Headings label the content: no colon-reveal titles, no template sections like "Key Takeaways" or "Final Thoughts", arguments written as prose rather than bullets, no line-per-sentence social posts (R-02, R-05)
 - [ ] No temporal runway clichés ("in today's fast-paced world", "in an increasingly digital landscape") padding openings (R-16, R-36)
 - [ ] List items and bullet points use natural sentence case, not mechanical title case on every word (R-36)
 - [ ] Voice present: the copy has a real voice (the user's sample or a clearly chosen tone), not a sterile default (R-37)

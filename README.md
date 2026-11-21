@@ -8,7 +8,7 @@
 
 <div align="center">
 
-# Anti Slop: Rules for AI Coding Agents
+# Rules for AI Coding Agents
 
 <code>npx antislop-ai</code>
 

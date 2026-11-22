@@ -69,7 +69,7 @@ npm ci
 npm test
 ```
 
-Run these on your own machine, not only in CI. CI runs on `ubuntu-latest` and nothing else, so a green run there does not mean a green run on the maintainer's machine. A recent pull request passed every check and the installer tests on macOS and failed on Windows at its first assertion, because a helper asked to resolve a path for Linux used the host's path module instead of the one it was told to simulate. If you are on Windows or macOS, your run is the one that matters.
+CI runs the installer smoke tests on Ubuntu, Windows, and macOS, with a separate Ubuntu job for the minimum supported Node.js version. Run the tests locally too so you can catch differences in your shell or Node.js setup.
 
 ## What the files have to follow
 

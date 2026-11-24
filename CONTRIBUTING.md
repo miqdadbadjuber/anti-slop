@@ -69,7 +69,7 @@ npm ci
 npm test
 ```
 
-CI runs the installer smoke tests on Ubuntu, Windows, and macOS, with a separate Ubuntu job for the minimum supported Node.js version. Run the tests locally too so you can catch differences in your shell or Node.js setup.
+The main CI job runs repository guardrails, the contrast table self-test, the generated skill sync check, and installer smoke tests on Ubuntu, Windows, and macOS. A separate Ubuntu job runs the installer smoke tests on the minimum supported Node.js version. Run the tests locally too so you can catch differences in your shell or Node.js setup.
 
 ## What the files have to follow
 

@@ -4,7 +4,7 @@ How antislop grows from a single rules file into an installable, cross-agent ski
 
 ## Where we are
 
-The latest release is [v3.2.32](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.32): a lean core plus five additive skills. What changed is in the [release notes](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.32), and the queue below is what comes next.
+The latest release is [v3.2.33](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.33): a lean core plus five additive skills. What changed is in the [release notes](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.33), and the queue below is what comes next.
 
 ## What's next
 
@@ -66,3 +66,4 @@ Every version below links to its notes on [GitHub](https://github.com/miqdadbadj
 | [v3.2.30](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.30) | Kilo Code joins the installer on the shared `.agents/skills` folder, with the Scaffold Sidebar pattern and a `@clack/prompts` refresh. |
 | [v3.2.31](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.31) | Qoder joins the installer on its own `.qoder/skills` folder with the `AGENTS.md` pointer, and `.qoder-plugin/plugin.json` makes the six skills importable in **Settings > Plugins**. The installer also names an installed plugin copy. |
 | [v3.2.32](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.32) | Qwen Code joins the installer on `.qwen/skills` with a `QWEN.md` pointer and the shared `.agents/skills` folder for a global install. No plugin door. |
+| [v3.2.33](https://github.com/miqdadbadjuber/anti-slop/releases/tag/v3.2.33) | Community maintenance round: contributor guidance matches the CI matrix, three skill docs align with their rules, and the copywriting skill gains 23 named patterns. |

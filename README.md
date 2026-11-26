@@ -255,10 +255,11 @@ A folder that goes deeper into one concern, holding a `SKILL.md` with its rules.
 
 ## Roadmap
 
-**v3.2.32** adds Qwen Code to the installer:
+**v3.2.33** is a community maintenance round:
 
-- **Shared folder.** Qwen Code reads `.agents/skills` at both scopes, the folder Antigravity, Copilot, Kimi Code, Amp, DeepSeek Harness, Muse Code, and Kilo Code already share.
-- **A folder of its own.** Qwen Code reads `.qwen/skills/` in a project, and its session pointer goes into `QWEN.md`, which it loads beside `AGENTS.md`.
+- **Docs that match CI.** Contributor guidance and the bug report form now describe the real matrix: Ubuntu, Windows, and macOS, with the minimum Node.js job on Ubuntu.
+- **Skill docs.** The code and human skills end with "Load with the core.", the human skill documents the `check_contrast` MCP tool, and the copywriting checklist names em dashes only, matching R-02.
+- **23 copywriting patterns.** Sentence and paragraph tells, from Deferred Subject to Line-Per-Sentence Posts, each with the existing before, after, and rule shape.
 
 Every earlier release, and what comes next, is in [ROADMAP.md](ROADMAP.md).
 

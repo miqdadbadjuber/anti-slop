@@ -387,7 +387,7 @@ Run this loop before delivering copy:
 
 1. **Draft.** Rewrite the text applying the patterns above. Check that it reads naturally aloud, varies sentence length, prefers specific detail and simple constructions, and keeps the appropriate register.
 2. **Audit.** Ask two questions and answer them briefly: "What makes this obviously AI generated?" and "Does it state any fact, name, number, date, or citation that is not in the source?" A fabrication is a defect even when it sounds more human than the vague original.
-3. **Final.** Revise to address both answers. Check for em and en dashes one last time (R-02). A hit means the draft is not done.
+3. **Final.** Revise to address both answers. Check for em dashes one last time (R-02). A hit means the draft is not done.
 
 ## Copywriting Skill Checklist
 

@@ -1,6 +1,6 @@
 ---
 name: antislop-human
-description: "Human and accessibility skill for antislop. Contrast, keyboard, focus, states, and interaction affordances for real people. Includes the contrast checker."
+description: "Human and accessibility skill for antislop. Contrast, keyboard, focus, states, and interaction affordances for real people. Includes the contrast checker. Load with the core."
 allowed-tools: Bash(python *), Bash(python3 *), Read, Write, Edit, Glob, Grep
 ---
 # antislop-human
@@ -45,7 +45,9 @@ allowed-tools: Bash(python *), Bash(python3 *), Read, Write, Edit, Glob, Grep
 
 ### The Contrast Checker
 
-The home of the contrast checker. Three layers, from most to least convenient:
+The home of the contrast checker. Four layers, from most to least convenient:
+
+**The MCP tool.** When this skill is loaded through the Claude plugin, call the `check_contrast` tool. It takes two required arguments, `foreground` and `background`, both hex colors (for example `foreground: "#777777"`, `background: "#FFFFFF"`), and returns the ratio and the verdict for both text sizes. Only the Claude plugin ships this tool; when it is unavailable, use the script.
 
 **The script.** When a script runtime is available and the file is present, run it instead of computing by hand. The script ships in this skill's folder (`contrast-check.py`, next to this `SKILL.md`). Run it with `python3` on macOS and Linux, `python` on Windows:
 

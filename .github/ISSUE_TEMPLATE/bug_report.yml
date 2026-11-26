@@ -43,7 +43,7 @@ body:
     id: os
     attributes:
       label: Operating system
-      description: This matters more than it looks. The repository is checked on Windows, CI runs on Linux, and macOS is the least tested of the three.
+      description: Which operating system were you using when the issue occurred? CI runs its main checks on Linux, Windows, and macOS.
       options:
         - Windows
         - macOS
